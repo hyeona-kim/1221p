@@ -10,9 +10,9 @@ public class LoginAction implements Action{
 		String select = request.getParameter("select");
 		String viewPath = null;
 		if(select.equalsIgnoreCase("admin")) {
-			viewPath = "/jsp/login_admin.jsp";
+			viewPath = "/jsp/login/login_admin.jsp";
 		}else if(select.equalsIgnoreCase("train")) {
-			viewPath = "/jsp/login_train.jsp";
+			viewPath = "/jsp/login/login_train.jsp";
 		}else if(select.equalsIgnoreCase("teacher")) {
 			viewPath = "/jsp/login_teacher.jsp";
 		}
