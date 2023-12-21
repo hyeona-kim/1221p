@@ -1,4 +1,4 @@
-package bbs.action;
+package icteduaction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
