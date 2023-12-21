@@ -9,7 +9,7 @@ public class IndexAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse respone) {
 		// TODO Auto-generated method stub
 		
-		return "index.jsp";
+		return "/jsp/index.jsp";
 	}
 
 }
