@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import icteduaction.Action;
+import ictedu.action.Action;
 
 /**
  * Servlet implementation class Controller
