@@ -30,10 +30,10 @@ public class ServeDAO {
 		map.put("begin",String.valueOf(begin));
 		map.put("end", String.valueOf(end));
 		
-		List<CourseVO> list = ss.selectList("serve.list2",map);
+		List<CourseVO> list = ss.selectList("serve.list",map);
 		if(list !=null && !list.isEmpty()) {
 			ar = new CourseVO[list.size()];
-			list.toArray();
+			list.toArray(ar);
 			
 		}
 		ss.close();

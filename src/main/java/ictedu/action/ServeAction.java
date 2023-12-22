@@ -26,10 +26,9 @@ public class ServeAction implements Action {
 		}
 		
 		CourseVO[] ar = ServeDAO.getlist(page.getBegin(),page.getEnd());
-		System.out.println(ar.length);
-		System.out.println(ar[0].getC_idx());
+		
 		request.setAttribute("page", page);
-		request.setAttribute("ser", ar);
+		request.setAttribute("ar", ar);
 		
 		
 		return "/jsp/admin/courseReg/serve.jsp";
