@@ -15,7 +15,7 @@ public class StaffListAction implements Action{
 		
 		StaffVO[] ar = EtcDAO.getList();
 		
-		request.setAttribute("ar", ar);
+		request.setAttribute("ar",ar);
 		
 		return "/jsp/admin/etcList/teacher_list.jsp";
 	}

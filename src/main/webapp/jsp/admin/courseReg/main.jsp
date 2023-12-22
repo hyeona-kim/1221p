@@ -15,20 +15,9 @@
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
-			<div class="left">
-				<ul id="list2">
-					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;과정등록</a></li>
-					
-		<%-- 	<li class="content"><a href="Controller?type=course">교육과정현황</a></li> --%>
-					<li class="content"><a href="courselog.jsp">교육과정현황</a></li>
-					<li class="content"><a href="">교수계획서 / 학습안내서</a></li>
-					<li class="content"><a href="">시간표만들기(HRD)</a></li>
-					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;동영상 메뉴얼 보기</a></li>
-				</ul>
-			</div>
+			<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
 				<!--  여기서 표시될 테이블들 가지고오기 -->
-				
 			</div>
 		</div>
 	</article>

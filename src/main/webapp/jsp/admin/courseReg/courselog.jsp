@@ -33,31 +33,31 @@ th, td {
 		 margin-bottom: 10px;
 	}
 </style>
-<link rel="stylesheet" type="text/css" href="../../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../../css/center.css" />
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 </head>
-<c:if test="${tvo eq null }">
 <body>
+<% 
+	Object obj = request.getAttribute("ar");
+	CourseVO[] cvo = null;
+	if (obj != null) {
+		cvo = (CourseVO[])obj;
+	};
+%>
+
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
-			<div class="left">
-				<ul id="list2">
-					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;과정등록</a></li>
-					<li class="content"><a href="teacher_list.jsp">교직원현황</a></li>
-					<li class="content"><a href="">교육과정현황</a></li>
-					<li class="content"><a href="">교수계획서 / 학습안내서</a></li>
-					<li class="content"><a href="">시간표만들기(HRD)</a></li>
-					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;동영상 메뉴얼 보기</a></li>
-				</ul>
-			</div>
+		<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
 				<!--  여기서 표시될 테이블들 가지고오기 -->
 	<div id="ttop">
-			<button>과정등록</button>	
-			<button>과정타입수정</button>	
-			<button>강의실관리</button>	
+			<button type="button" onclick="set()">과정등록</button>	
+			<button type="button" onclick="set2()">과정타입수정</button>	
+			<button type="button" onclick="set3()">강의실관리</button>	
 	</div>
 	
 	<div id="top">
@@ -105,18 +105,18 @@ th, td {
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="course" items="${courseList }" varStatus="vs"> 
+				<c:forEach var="cvo" items="${ar }" >
 					<tr>
-						<td>${course.name }</td>
+						<td>${cvo.c_idx }</td>
 						<td>W1805300001</td>
-						<td>내일배움카드</td>
-						<td>김상당</td>
-						<td>2018-05-28</td>
-						<td>2018-07-12</td>
+						<td>${cvo.ct_idx} </td>
+						<td>${cvo.t_idx }</td>
+						<td>${cvo.start_date }</td>
+						<td>${cvo.end_date }</td>
 						<td>월화수목금</td>
-						<td>2</td>
-						<td>5</td>
-						<td>103호 104호 202호</td>
+						<td>${cvo.c_round_num }</td>
+						<td>${cvo.c_peo_num }</td>
+						<td>${cvo.r_idx }</td>
 						<td>
 							<button type="button">교과목 등록/수정</button>
 							<button type="button">학습안내서 등록/수정</button>
@@ -131,21 +131,75 @@ th, td {
 			</div>
 		</div>
 	</article>
+	<div id="dialog" hidden="" title="교육과정등록">
+		<div>
+			<jsp:include page="../../basics.jsp"></jsp:include>
+		</div>
+	</div>
+	
+	<div id="dialog2" hidden="" title="과정타입수정">
+		<div>
+				<jsp:include page="../table/typeInput.jsp"></jsp:include>
+		</div>
+	</div>
+	
+	<div id="dialog3" hidden="" title="강의실관리">
+		<div>
+				<jsp:include page="../table/classApply.jsp"></jsp:include>
+		</div>
+	</div>
+	
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
 		$(function() {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
+		
 		});
+		function set() {
+            $("#dialog").dialog("open");
+        }
+		function set2() {
+            $("#dialog2").dialog("open");
+        }
+		function set3() {
+            $("#dialog3").dialog("open");
+        }
+		$( "#dialog" ).dialog({
+            autoOpen: false,
+            width: 400,
+            modal: true,
+            buttons: {
+                "닫기": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
 		
-		
+		$( "#dialog2" ).dialog({
+            autoOpen: false,
+            width: 400,
+            modal: true,
+            buttons: {
+                "닫기": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+		$( "#dialog3" ).dialog({
+            autoOpen: false,
+            width: 400,
+            modal: true,
+            buttons: {
+                "닫기": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
 		
 	</script>
 </body>
-</c:if>
-<c:if test="${tvo ne null}">
-	<c:redirect url="Controller">
-	</c:redirect>
-</c:if>
+
 </html>

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	header{
+	#header{
 		  background-color: #2e2e2e;
       color: #fff;
       width: 600px;
@@ -15,7 +15,7 @@
       margin-bottom: 10px;
       font-size: 20px;
 	}
-	#wrap{
+	#wrap1{
 		width: 600px;
 		height: 270px;
 		padding: 0;
@@ -23,7 +23,7 @@
 		text-align: center;
 	}
 
-	 th, td {
+	#tr {
 	 	margin: 0;
         padding: 0;
         border: 1px solid black;
@@ -31,9 +31,9 @@
     }
  
     #ad, #sa {
-		width: 600px;
+		width: 100%;
 		margin: 0 auto;
-		padding-top: 10px; 
+		padding-top: 100px; 
 	}
 	
 	#ad{
@@ -58,10 +58,8 @@
 		color: white;
 	 }
 	 
-	 button{
-	 	border-radius: 3px;
-	 }
-	table {
+	 
+	#t1 {
 		border-collapse: collapse;
 		width: 100%;
 		border-spacing: 0;
@@ -71,11 +69,11 @@
 </style>
 </head>
 <body>
-	<header>강의실 등록/수정</header>
-	<div id="wrap">
+	<header id="header">강의실 등록/수정</header>
+	<div id="wrap1">
 		<table id="t1">
 			<thead>
-				<tr>
+				<tr id="tr">
 					<td>순번</td>
 					<td>강의실명</td>
 					<td>강의구분</td>
@@ -83,7 +81,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr id="tr">
 					<td>1 </br>
 						<button type="button">삭제1</button>
 					</td>
@@ -102,7 +100,7 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
+				<tr id="tr">
 					<td>1 </br>
 						<button type="button">삭제</button>
 					</td>
@@ -121,7 +119,7 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
+				<tr id="tr">
 					<td>1 </br>
 						<button type="button">삭제</button>
 					</td>
@@ -140,7 +138,7 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
+				<tr id="tr">
 					<td>1 </br>
 						<button type="button">삭제</button>
 					</td>
@@ -159,7 +157,7 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
+				<tr id="tr">
 					<td>1 </br>
 						<button type="button">삭제</button>
 					</td>

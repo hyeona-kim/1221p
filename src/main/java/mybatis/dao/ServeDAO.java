@@ -13,27 +13,27 @@ public class ServeDAO {
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
 		int cnt = ss.selectOne("serve.count");
+		
 		ss.close();
 		
 		return cnt;
 	}
 	
-	
-	
+
 	public static CourseVO[] getlist(int begin, int end) {
 		CourseVO[] ar = null;
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
+		
 		map.put("begin",String.valueOf(begin));
 		map.put("end", String.valueOf(end));
 		
-		List<CourseVO> list = ss.selectList("serve.list2",map);
-		if(list !=null && list.isEmpty()) {
+		List<CourseVO> list = ss.selectList("serve.list",map);
+		if(list !=null && !list.isEmpty()) {
 			ar = new CourseVO[list.size()];
-			
-			list.toArray();
+			list.toArray(ar);
 			
 		}
 		ss.close();

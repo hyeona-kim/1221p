@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../../css/center.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 <style>
 table tfoot ol.page {
 	    list-style:none;
@@ -45,7 +45,34 @@ table tfoot ol.page {
 	    color:white;
 	    font-weight:bold;
 	}
-
+	#staffWrap{
+		width: 95%;
+		margin: auto;
+		margin-top: 20px;
+	}
+	#staffList_top {
+		background: black;
+		color: white;
+		height: 40px;
+		line-height: 40px;
+	}
+	
+	#searchTime, #makeTime{
+		margin-top:10px;
+		border-collapse: collapse;
+		width: 100%;
+	}
+	#searchTime td, #searchTime th, #makeTime td, #makeTime th{
+		border: 1px solid #ddd;
+		height: 40px;
+		padding-left: 10px;
+	}
+	#searchTime th, #makeTime th{background-color: #ddd;}
+	
+	#searchTime caption, #makeTime caption{
+		text-indent: -9999px;
+		height: 0;
+	}
 </style>
 
 </head>
@@ -54,19 +81,40 @@ table tfoot ol.page {
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
-			<div class="left">
-				<ul id="list2">
-					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;과정등록</a></li>
-					<li class="content"><a href="teacher_list.jsp">교직원현황</a></li>
-					<li class="content"><a href="">교육과정현황</a></li>
-					<li class="content"><a href="">교수계획서 / 학습안내서</a></li>
-					<li class="content"><a href="">시간표만들기(HRD)</a></li>
-					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;동영상 메뉴얼 보기</a></li>
-				</ul>
-			</div>
+			<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
-				<!--  여기서 표시될 테이블들 가지고오기 -->
-				<table>
+				<div id="staffWrap">
+					<div id="staffList_top">과정별 교수계획서 및 학습 안내서</div>
+					<table id="searchTime">
+					<caption>과정별 교수계획서 및 학습 안내서 검색</caption>
+						<tr>
+							<th>검색</th>
+							<td>
+								<select>
+									<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
+									<option>표시개수</option>
+									<option>5</option>
+									<option>10</option>
+									<option>15</option>
+								</select>
+								<select>
+									<option value="년도선택">년도선택</option>
+									<c:forEach begin="2000" end="2023" var="year">
+										<option value="${year }">${year }</option>		
+									</c:forEach>
+								</select>
+							</td>
+							<td>
+								<select>
+									<option>훈련강사</option>
+								</select>
+								<input type="text" size="14" />
+								<button type="button">검색</button>
+							</td>
+						</tr>
+					</table>	
+				<table id="makeTime">
+				<caption>과정별 교수계획서 및 학습 안내서 리스트</caption>
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -83,7 +131,7 @@ table tfoot ol.page {
 					</thead>
 					<tfoot>
 						<tr>
-							<td colspan="6">
+							<td colspan="10">
 								<ol class="page">
 			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
 		<li class="disable">&lt;</li>
@@ -114,26 +162,25 @@ table tfoot ol.page {
 					</tfoot>
 					<tbody>
 		
-			<c:forEach var="vo" items="${ser }" varStatus="vs">
-			<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
-			
-				<tr>
-					<td>${num+(vs.index)+1 }</td>
-					<td>${vo.c_name }</td>
-					<td>과정코드</td>
-					<td>담당교수</td>
-					<td>${vo.start_date }</td>
-					<td>${vo.end_date }</td>
-					<td>요일</td>
-					<td>${vo.c_round_num }</td>
-					<td>관리</td>
-					
-					
-				</tr>
-			
-			</c:forEach>
-			</tbody>
+						<c:forEach var="vo2" items="${requestScope.ar }" varStatus="vs">
+						<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
+						<tr>
+							<td>${num+(vs.index)-2 }</td>
+								<td>${vo2.c_name}</td>
+								<td>${vo2.c_code}</td>
+								<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
+								<td>${vo2.t_idx}</td>
+								<td>${vo2.start_date }</td>
+								<td>${vo2.end_date }</td>
+								<td>${vo2.ti_idx}</td>
+								<td>${vo2.c_round_num }</td>
+								<td>${vo2.c_peo_num}</td>
+								<td>과정별 학습 안내서</td>
+							</tr>
+						</c:forEach>
+					</tbody>
 				</table>
+				</div>
 			</div>
 		</div>
 	</article>
