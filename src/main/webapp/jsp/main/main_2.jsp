@@ -18,6 +18,7 @@
 			<div class="left">
 				<ul id="list2">
 					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;과정등록</a></li>
+					<li class="content"><a href="">교직원현황</a></li>
 					<li class="content"><a href="">교육과정현황</a></li>
 					<li class="content"><a href="">교수계획서 / 학습안내서</a></li>
 					<li class="content"><a href="">시간표만들기(HRD)</a></li>
