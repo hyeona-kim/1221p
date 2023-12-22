@@ -85,7 +85,7 @@
 			<tbody>
 				<tr>
 					<td>1 </br>
-						<button type="button">삭제</button>
+						<button type="button">삭제1</button>
 					</td>
 					<td><input type="text" name="className"> </td>
 					<td>
