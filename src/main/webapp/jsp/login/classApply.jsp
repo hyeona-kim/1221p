@@ -30,8 +30,6 @@
         text-align: center;
     }
  
- 	
-    
     #ad, #sa {
 		width: 600px;
 		margin: 0 auto;
@@ -87,20 +85,20 @@
 			<tbody>
 				<tr>
 					<td>1 </br>
-						<button type="button">삭제</button>
+						<button type="button">삭제1</button>
 					</td>
 					<td><input type="text" name="className"> </td>
 					<td>
-						<select>
-								<option>실습</option>
-								<option>이론</option>
-								<option>겸용</option>
+						<select name="roomSep">
+								<option value="1">실습</option>
+								<option value="2">이론</option>
+								<option value="3">겸용</option>
 						</select>
 					</td>
 					<td>
-						<select>
-							<option>사용</option>
-							<option>미사용</option>
+						<select name="use">
+							<option value="1">사용</option>
+							<option value="2">미사용</option>
 						</select>
 					</td>
 				</tr>
