@@ -25,27 +25,6 @@ public class LoginAction implements Action{
 			}else if(select.equalsIgnoreCase("teacher")) {
 				viewPath = "/jsp/login/login_teacher.jsp";
 			}
-		}else if(enc_type.startsWith("application")) {
-			String u_id = request.getParameter("ID");
-			String u_pw = request.getParameter("PW");
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("id", u_id);
-			map.put("pw", u_pw);
-			// select에 따라 맞는 dao에서 정보를 받아
-			// 맞는 정보가 있다면 세션에 저장한다 
-
-			if(select.equalsIgnoreCase("admin")) {
-				viewPath = "/jsp/admin/main.jsp";
-				// adminVO객체를 session에 저장한다
-			}else if(select.equalsIgnoreCase("train")) {
-				viewPath = "/jsp/train/main.jsp";
-				// TrainVO객체를 session에 저장한다
-			}else if(select.equalsIgnoreCase("teacher")) {
-				viewPath = "/jsp/main/main.jsp";
-				// teacherVO객체를 session에 저장한다
-			}
-			
-			
 		}
 		return viewPath;
 	}
