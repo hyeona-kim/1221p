@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../css/center.css" />
+<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+<link rel="stylesheet" type="text/css" href="../../css/center.css" />
 
 </head>
 <body>
 	<article id="wrap">
-		<jsp:include page="./head.html"></jsp:include>
+		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
 			<div class="left 2">
 				<ul id="list2">

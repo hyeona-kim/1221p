@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bbs">
+<mapper namespace="staff">
+
 <resultMap type="mybatis.vo.BbsVO" id="map1">
 <result property="b_idx" column="b_idx"/> <!-- 기본키 값 채워주기 -->
 <collection property="c_list" ofType="mybatis.vo.CommVo" select="commList" column="b_idx"/>
