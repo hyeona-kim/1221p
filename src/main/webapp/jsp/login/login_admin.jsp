@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +20,12 @@
 			<tr>
 				<td valign="top">
 					<div style="padding-top: 20px">
-						<img src="images/lms_main_intro.png" style="max-width: 100%">
+						<img src="images/lms_main_intro.png" style="max-width: 100%" alt="상단 이미지">
 					</div>
 				</td>
 				<td width="20px"></td>
 				<td valign="top">
-					<form name="theForm" method="post" action="Login_ok.asp"
-						onSubmit="return OnAdminLognCheck();">
+					<form name="theForm" method="post" action="Controller?type=login&select=admin">
 						<input type="hidden" name="strPrevUrl" value=""> <input
 							type="hidden" name="serviceYN" id="serviceYN">
 						<div class="login-layout">
@@ -34,21 +33,17 @@
 							<div class="login-form">
 								<div class="login-input">
 									<div>
-										<input type="text" id="strLoginID" name="strLoginID" value=""
+										<input type="text" id="strLoginID" name="ID" value=""
 											placeholder="관리자 아이디" class="form-control input-lg"
 											style="margin-bottom: 5px" />
 									</div>
 									<div>
-										<input type="password" id="strLoginPwd" name="strLoginPwd"
-											value="" placeholder="관리자 비밀번호"
-											autocomplete="atosoft_02 strLoginPwd"
-											class="form-control input-lg" /> <input type="hidden"
-											name="strLoginPwd1" id="strLoginPwd1" value="">
+										<input type="password" id="strLoginPwd" name="PW" value="" placeholder="관리자 비밀번호" autocomplete="atosoft_02 strLoginPwd" class="form-control input-lg" />
+										 <input type="hidden" name="strLoginPwd1" id="strLoginPwd1" value="">
 									</div>
 								</div>
 								<div class="login-btn" style="margin-top: 10px">
-									<input type="submit" value="로그인"
-										class="btn btn-info block full-width" style="cursor: pointer;" />
+									<input type="submit" value="로그인" class="btn btn-info block full-width" style="cursor: pointer;" />
 								</div>
 							</div>
 							<div class="login-bottom"></div>

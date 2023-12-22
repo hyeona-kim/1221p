@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,8 +68,8 @@
 	
 	#list .menubar a:hover{
 		background-color: black;
-		color: yellow;
 	}
+
 	#center{
 		width: 100%;
 		height: 700px; 
@@ -88,7 +89,7 @@
 		background-color: black;
 		color: yellow;
 	}
-		#list2 .title{
+	#list2 .title{
 		list-style: none;
 		padding: 0;
 		margin: 0;
@@ -143,6 +144,7 @@
 	}
 </style>
 </head>
+<c:if test="${tvo eq null }">
 <body>
 	<article id="wrap">
 		<header>
@@ -153,23 +155,21 @@
 				<a href="">로그아웃</a>
 			</div>
 			<ul id="list">
-				<li class="menubar 1 selected" ><a href="">상담 및 접수</a></li>
-				<li class="menubar 2"><a href="./main_2.jsp">과정등록</a></li>
+				<li class="menubar 1" ><a href="./main.jsp">상담 및 접수</a></li>
+				<li class="menubar 2 selected"><a href="">과정등록</a></li>
 				<li class="menubar 3"><a href="">학적부</a></li>
 				<li class="menubar 4"><a href="">상담관리</a></li>
 				<li class="menubar 5"><a href="">훈련일지</a></li>
 			</ul>
 		</header>
 		<div id="center">
-			<div class="left 2">
+			<div class="left">
 				<ul id="list2">
-					<li class="title"><a href="">입학상담 및 모집현황</a></li>
-					<li class="content"><a href="">면접평가표관리</a></li>
-					<li class="content"><a href="">입학상담내역</a></li>
-					<li class="content"><a href="">일일모집현황</a></li>
-					<li class="content"><a href="">교육생등록현황</a></li>
-					<li class="content"><a href="">수강생파일등록</a></li>
-					<li class="title"><a href="">동영상메뉴얼보기</a></li>
+					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;과정등록</a></li>
+					<li class="content"><a href="">교육과정현황</a></li>
+					<li class="content"><a href="">교수계획서 / 학습안내서</a></li>
+					<li class="content"><a href="">시간표만들기(HRD)</a></li>
+					<li class="title"><a href="">&nbsp;&nbsp;&nbsp;동영상 메뉴얼 보기</a></li>
 				</ul>
 			</div>
 			<div class="right">
@@ -178,4 +178,9 @@
 		</div>
 	</article>
 </body>
+</c:if>
+<c:if test="${tvo ne null}">
+	<c:redirect url="Controller">
+	</c:redirect>
+</c:if>
 </html>

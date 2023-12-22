@@ -25,7 +25,7 @@
 				</td>
 				<td width="20px"></td>
 				<td valign="top">
-				 <form name="theForm" method="post" action="Login_ok.asp" onSubmit="return OnAdminLognCheck();">
+				 <form name="theForm" method="post" action="Controller?type=login&select=teacher" onSubmit="return OnAdminLognCheck();">
 					<input type="hidden" name="strPrevUrl" value="">
 					<input type="hidden" name="serviceYN" id="serviceYN">
 						<div class="login-layout">
@@ -33,10 +33,10 @@
 								 <div class="login-form">
 									<div class="login-input">
 										<div>
-											<input type="text" id="strLoginID" name="strLoginID" value="" placeholder="교·강사 아이디" class="form-control input-lg" style="margin-bottom:5px"/>
+											<input type="text" id="strLoginID" name="ID" value="" placeholder="교·강사 아이디" class="form-control input-lg" style="margin-bottom:5px"/>
 										</div>
 										<div>
-											<input type="password"  id="strLoginPwd" name="strLoginPwd" value="" placeholder="교·강사 비밀번호" autocomplete="atosoft_02 strLoginPwd" class="form-control input-lg"/>
+											<input type="password"  id="strLoginPwd" name="PW" value="" placeholder="교·강사 비밀번호" autocomplete="atosoft_02 strLoginPwd" class="form-control input-lg"/>
 											<input type="hidden" name="strLoginPwd1" id="strLoginPwd1" value="">
 										</div>
 									</div>
