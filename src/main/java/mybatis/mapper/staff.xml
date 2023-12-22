@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="staff">
+	<!-- 총 교직원 목록을 반환하는 기능 -->
+	<select id="all" resultType="mybatis.vo.StaffVO">
+		select * from staff_t
+	</select>
+	
 	<select id="login_admin" parameterType="Map" resultType="mybatis.vo.StaffVO">
 		select * from staff_t 
 		where sf_id=#{u_id} and sf_pwd =#{u_pw} and rt_idx=9
