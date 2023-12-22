@@ -10,8 +10,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 <style>
 	#staffWrap{
-		width: 90%;
+		width: 95%;
 		margin: auto;
+		margin-top: 20px;
 	}
 	#staffList_top {
 		background: black;
