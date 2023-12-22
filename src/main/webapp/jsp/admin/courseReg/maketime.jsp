@@ -9,43 +9,33 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 <style>
-table tfoot ol.page {
-	    list-style:none;
+	#staffWrap{
+		width: 90%;
+		margin: auto;
+	}
+	#staffList_top {
+		background: black;
+		color: white;
+		height: 40px;
+		line-height: 40px;
 	}
 	
-	table tfoot ol.page li {
-	    float:left;
-	    margin-right:8px;
+	#searchTime, #makeTime{
+		margin-top:10px;
+		border-collapse: collapse;
+		width: 100%;
 	}
+	#searchTime td, #searchTime th, #makeTime td, #makeTime th{
+		border: 1px solid #ddd;
+		height: 40px;
+		padding-left: 10px;
+	}
+	#searchTime th, #makeTime th{background-color: #ddd;}
 	
-	table tfoot ol.page li a {
-	    display:block;
-	    padding:3px 7px;
-	    border:1px solid #00B3DC;
-	    color:#2f313e;
-	    font-weight:bold;
-	    text-decoration: none;
+	#searchTime caption, #makeTime caption{
+		text-indent: -9999px;
+		height: 0;
 	}
-	
-	table tfoot ol.page li a:hover {
-	    background:#00B3DC;
-	    color:white;
-	    font-weight:bold;
-	}
-	.disable {
-	    padding:3px 7px;
-	    border:1px solid silver;
-	    color:silver;
-	}
-	
-	.now {
-	   padding:3px 7px;
-	    border:1px solid #ff4aa5;
-	    background:#ff4aa5;
-	    color:white;
-	    font-weight:bold;
-	}
-
 </style>
 
 </head>
@@ -60,29 +50,69 @@ table tfoot ol.page {
 					<article>
 						<%-- ========== 교직원현황 테이블 시작 ========== --%>
 						<div id="staffList_top">과정별시간표만들기</div>
-						<table id="staffList">
+						<table id="searchTime">
+						<caption>시간표 검색</caption>
+							<tr>
+								<th>검색</th>
+								<td>
+									<select>
+										<option value="년도선택">년도선택</option>
+										<c:forEach begin="2000" end="2023" var="year">
+											<option value="${year }">${year }</option>		
+										</c:forEach>
+									</select>
+								</td>
+								<td>
+									<select>
+										<option>과정타입</option>
+									</select>
+									<input type="text" size="14" />
+									<button type="button">검색</button>
+								</td>
+							</tr>
+						</table>
+						<table id="makeTime">
 							<colgroup>
 								<col width="">
 							</colgroup>
 							<caption>과정별시간표만들기</caption>
 							<thead>
-								<%-- ===== 교직원 등록 버튼 ===== --%>
-								<tr><td colspan="12"><a href="" id="staff_add_btn">교직원 등록</a></td></tr>
+								<tr>
+									<th>과정명</th>
+									<th>담당교수</th>
+									<th>개강일</th>
+									<th>종료일</th>
+									<th>요일</th>
+									<th>회차</th>
+									<th>주차</th>
+									<th>모집</th>
+									<th>관리</th>
+								</tr>
 							</thead>
 							<tbody>
+								<c:if test="${ar ne null }">
+								<c:forEach items="${ar }" var="tvo" varStatus="vs"></c:forEach>
 								<tr>
-									<th>성명</th>
-									<th>교수코드</th>
-									<th>직급</th>
-									<th>아이디</th>
-									<th>암호</th>
-									<th>연락처</th>
-									<th>입사일</th>
-									<th>퇴사일</th>
-									<th>사용권한</th>
-									<th>책임자</th>
-									<th colspan="2">관리</th>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>
+										 <button type="button">강사/시설/교과목 액셀등록</button>
+										 <button type="button">HRD시간표 액셀등록</button>
+										 <button type="button">주별시간표보기</button>
+									</td>
 								</tr>
+								</c:if>
+								<c:if test="${ar eq null}">
+									<tr>
+										<td colspan="9">시간표 리스트가 존재하지 않습니다.</td>
+									</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</article>
