@@ -104,10 +104,10 @@ th, td {
 					<td>관리</td>
 				</tr>
 			</thead>
-			<c:forEach var="" items="" varStatus=""> 
 			<tbody>
+			<c:forEach var="course" items="${courseList }" varStatus="vs"> 
 					<tr>
-						<td>테스트1</td>
+						<td>${course.name }</td>
 						<td>W1805300001</td>
 						<td>내일배움카드</td>
 						<td>김상당</td>
@@ -124,8 +124,8 @@ th, td {
 							<button type="button">삭제</button>
 						</td>
 					</tr>
-			</tbody>
 			</c:forEach>
+			</tbody>
 		</table>
 	</div>
 			</div>

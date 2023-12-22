@@ -8,6 +8,7 @@ import mybatis.service.FactoryService;
 import mybatis.vo.CourseVO;
 
 public class CourseDAO {
+	
 	public static CourseVO[] getCourseList() {
 		CourseVO[] ar = null;
 		

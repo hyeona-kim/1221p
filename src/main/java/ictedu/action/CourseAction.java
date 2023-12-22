@@ -12,7 +12,7 @@ public class CourseAction  implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		CourseVO[] ar = CourseDAO.getCourseList();
 		
-		request.setAttribute("ar", ar);
+		request.setAttribute("courseList", ar);
 		
 		return "courselog.jsp";
 	}
