@@ -25,12 +25,6 @@
 						</td>
 					</tr>
 					<tr>
-						<!--<td>
-				    <div style="padding-top:20px">
-		  				<img src="images/lms_main_intro.jpg">
-					</div>
-				</td>
-				<td width="20px"></td>-->
 						<td valign="top">
 
 							<div class="login-layout">
@@ -38,13 +32,13 @@
 								<div class="login-form">
 									<div class="login-input">
 										<div>
-											<input type="text" id="search" name="strSName"
+											<input type="text" id="search" name="ID"
 												placeholder="수강생 이름" class="form-control input-lg"
-												style="margin-bottom: 5px" /> <input type="hidden"
-												name="strCode" id="strPN">
+												style="margin-bottom: 5px" /> 
+												<input type="hidden" name="strCode" id="strPN">
 										</div>
 										<div>
-											<input type="password" id="strLoginPwd" name="strLoginPwd"
+											<input type="password" id="strLoginPwd" name="PW"
 												placeholder="수강생 비밀번호" autocomplete="atosoft_02 strLoginPwd"
 												class="form-control input-lg" /> <input type="hidden"
 												name="strLoginPwd1" id="strLoginPwd1" value="">
@@ -61,6 +55,7 @@
 									</div>
 									<div class="login-bottom"></div>
 								</div>
+								</div>
 						</td>
 					</tr>
 					<tr>
@@ -74,6 +69,7 @@
 					</tr>
 				</table>
 			</form>
+		</div>
 		</div>
 </body>
 </html>
