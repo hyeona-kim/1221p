@@ -34,7 +34,7 @@
 		$(function() {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
-			$("#secondmenu").addClass("selected");
+			$("#firstmenu").addClass("selected");
 		});
 	</script>
 </body>
