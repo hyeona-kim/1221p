@@ -15,6 +15,7 @@ public class LoginDAO {
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
 		svo = ss.selectOne("staff.login_admin",map);
+		ss.close();
 		return svo;
 	}
 	
@@ -24,6 +25,7 @@ public class LoginDAO {
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
 		svo = ss.selectOne("staff.login_teacher",map);
+		ss.close();
 		return svo;
 	}
 	

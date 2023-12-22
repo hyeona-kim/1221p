@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../../css/center.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 <title>Insert title here</title>
 <style>
 	#staffWrap{
@@ -132,7 +132,7 @@
 										<a href="" class="staff_del_btn staff_btn">삭제</a>
 									</td>
 								</tr>
-								<%
+								<%if(svo!= null){
 									for(int i=0; i<svo.length; i++) {
 										StaffVO vo = svo[i];
 								%>
@@ -157,7 +157,8 @@
 									</td>
 								</tr>
 								<%
-									}; // for의 끝
+										} // for의 끝
+									}
 								%>
 							</tbody>
 						</table>

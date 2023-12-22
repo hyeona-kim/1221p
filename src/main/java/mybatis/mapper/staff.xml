@@ -15,6 +15,6 @@
 	
 	<select id="login_teacher" parameterType="Map" resultType="mybatis.vo.StaffVO">
 		select * from staff_t 
-		where sf_id=#{u_id} and sf_pwd =#{u_pw} and rt_idx b
+		where sf_id=#{u_id} and sf_pwd =#{u_pw} and rt_idx between 0 and 9
 	</select>
 </mapper>
