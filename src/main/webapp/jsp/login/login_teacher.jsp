@@ -14,20 +14,22 @@
 		 <table border="0" align="center" style="margin-top:50px">
 			 <tr>
 			  <td colspan="3" align="center"> 
-				<h1><a href="http://ictedu.atosoft.net/"><img src="images/vendor_logo.png"></a></h1>
+				<h1>
+					<a href="Controller"><img src="" alt="상단이미지"></a>
+				</h1>
 			  </td>
 			 </tr>
 			 <tr>
 				<td valign="top">
 		  			<div style="padding-top:20px">
-		  				<img src="images/lms_main_intro.png" style="max-width:100%">
+		  				<img src="" style="max-width: 100%" alt="왼쪽이미지">
 					 </div>
 				</td>
 				<td width="20px"></td>
 				<td valign="top">
-				 <form name="theForm" method="post" action="Controller?type=login&select=teacher" onSubmit="return OnAdminLognCheck();">
-					<input type="hidden" name="strPrevUrl" value="">
-					<input type="hidden" name="serviceYN" id="serviceYN">
+				 <form name="theForm" method="post" action="Controller">
+						<input type="hidden" name="select" value="teacher">
+						<input type="hidden" name="type" value="login_ok">
 						<div class="login-layout">
 							<h2>교강사 로그인</h2>
 								 <div class="login-form">

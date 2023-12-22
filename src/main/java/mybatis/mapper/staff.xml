@@ -3,85 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="staff">
-
-<resultMap type="mybatis.vo.BbsVO" id="map1">
-<result property="b_idx" column="b_idx"/> <!-- 기본키 값 채워주기 -->
-<collection property="c_list" ofType="mybatis.vo.CommVo" select="commList" column="b_idx"/>
-
-
-</resultMap>
-
-	<select id="list" resultType="mybatis.vo.BbsVO" >
-		select * from bbs_t
-		where status = 0 AND bname = 'BBS'
-		ORDER BY b_idx desc
-	
+	<select id="login_admin" parameterType="Map" resultType="mybatis.vo.StaffVO">
+		select * from staff_t 
+		where sf_id=#{u_id} and sf_pwd =#{u_pw} and rt_idx=9
 	</select>
 	
-	<!-- 게시판 페이지에 갯수 보이게하는 select문 -->
-	<select id="list2" resultMap="map1" parameterType="Map">
-	select * from (select @RN:=@RN+1 as rnum, a.* from(select * from bbs_t
-	where status = 0 AND bname = #{bname}
-	ORDER BY b_idx desc) a, (Select @RN:=0) b) c where c.rnum between #{begin} and #{end}
+	<select id="login_teacher" parameterType="Map" resultType="mybatis.vo.StaffVO">
+		select * from staff_t 
+		where sf_id=#{u_id} and sf_pwd =#{u_pw} and rt_idx b
 	</select>
-	
-	<!-- 총 게시물 수를 반환하는 기능 -->
-	<select id="count" resultType="int" parameterType="String">
-		select count(*) from bbs_t
-		where status = 0 AND bname = #{bname}
-	</select>
-	
-	<!-- b_idx를 인자로 받아서 해당 b_idx를 참조하는 댓글들을 반환하는 select -->
-	<select id="commList" resultType="mybatis.vo.CommVO" parameterType="String">
-		select * from comment_t where b_idx = #{idx} and status = 0
-	</select>
-	
-	<!-- 원글 저장 -->
-	<insert id="add" parameterType="Map">
-		insert into bbs_t(subject, writer, content, file_name, ori_name, write_date,ip,hit,bname,status)
-		values(#{subject}, #{writer}, #{content}, #{file_name}, #{ori_name}, now(),#{ip},0,#{bname},0)
-	</insert>
-	
-	<!-- 원글 보기 -->
-	<select id="getBbs" parameterType="String" resultMap="map1">
-		select * from bbs_t
-		where b_idx = #{num}
-	</select>
-	<!-- 댓글 저장 -->
-	<insert id="addComm" parameterType="mybatis.vo.CommVO">
-		INSERT INTO comment_t(writer, content, pwd, ip, 
-			write_date, b_idx, status)
-		VALUES(#{writer}, #{content}, #{pwd}, #{ip}, 
-			NOW(), #{b_idx}, 0)
-	</insert>
-	<!-- 수정 -->
-	<update id="update" parameterType="Map">
-		update bbs_t 
-		<trim prefix="SET" suffixOverrides=",">
-		subject= #{subject},
-		content =#{content},
-		<if test="fname !=null">
-		fname= #{fname},
-		oname= #{oname},
-		</if>
-		ip = #{ip}
-		</trim>
-		where b_idx = #{b_idx}
-	</update>
-	
-	<!-- 원글 삭제 status값을 1로 변경 -->
-	<update id="del" parameterType="String">
-		update bbs_t
-		set status =1
-		where b_idx = #{b_idx}
-	</update>
-	
-	<!-- 조회수 증가 -->
-	<update id="hit" parameterType="String">
-		update bbs_t
-		set hit = hit+1
-		where b_idx = #{b_idx}
-	</update>
-	
-	
 </mapper>
