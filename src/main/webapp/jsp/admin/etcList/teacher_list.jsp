@@ -1,6 +1,7 @@
 <%@page import="mybatis.vo.StaffVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,6 @@
 	}
 	.staff_btn{
 		display: inline-block;
-		padding: 3px;
 		background-color: #cc1919;
 		border-radius: 3px;
 		border: none;
@@ -106,16 +106,17 @@
 	#addForm tfoot td{
 		border: none;
 	}
+	#director{
+		background-color: #e14b4b;
+		border-radius: 3px;
+		padding: 5px 7px;
+		font-weight: bold;
+		font-size: 14px;
+		color: white; 
+	}
 </style>
 </head>
 <body>
-<% 
-	Object obj = request.getAttribute("ar");
-	StaffVO[] svo = null;
-	if (obj != null) {
-		svo = (StaffVO[])obj;
-	};
-%>
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
@@ -135,6 +136,7 @@
 							<tbody>
 								<tr>
 								<%-- ===== 출력할 교직원 항목 ===== --%>
+									<th>번호</th>
 									<th>성명</th>
 									<th>교수코드</th>
 									<th>직급</th>
@@ -148,34 +150,41 @@
 									<th colspan="2">관리</th>
 								</tr>
 								<%-- ===== 교직원 목록 출력 ===== --%>
-								<%if(svo!= null){
-									for(int i=0; i<svo.length; i++) {
-										StaffVO vo = svo[i];
-								%>
-								<tr>
-									<td><%=vo.getSf_name()%></td>
-									<td><%=vo.getSf_code()%></td>
-									<td><%=vo.getSf_job()%></td>
-									<td><%=vo.getSf_id()%></td>
-									<td><%=vo.getSf_pwd()%></td>
-									<td><%=vo.getSf_phone()%></td>
-									<td><%=vo.getSf_hire_date()%></td>
-									<td><%=vo.getSf_fire_date()%></td>
-									<%-- 이 부분은 수정해야함
-										 사용권한 번호를 이용해서
-										 사용권한명을 가져와야함 --%>
-									<td><%=vo.getRt_idx()%></td>
-									<%-- 이것도 if문을 사용해서 총책임자만 표시하기 --%>
-									<td><%=vo.getSf_mgr()%></td>
-									<td colspan="2">
-										<a href="" class="staff_edit_btn staff_btn">수정</a>
-										<a href="" class="staff_del_btn staff_btn">삭제</a>
-									</td>
-								</tr>
-								<%
-										} // for의 끝
-									}
-								%>
+								<sf:if test="${vo ne null}">
+									<sf:forEach items="${requestScope.ar}" varStatus="vs" var="vo">
+										<tr>
+											<td>${vs.index+1}</td>
+											<td>${vo.sf_name}</td>
+											<td>${vo.sf_code}</td>
+											<td>${vo.sf_job}</td>
+											<td>${vo.sf_id}</td>
+											<td>${vo.sf_pwd}</td>
+											<td>${vo.sf_phone}</td>
+											<td>${vo.sf_hire_date}</td>
+											<td>${vo.sf_fire_date}</td>
+											<%-- 이 부분은 수정해야함
+												 사용권한 번호를 이용해서
+												 사용권한명을 가져와야함 --%>
+											<sf:if test="${vo.rt_idx ne null}">
+												<td>${vo.rt_idx}</td>
+											</sf:if>
+											<sf:if test="${vo.rt_idx eq null}">
+												<td></td>
+											</sf:if>
+											<%-- 이것도 if문을 사용해서 총책임자만 표시하기 --%>
+											<sf:if test="${vo.sf_mgr eq '9'}">
+												<td><span id="director">총책임자</span></td>
+											</sf:if>
+											<sf:if test="${vo.sf_mgr ne '9'}">
+												<td></td>
+											</sf:if>
+											<td colspan="2">
+												<a href="" class="staff_edit_btn staff_btn">수정</a>
+												<a href="" class="staff_del_btn staff_btn">삭제</a>
+											</td>
+										</tr>
+									</sf:forEach>
+								</sf:if>
 							</tbody>
 						</table>
 						<%-- ========== 교직원현황 테이블 끝 ========== --%>
@@ -202,7 +211,7 @@
 		
 		$("#staff_add_btn").bind("click", function(){
 			$.ajax({
-				url: "${pageContext.request.contextPath }/jsp/admin/etcList/add_ajax.jsp",
+				url: "${pageContext.request.contextPath}/jsp/admin/etcList/add_ajax.jsp",
 				type: "post"
 			}).done(function(result){
 				console.log(result);
