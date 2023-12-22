@@ -1,3 +1,4 @@
+<%@page import="mybatis.vo.StaffVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,62 +9,96 @@
 <link rel="stylesheet" type="text/css" href="../../css/center.css" />
 <title>Insert title here</title>
 <style>
-	#wrap2{
-		width: 100%;
-		padding: 0px;
+	#staffWrap{
+		width: 95%;
+		padding: 10px;
 		margin: 0px auto;
 	}
-	table#list{
+	table#staffList{
 		border-collapse: collapse;
-		width: 950px;
+		width: 98%;
 		margin: 0px auto;
 		padding: 0px;
 		text-align: center;
 	}
-	table#list tbody th, table#list tbody td{
-		border: 1px solid red;
-		padding: 4px;
+	table#staffList tbody th, table#staffList tbody td{
+		border: 1px solid #e9e9e6;
+		padding: 5px;
 	}
-	table#list tbody th {
-		background-color: #dfdfdf;
+	table#staffList tbody th {
+		background-color: #f0f0ef;
 	}
-	table#list caption{
+	table#staffList tbody td {
+		font-size: 13px;
+	}
+	table#staffList caption{
 		text-indent: -9999px;
 		height: 0px;
 	}
-	table#list thead td{
+	table#staffList thead td{
 		text-align: right;
 		border: none;
 		padding: 8px 0px;
 	}
-	div#list_top{
+	div#staffList_top{
 		background-color: black;
 		padding: 5px;
 		padding-left: 10px;
 		color: white;
 		font-weight: bold;
 	}
+	#staff_add_btn{
+		background-color: #4cdbcf;
+		border-radius: 3px;
+		border: none;
+		padding: 5px 7px;
+		font-weight: bold;
+		font-size: 14px;
+		color: white; 
+		text-decoration: none;
+	}
+	.staff_btn{
+		display: inline-block;
+		padding: 3px;
+		background-color: #cc1919;
+		border-radius: 3px;
+		border: none;
+		padding: 5px 7px;
+		font-weight: bold;
+		font-size: 14px;
+		color: white; 
+		text-decoration: none;
+	}
+	.staff_edit_btn{ background-color: #1876c7;	}
+	.staff_del_btn{ background-color: #cc1919;	}
 </style>
 </head>
 <body>
+<% 
+	Object obj = request.getAttribute("ar");
+	StaffVO[] svo = null;
+	if (obj != null) {
+		svo = (StaffVO[])obj;
+	};
+%>
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
 		<jsp:include page="leftList.jsp"></jsp:include>
 			<div class="right">
 				<!--  여기서 표시될 테이블들 가지고오기 -->
-				<div id="wrap2">
+				<div id="staffWrap">
 					<article>
 						<%-- ========== 교직원현황 테이블 시작 ========== --%>
-						<div id="list_top">교직원현황</div>
-						<table id="list">
+						<div id="staffList_top">교직원현황</div>
+						<table id="staffList">
 							<colgroup>
 								<col width="">
 							</colgroup>
 							<caption>교직원현황 테이블</caption>
 							<thead>
 								<%-- ===== 교직원 등록 버튼 ===== --%>
-								<tr><td colspan="12"><button id="reg_tea_btn">교직원 등록</button></td></tr>
+								<tr><td colspan="12"><a href="" id="staff_add_btn">교직원 등록</a></td></tr>
 							</thead>
 							<tbody>
 								<tr>
@@ -93,26 +128,37 @@
 									<td>1</td>
 									<td></td>
 									<td colspan="2">
-										<button id="list_edit_btn">수정</button>
-										<button id="list_del_btn">삭제</button>
+										<a href="" class="staff_edit_btn staff_btn">수정</a>
+										<a href="" class="staff_del_btn staff_btn">삭제</a>
 									</td>
 								</tr>
+								<%
+									for(int i=0; i<svo.length; i++) {
+										StaffVO vo = svo[i];
+								%>
 								<tr>
-									<td>김상담</td>
-									<td>3002</td>
-									<td>사원</td>
-									<td>김상담</td>
-									<td>1234</td>
-									<td>010-5678-5678</td>
-									<td>2018-04-02</td>
-									<td></td>
-									<td>2</td>
-									<td></td>
+									<td><%=vo.getSf_name()%></td>
+									<td><%=vo.getSf_code()%></td>
+									<td><%=vo.getSf_job()%></td>
+									<td><%=vo.getSf_id()%></td>
+									<td><%=vo.getSf_pwd()%></td>
+									<td><%=vo.getSf_phone()%></td>
+									<td><%=vo.getSf_hire_date()%></td>
+									<td><%=vo.getSf_fire_date()%></td>
+									<%-- 이 부분은 수정해야함
+										 사용권한 번호를 이용해서
+										 사용권한명을 가져와야함 --%>
+									<td><%=vo.getRt_idx()%></td>
+									<%-- 이것도 if문을 사용해서 총책임자만 표시하기 --%>
+									<td><%=vo.getSf_mgr()%></td>
 									<td colspan="2">
-										<button id="list_edit_btn">수정</button>
-										<button id="list_del_btn">삭제</button>
+										<a href="" class="staff_edit_btn staff_btn">수정</a>
+										<a href="" class="staff_del_btn staff_btn">삭제</a>
 									</td>
 								</tr>
+								<%
+									}; // for의 끝
+								%>
 							</tbody>
 						</table>
 						<%-- ========== 교직원현황 테이블 끝 ========== --%>
