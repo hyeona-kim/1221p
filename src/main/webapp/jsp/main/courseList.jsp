@@ -78,7 +78,7 @@
 							<option>강의실</option>
 						</select>
 						<input type="text"/>
-						<button type="button">검색</button>
+						<button type="button">검 색</button>
 					</td>
 				</tr>
 			</thead>
