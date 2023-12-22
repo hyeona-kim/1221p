@@ -7,10 +7,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import mybatis.service.FactoryService;
-import mybatis.vo.BbsVO;
-import mybatis.vo.CommVO;
 
-public class BbsDAO {
+
+public class LmsDAO {
 	
 	public static int getCount(String bname) {
 		
@@ -24,28 +23,6 @@ public class BbsDAO {
 	}
 	
 	
-	
-	public static BbsVO[] getlist(String bname, int begin, int end) {
-		BbsVO[] ar = null;
-		
-		SqlSession ss = FactoryService.getFactory().openSession();
-		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("bname", bname);
-		map.put("begin", String.valueOf(begin));
-		map.put("end", String.valueOf(end));
-		
-		List<BbsVO> list = ss.selectList("bbs.list2",map);
-		if(list != null && !list.isEmpty()) {
-			ar = new BbsVO[list.size()];
-			
-			list.toArray(ar);
-			
-		}
-		ss.close();
-		return ar;
-		
-	}
 	
 	
 	// 원글을 저장하는 기능
@@ -73,28 +50,8 @@ public class BbsDAO {
 		
 	}
 	// 보기 기능
-	public static BbsVO getBbs(String b_idx) {
-		
-		SqlSession ss = FactoryService.getFactory().openSession();
-		BbsVO vo = ss.selectOne("bbs.getBbs",b_idx);
-		ss.close();
-		
-		return vo;
-		
-	}
-	public static int addComm(CommVO vo) {
-		SqlSession ss = FactoryService.getFactory().openSession();
-		int cnt = ss.insert("bbs.addComm",vo);
-		
-		if(cnt > 0)
-			ss.commit();
-		else
-			ss.rollback();
-		ss.close();
-		return cnt;
-		
-		
-	}
+	
+
 	
 	// 원글을 수정하는 기능
 		public static int edit(String b_idx, String subject, String content,String fname, String oname, String ip) {
