@@ -9,18 +9,14 @@
 <body>
 	<div id="content" class="row" style="margin: 0px;">
 		<div class="col-xs-12" style="margin: 0px;">
-
-
-			<form class="form-horizontal" method="post"
-				data-parsley-validate="true" id="CompanyStu" name="CompanyStu"
-				action="SLogin_ok.asp" onSubmit="return OnAdminLognCheck();">
-				<input type="hidden" name="strPrevUrl" value="">
+			<form method="post" action="Controller" >
+				<input type="hidden" name="select" value="train">
+				<input type="hidden" name="type" value="login_ok">
 				<table border="0" align="center" style="margin-top: 50px">
 					<tr>
 						<td colspan="3" align="center">
 							<h1>
-								<a href="http://ictedu.atosoft.net/"><img
-									src="images/vendor_logo.png"></a>
+								<img src="" style="max-width: 100%" alt="왼쪽이미지">
 							</h1>
 						</td>
 					</tr>

@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../../css/center.css" />
+<!-- <link rel="stylesheet" type="text/css" href="../../css/header.css" /> -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 
 </head>
+<c:if test="${sessionScope.vo ne null}">
 <body>
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
@@ -38,4 +41,9 @@
 		});
 	</script>
 </body>
+</c:if>
+<c:if test="${sessionScope.vo eq null }">
+	<c:redirect url="Controller">
+	</c:redirect>
+</c:if>
 </html>
