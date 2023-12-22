@@ -11,15 +11,15 @@ public class EtcDAO {
 	
 	public static StaffVO[] getList() {
 		StaffVO[] ar = null;
-		// SQL문장을 실행하기 위해 sqlsession을 만든다
+		// SQL臾몄옣�쓣 �떎�뻾�븯湲� �쐞�빐 sqlsession�쓣 留뚮뱺�떎
 		SqlSession ss = FactoryService.getFactory().openSession();
-		// 구해진 session을 통해 SQL문을 실행한다.
+		// 援ы빐吏� session�쓣 �넻�빐 SQL臾몄쓣 �떎�뻾�븳�떎.
 		List<StaffVO> list = ss.selectList("staff.all");
-		if (list.size() > 0) {
+		if (list!= null && !list.isEmpty()) {
 			ar = new StaffVO[list.size()];
 			list.toArray(ar);
 		}
-		
+		ss.close();
 		return ar;
 	}
 	

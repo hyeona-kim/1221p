@@ -9,11 +9,11 @@
       <a href="Controller?type=logout">로그아웃</a>
    </div>
    <ul id="list">
-      <li class="menubar selected" id="firstmenu"><a href="../../admin/counselReceipt/main.jsp">상담 및 접수</a></li>
-      <li class="menubar" id="secondmenu"><a href="../../admin/courseReg/main.jsp">과정등록</a></li>
-      <li class="menubar" id="thirdmenu"><a href="../../admin/schoolRecord/main_3.jsp">학적부</a></li>
-      <li class="menubar 4"><a href="../../admin/counselManage/main_4.jsp">상담관리</a></li>
-      <li class="menubar 5"><a href="../../admin/trainingLog/main_5.jsp">훈련일지</a></li>
-      <li class="menubar 6" id="etclist"><a href="../../admin/etcList/main.jsp">기타관리</a></li>
+      <li class="menubar selected" id="firstmenu"><a href="Controller?type=menu&select=counselReceipt">상담 및 접수</a></li>
+      <li class="menubar" id="secondmenu"><a href="Controller?type=menu&select=courseReg">과정등록</a></li>
+      <li class="menubar" id="thirdmenu"><a href="Controller?type=menu&select=schoolRecord">학적부</a></li>
+      <li class="menubar 4"><a href="Controller?type=menu&select=counselManage">상담관리</a></li>
+      <li class="menubar 5"><a href="Controller?type=menu&select=trainingLog">훈련일지</a></li>
+      <li class="menubar 6" id="etclist"><a href="Controller?type=menu&select=etcList">기타관리</a></li>
    </ul>
 </header>
