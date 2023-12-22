@@ -33,12 +33,21 @@ th, td {
 		 margin-bottom: 10px;
 	}
 </style>
-<link rel="stylesheet" type="text/css" href="../../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../../css/center.css" />
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 
 </head>
 <c:if test="${tvo eq null }">
 <body>
+<% 
+	Object obj = request.getAttribute("ar");
+	CourseVO[] cvo = null;
+	if (obj != null) {
+		cvo = (CourseVO[])obj;
+	};
+%>
+
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
@@ -96,9 +105,12 @@ th, td {
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="course" items="${courseList }" varStatus="vs"> 
+				<%if(cvo!= null){
+									for(int i=0; i<cvo.length; i++) {
+										CourseVO vo = cvo[i];
+								%>
 					<tr>
-						<td>${course.name }</td>
+						<td><%=vo.getC_idx() %></td>
 						<td>W1805300001</td>
 						<td>내일배움카드</td>
 						<td>김상당</td>
@@ -115,7 +127,10 @@ th, td {
 							<button type="button">삭제</button>
 						</td>
 					</tr>
-			</c:forEach>
+			<%
+							}
+									}
+									%>
 			</tbody>
 		</table>
 	</div>
