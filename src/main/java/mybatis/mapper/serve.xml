@@ -5,7 +5,6 @@
 <mapper namespace="serve">
 	<select id="count" resultType="int">
 		select count(*) from course_t
-		order by c_idx desc
 	</select>
 	
 	<select id="list2" parameterType="Map" resultType="mybatis.vo.CourseVO">

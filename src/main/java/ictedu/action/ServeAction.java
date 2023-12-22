@@ -32,7 +32,7 @@ public class ServeAction implements Action {
 		request.setAttribute("ser", ar);
 		
 		
-		return "serve.jsp";
+		return "/jsp/admin/courseReg/serve.jsp";
 	}
 
 }
