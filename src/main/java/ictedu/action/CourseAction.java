@@ -14,7 +14,7 @@ public class CourseAction  implements Action{
 		
 		request.setAttribute("courseList", ar);
 		
-		return "courselog.jsp";
+		return "/jsp/admin/courseReg/courselog.jsp";
 	}
 
 }

@@ -10,13 +10,16 @@ import mybatis.vo.CourseVO;
 public class CourseDAO {
 	
 	public static CourseVO[] getCourseList() {
-		CourseVO[] ar = null;
-		
 		SqlSession ss = FactoryService.getFactory().openSession();
 		List<CourseVO> list = ss.selectList("course.list");
-		if(list != null && !list.isEmpty()) {
-			list.toArray(ar);
+		ss.close();
+
+		// List가 null이거나 비어 있을 경우 빈 배열 반환
+		if (list == null || list.isEmpty()) {
+			return new CourseVO[0];
 		}
-		return ar;
+
+		// List를 배열로 변환하여 반환
+		return list.toArray(new CourseVO[list.size()]);
 	}
 }
