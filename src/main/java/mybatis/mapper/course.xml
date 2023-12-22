@@ -5,7 +5,8 @@
 <mapper namespace="course">
 
 <insert id="add" parameterType="Map">
-		INSERT INTO course_t(
+		INSERT INTO course_t(subject,start_date,end_date,course_fee,c_peo_num,c_round_num)
+		values(subject,start_date,end_date,course_fee,c_peo_num,c_round_num)
 	</insert>
   
 <select id="list" resultType="mybatis.vo.CourseVO">

@@ -106,7 +106,7 @@ thead tr{
 					<tr>
 						<th><label>과정명</label></th>
 						<td>
-							<input type="text" name="subject" />
+							<input type="text" name="c_name" />
 						</td>
 						<th><label>과정구분</label></th>
 						<td>
@@ -131,9 +131,9 @@ thead tr{
 					</tr>
 					<tr>
 						<th><label>개강일</label></th>
-						<td><input type="text"></td>
+						<td><input type="text" name="start_date"></td>
 						<th><label>종료일</label></th>
-						<td><input type="text"></td>
+						<td><input type="text" name="end_date"></td>
 					</tr>
 					<tr>
 						<th><label>교육시간</label></th>
@@ -143,13 +143,13 @@ thead tr{
 					</tr>
 					<tr>
 						<th><label>교육비</label></th>
-						<td><input type="text"><div id="box">(* 콤마(,)없이 숫자로만 입력해주세요)</div></td>
+						<td><input type="text" name="course_fee"><div id="box">(* 콤마(,)없이 숫자로만 입력해주세요)</div></td>
 						<th><label>총교육일수</label></th>
 						<td><input type="text"><div id="box">(숫자만입력가능)</div></td>
 					</tr>
 					<tr>
 						<th><label>모집인원</label></th>
-						<td><input type="text"></td>
+						<td><input type="text" name="c_peo_num"></td>
 						<th><label>요일</label></th>
 						<td>
 						<input type="checkbox" name="monday" value="월">월
@@ -166,7 +166,7 @@ thead tr{
 						<td><input type="text"></td>
 						<th><label>회차</label></th>
 						<td>
-						<input type="text">
+						<input type="text" name="c_round_num++">
 						</td>
 					</tr>
 				</tbody>
@@ -190,5 +190,10 @@ thead tr{
 		
 		</article>
 	</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+
+	
+</script>
 </body>
 </html>
