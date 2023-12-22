@@ -16,7 +16,7 @@ public class Paging {
 	int endPage; // 한 블럭의 마지막 페이지 값
 	
 	// 객체를 생성할 때 기본 생성자를 부르면 한 페이지당 10개씩 보여주는 페이징 기법을 지정
-	public Paging() {}
+	public Paging(){}
 	
 	public Paging(int numPerPage, int pagePerBlock) {
 		this.numPerPage = numPerPage;
@@ -29,12 +29,11 @@ public class Paging {
 	}
 
 	public void setNowPage(int nowPage) {
-		this.nowPage = nowPage;
-		
 		// 현재 페이지값이 총 페이지 값을 넘기지못하도록 설정
 		if(nowPage > totalPage)
 			nowPage = totalPage;
 		
+		this.nowPage = nowPage;
 		// 시작 행 번호와 마지막 행번호 설정
 		begin = (nowPage-1)*numPerPage+1;
 		end = nowPage*numPerPage;
@@ -66,10 +65,7 @@ public class Paging {
 
 	public void setTotalRecord(int totalRecord) {
 		this.totalRecord = totalRecord;
-		
 		this.totalPage =(int)Math.ceil((double)totalRecord/numPerPage);
-		
-		
 	}
 
 	public int getPagePerBlock() {

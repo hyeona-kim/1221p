@@ -11,7 +11,7 @@ public class ServeAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		Paging page = new Paging();
 		
 		page.setTotalRecord(ServeDAO.getCount());
