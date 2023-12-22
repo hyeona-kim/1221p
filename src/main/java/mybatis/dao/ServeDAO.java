@@ -26,11 +26,12 @@ public class ServeDAO {
 		SqlSession ss = FactoryService.getFactory().openSession();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
+		
 		map.put("begin",String.valueOf(begin));
 		map.put("end", String.valueOf(end));
 		
 		List<CourseVO> list = ss.selectList("serve.list2",map);
-		if(list !=null && list.isEmpty()) {
+		if(list !=null && !list.isEmpty()) {
 			ar = new CourseVO[list.size()];
 			list.toArray();
 			

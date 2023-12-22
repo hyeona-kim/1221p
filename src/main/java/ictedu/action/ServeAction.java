@@ -11,6 +11,7 @@ public class ServeAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+
 		Paging page = new Paging();
 		
 		page.setTotalRecord(ServeDAO.getCount());
@@ -25,8 +26,8 @@ public class ServeAction implements Action {
 		}
 		
 		CourseVO[] ar = ServeDAO.getlist(page.getBegin(),page.getEnd());
-		
-		
+		System.out.println(ar.length);
+		System.out.println(ar[0].getC_idx());
 		request.setAttribute("page", page);
 		request.setAttribute("ser", ar);
 		

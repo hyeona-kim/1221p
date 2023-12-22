@@ -105,18 +105,18 @@ table tfoot ol.page {
 					</tfoot>
 					<tbody>
 		
-			<c:forEach var="vo" items="${ser }" varStatus="vs">
+			<c:forEach var="vo2" items="${requestScope.ser }" varStatus="vs">
 			<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 			
 				<tr>
-					<td>${num+(vs.index)+1 }</td>
-					<td>${vo.c_name }</td>
+					<td>${num+(vs.index)-2 }</td>
+					<td>${vo2.c_name}</td>
 					<td>과정코드</td>
 					<td>담당교수</td>
-					<td>${vo.start_date }</td>
-					<td>${vo.end_date }</td>
+					<td>${vo2.start_date }</td>
+					<td>${vo2.end_date }</td>
 					<td>요일</td>
-					<td>${vo.c_round_num }</td>
+					<td>${vo2.c_round_num }</td>
 					<td>관리</td>
 					
 					
