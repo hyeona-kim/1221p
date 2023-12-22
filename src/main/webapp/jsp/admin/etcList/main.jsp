@@ -13,9 +13,9 @@
 <c:if test="${tvo eq null }">
 <body>
 	<article id="wrap">
-		<jsp:include page="../head.html"></jsp:include>
+		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
-		<jsp:include page="leftList.html"></jsp:include>
+		<jsp:include page="leftList.jsp"></jsp:include>
 			<div class="right">
 				<!--  여기서 표시될 테이블들 가지고오기 -->
 				

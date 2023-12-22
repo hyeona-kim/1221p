@@ -11,7 +11,7 @@
 </head>
 <body>
 	<article id="wrap">
-		<jsp:include page="../head.html"></jsp:include>
+		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
 			<div class="left 2">
 				<ul id="list2">

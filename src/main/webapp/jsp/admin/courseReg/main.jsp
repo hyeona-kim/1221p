@@ -13,7 +13,7 @@
 <c:if test="${tvo eq null }">
 <body>
 	<article id="wrap">
-		<jsp:include page="../head.html"></jsp:include>
+		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
 			<div class="left">
 				<ul id="list2">
