@@ -38,7 +38,6 @@ th, td {
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 
 </head>
-<c:if test="${tvo eq null }">
 <body>
 <% 
 	Object obj = request.getAttribute("ar");
@@ -105,21 +104,18 @@ th, td {
 				</tr>
 			</thead>
 			<tbody>
-				<%if(cvo!= null){
-									for(int i=0; i<cvo.length; i++) {
-										CourseVO vo = cvo[i];
-								%>
+				<c:forEach var="cvo" items="${ar }" >
 					<tr>
-						<td><%=vo.getC_idx() %></td>
+						<td>${cvo.c_idx }</td>
 						<td>W1805300001</td>
-						<td>내일배움카드</td>
-						<td>김상당</td>
-						<td>2018-05-28</td>
-						<td>2018-07-12</td>
+						<td>${cvo.ct_idx} </td>
+						<td>${cvo.t_idx }</td>
+						<td>${cvo.start_date }</td>
+						<td>${cvo.end_date }</td>
 						<td>월화수목금</td>
-						<td>2</td>
-						<td>5</td>
-						<td>103호 104호 202호</td>
+						<td>${cvo.c_round_num }</td>
+						<td>${cvo.c_peo_num }</td>
+						<td>${cvo.r_idx }</td>
 						<td>
 							<button type="button">교과목 등록/수정</button>
 							<button type="button">학습안내서 등록/수정</button>
@@ -127,10 +123,7 @@ th, td {
 							<button type="button">삭제</button>
 						</td>
 					</tr>
-			<%
-							}
-									}
-									%>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -149,9 +142,5 @@ th, td {
 		
 	</script>
 </body>
-</c:if>
-<c:if test="${tvo ne null}">
-	<c:redirect url="Controller">
-	</c:redirect>
-</c:if>
+
 </html>
