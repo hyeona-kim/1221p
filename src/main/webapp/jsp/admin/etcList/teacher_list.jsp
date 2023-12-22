@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <title>Insert title here</title>
 <style>
 	#staffWrap{
@@ -19,6 +20,8 @@
 		width: 98%;
 		margin: 0px auto;
 		padding: 0px;
+	}
+	table#staffList tbody{
 		text-align: center;
 	}
 	table#staffList tbody th, table#staffList tbody td{
@@ -70,7 +73,39 @@
 		text-decoration: none;
 	}
 	.staff_edit_btn{ background-color: #1876c7;	}
-	.staff_del_btn{ background-color: #cc1919;	}
+	.staff_del_btn{ background-color: #cc1919; }
+	#addForm table caption{ text-indent: -9999px; }
+	#addForm table {
+		width: 950px;
+		height: 450px;
+		border-collapse: collapse;
+		position: absolute;
+		
+	}
+	#addForm table th, #addForm table td{
+		border: 1px solid #e9e9e6;
+		padding: 5px;
+	}
+	#addForm {
+		text-align: center;
+		margin: 0px auto;
+		padding: 10px;
+	}
+	#addForm .left {
+		text-align: left;
+	}
+	#addForm th{
+		width: 20%;
+	}
+	#addForm .phone{
+		width: 50px;
+	}
+	#addForm .input{
+		width: 150px;
+	}
+	#addForm tfoot td{
+		border: none;
+	}
 </style>
 </head>
 <body>
@@ -92,13 +127,10 @@
 						<%-- ========== 교직원현황 테이블 시작 ========== --%>
 						<div id="staffList_top">교직원현황</div>
 						<table id="staffList">
-							<colgroup>
-								<col width="">
-							</colgroup>
 							<caption>교직원현황 테이블</caption>
 							<thead>
 								<%-- ===== 교직원 등록 버튼 ===== --%>
-								<tr><td colspan="12"><a href="" id="staff_add_btn">교직원 등록</a></td></tr>
+								<tr><td colspan="12"><button type="button" id="staff_add_btn">교직원 등록</button></td></tr>
 							</thead>
 							<tbody>
 								<tr>
@@ -116,22 +148,6 @@
 									<th colspan="2">관리</th>
 								</tr>
 								<%-- ===== 교직원 목록 출력 ===== --%>
-								<tr>
-									<td>김헤어</td>
-									<td>3001</td>
-									<td>헤어전문강사</td>
-									<td>강사</td>
-									<td>1234</td>
-									<td>010-1234-1234</td>
-									<td>2018-04-02</td>
-									<td></td>
-									<td>1</td>
-									<td></td>
-									<td colspan="2">
-										<a href="" class="staff_edit_btn staff_btn">수정</a>
-										<a href="" class="staff_del_btn staff_btn">삭제</a>
-									</td>
-								</tr>
 								<%if(svo!= null){
 									for(int i=0; i<svo.length; i++) {
 										StaffVO vo = svo[i];
@@ -167,15 +183,45 @@
 				</div>
 			</div>
 		</div>
+		<%-- ========== 교직원 등록 폼 시작 ========== --%>
+		<div id="addForm">
+			
+		</div>
+		<%-- ========== 교직원 등록 폼 끝 ========== --%>
 	</article>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
-		$(function() {
+		$(function(){
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#etclist").addClass("selected");
+			
 		});
+		
+		$("#staff_add_btn").bind("click", function(){
+			$.ajax({
+				url: "${pageContext.request.contextPath }/jsp/admin/etcList/add_ajax.jsp",
+				type: "post"
+			}).done(function(result){
+				console.log(result);
+				$("#addForm").html(result);
+			});
+			
+			$("#addForm").dialog({
+				title : '교직원등록',
+				modal : true,
+				width : 1000,
+				height : 600
+			});
+		});
+			
+		function addStaff() {
+			// 유효성 검사 해야함
+			
+			document.forms[0].submit();
+		};
 	</script>
-	
 </body>
 </html>

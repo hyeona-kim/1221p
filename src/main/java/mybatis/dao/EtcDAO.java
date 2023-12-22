@@ -1,5 +1,6 @@
 package mybatis.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,6 +22,17 @@ public class EtcDAO {
 		}
 		ss.close();
 		return ar;
+	}
+	
+	public static void addStaff(HashMap<String, String> map) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.insert("staff.add", map);
+		if(cnt > 0) {
+			ss.commit();
+		}else {
+			ss.rollback();
+		}
+		ss.close();
 	}
 	
 }

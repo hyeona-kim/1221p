@@ -8,13 +8,21 @@
 		select * from staff_t
 	</select>
 	
+	<!-- 관리자 모드로 로그인하는 기능 -->
 	<select id="login_admin" parameterType="Map" resultType="mybatis.vo.StaffVO">
 		select * from staff_t 
 		where sf_id=#{u_id} and sf_pwd =#{u_pw} and rt_idx=9
 	</select>
 	
+	<!-- 강사 모드로 로그인하는 기능 -->
 	<select id="login_teacher" parameterType="Map" resultType="mybatis.vo.StaffVO">
 		select * from staff_t 
 		where sf_id=#{u_id} and sf_pwd =#{u_pw} and rt_idx between 0 and 9
 	</select>
+	
+	<!-- 교직원 추가하는 기능 -->
+	<insert id="add" parameterType="Map">
+		insert into staff_t (sf_name, sf_job, sf_id, sf_pwd, sf_hire_date, sf_phone, rt_idx, status, sf_code)
+		values (#{sf_name}, #{sf_job}, #{sf_id}, #{sf_pwd}, #{sf_hire_date}, #{sf_phone}, #{rt_idx}, 0, 't011000')
+	</insert>
 </mapper>
