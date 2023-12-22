@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	header{
+	#hd{
 		background-color: #2e2e2e;
 		color: #fff;
 		width: 600px;
@@ -15,12 +15,12 @@
 		margin-bottom: 10px;
 		font-size: 20px;
 	}
-	table{
+	#t1{
 		border-collapse: collapse;
 		width: 600px;
 		margin: auto;
 	}
-	table td{
+	#t1 td{
 		border: 1px solid black;
 		padding: 4px;
 		height: 50px;
@@ -49,7 +49,7 @@
 </style>
 </head>
 <body>
-	<header>과정타입 등록/수정</header>
+	<header id="hd">과정타입 등록/수정</header>
 	<div id="wrap">
 		<article>
 			<table id="t1">
