@@ -117,7 +117,7 @@ th, td {
 						<td>${cvo.c_peo_num }</td>
 						<td>${cvo.r_idx }</td>
 						<td>
-							<button type="button">교과목 등록/수정</button>
+							<button type="button">교 과목 등록/수정</button>
 							<button type="button">학습안내서 등록/수정</button>
 							<button type="button">수정</button>
 							<button type="button">삭제</button>
