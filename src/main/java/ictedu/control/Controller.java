@@ -98,6 +98,7 @@ public class Controller extends HttpServlet {
 		Action action = actionMap.get(type);
 		
 		String viewPath = action.execute(request, response);
+
 		if(viewPath ==null)
 			response.sendRedirect("Controller?type=list");
 		else {
