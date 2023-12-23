@@ -38,9 +38,9 @@
 				<th>사용권한</th>
 				<td align="left">
 					<select name="rt_idx">
-						<option value="1">기본(교직원)</option>
-						<option value="2">임직원</option>
-						<option value="3">총책임자</option>
+						<option value="0">기본(교직원)</option>
+						<option value="1">임직원</option>
+						<option value="9">총책임자</option>
 					</select>
 				</td>
 			</tr>
