@@ -91,10 +91,10 @@ thead tr{
 <body>
 	<div id ="wrap">
 		<header>
-			<h2>교육과정등록</h2>
+			<h2>교육과정수정</h2>
 		</header>
 		<article>
-			<form action="Controller?type=addCourse" method="post">
+			<form action="Controller?type=editCourse" method="post">
 			<table id="table">
 			<thead>
 				<tr>
@@ -180,7 +180,7 @@ thead tr{
 					</tr>
 					<tr>
 						<td colspan="2" align="right" id="course_add_btn">
-							<input type="button" value="등록" onclick="addCourse()">
+							<input type="button" value="수정" onclick="addCourse()">
 						</td>
 						<td colspan="2" align="left">
 							<input type="button" value="목록" onclick="javascript:location.href=">

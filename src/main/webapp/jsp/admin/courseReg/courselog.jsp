@@ -109,6 +109,7 @@
 							<button type="button" onclick="set2()">과정타입수정</button>	
 							<button type="button" onclick="set3()">강의실관리</button>	
 						</div>
+			<form action="Controller" method="post">
 						<table id="searchCourse">
 						<caption>과정검색</caption>
 							<thead>
@@ -176,8 +177,9 @@
 									<td>
 										<button type="button">교과목 등록/수정</button>
 										<button type="button">학습안내서 등록/수정</button>
-										<button type="button">수정</button>
-										<button type="button">삭제</button>
+										<button type="button" onclick="set4()">수정</button>
+										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
+										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -214,6 +216,7 @@
 						</tr>
 					</tfoot>
 						</table>
+							</form>
 					</div>
 				</div>
 			</div>
@@ -233,6 +236,12 @@
 		<div id="dialog3" hidden="" title="강의실관리">
 			<div>
 				<jsp:include page="../table/classApply.jsp"></jsp:include>
+			</div>
+		</div>
+		
+		<div id="dialog4" hidden="" title="과정수정">
+			<div>
+				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
 			</div>
 		</div>
 		
@@ -256,6 +265,9 @@
         }
 		function set3() {
             $("#dialog3").dialog("open");
+        }
+		function set4() {
+            $("#dialog4").dialog("open");
         }
 		$( "#dialog" ).dialog({
             autoOpen: false,
@@ -288,6 +300,23 @@
                 }
             }
         });
+		$( "#dialog4" ).dialog({
+            autoOpen: false,
+            width: 1200,
+            modal: true,
+            buttons: {
+                "닫기": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+		
+	
+		function del(frm){
+			frm.action = "Controller?type=delCourse";
+			
+			frm.submit();
+		}
 		
 	</script>
 </body>
