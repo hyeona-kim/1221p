@@ -94,7 +94,8 @@ thead tr{
 			<h2>교육과정등록</h2>
 		</header>
 		<article>
-			<form action="Controller?type=addCourse" method="post">
+			<form action="Controller" method="post" name="frm02">
+			<input type="hidden" name="type"  value="addCourse"/>
 			<table id="table">
 			<thead>
 				<tr>
@@ -180,10 +181,10 @@ thead tr{
 					</tr>
 					<tr>
 						<td colspan="2" align="right" id="course_add_btn">
-							<input type="button" value="등록" onclick="addCourse()">
+							<input type="button" value="등록" id="course_add_button">
 						</td>
 						<td colspan="2" align="left">
-							<input type="button" value="목록" onclick="javascript:location.href=">
+							<input type="button" value="목록" onclick="">
 						</td>
 					</tr>
 				</tfoot>	
@@ -195,10 +196,12 @@ thead tr{
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-function addCourse() {
-    // 양식(form)을 서버로 제출
-    document.forms[0].submit();
-}
+	$(function(){
+		$("#course_add_button").click(function(){
+			
+			document.frm02.submit();
+		});
+	});
 </script>
 </body>
 </html>
