@@ -22,6 +22,8 @@
     <mapper resource="mybatis/mapper/subject.xml"/>
     <mapper resource="mybatis/mapper/time.xml"/>
     <mapper resource="mybatis/mapper/upskill.xml"/>
+    <mapper resource="mybatis/mapper/trainee.xml"/>
+    <mapper resource="mybatis/mapper/suggestion.xml"/>
     <mapper resource="mybatis/mapper/traineecurrent.xml"/>
   </mappers>
 </configuration>

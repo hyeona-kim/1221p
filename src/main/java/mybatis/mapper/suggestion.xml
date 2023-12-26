@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="suggestion">
+  	
+  	<!-- 고충 및 건의사항 전체 목록 출력하는 기능
+  		 status가 1인 건의사항은 삭제된 건의사항 -->
+	<select id="all" resultType="mybatis.vo.SuggestionVO">
+		select * from suggestion_t
+		where status = 0
+		order by sg_idx desc
+	</select>
+	
+	<!-- 고충 및 건의사항 추가하는 기능 -->
+	<insert id="add" parameterType="Map">
+		insert into suggestion_t (sg_subject, sg_writer, sg_write_date, sg_hit, sg_content, sg_file, notice, status)
+		values (#{sg_subject}, #{sg_writer}, now(), 0, #{sg_content}, #{sg_file}, #{notice}, 0)
+	</insert>
+</mapper>
