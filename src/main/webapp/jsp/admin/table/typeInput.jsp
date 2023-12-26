@@ -26,8 +26,8 @@
 		height: 50px;
 		text-align: center;
 	}
-	.num{
-		background-color: #cdcdcd;
+	.num, .color{
+		background-color: #D6F0FF;
 	}
 	#btn{
 		display: inline-block;
@@ -62,45 +62,66 @@
 				<tbody>
 					<tr>
 						<td class="num">1</td>
-						<td><input type="text" name="type1"/></td>
-						<td class="num">색상</td>
-						<td><input type="text" name="color1"/></td>
+						<td><input type="text" id="type1"/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text1" />
+							<input type="color" id="color1"/>
+						</td>
 					</tr>
 					<tr>
 						<td class="num">2</td>
-						<td><input type="text" name="type2"/></td>
-						<td class="num">색상</td>
-						<td><input type="text" name="color2"/></td>
+						<td><input type="text" id="type2"/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text2" />
+							<input type="color" id="color2"/>
+						</td>
 					</tr>
 					<tr>
 						<td class="num">3</td>
-						<td><input type="text" name="type3"/></td>
-						<td class="num">색상</td>
-						<td><input type="text" name="color3"/></td>
+						<td><input type="text" id="type3"/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text3" />
+							<input type="color" id="color3"/>
+						</td>
 					</tr>
 					<tr>
 						<td class="num">4</td>
-						<td><input type="text" name="type4"/></td>
-						<td class="num">색상</td>
-						<td><input type="text" name="color4"/></td>
+						<td><input type="text" id="type4"/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text4" />
+							<input type="color" id="color4"/>
+						</td>
 					</tr>
 					<tr>
 						<td class="num">5</td>
-						<td><input type="text" name="type5"/></td>
-						<td class="num">색상</td>
-						<td><input type="text" name="color5"/></td>
+						<td><input type="text" id="type5"/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text5" />
+							<input type="color" id="color5"/>
+						</td>
 					</tr>
 					<tr>
 						<td class="num">6</td>
-						<td><input type="text" name="type6"/></td>
-						<td class="num">색상</td>
-						<td><input type="text" name="color6"/></td>
+						<td><input type="text" id="type6"/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text6" />
+							<input type="color" id="color6"/>
+						</td>
 					</tr>
 					<tr>
 						<td class="num">7</td>
-						<td><input type="text" name="type7"/></td>
-						<td class="num">색상</td>
-						<td><input type="text" name="color7"/></td>
+						<td><input type="text" id="type7"/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text7" />
+							<input type="color" id="color7"/>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -112,6 +133,7 @@
 			<input type="button" value="취소" onclick="cancel()"/>
 		</form>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	
 	<script>
 		function save() {
