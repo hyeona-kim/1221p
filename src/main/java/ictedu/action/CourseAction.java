@@ -15,6 +15,7 @@ public class CourseAction  implements Action{
 		Object obj2 = request.getAttribute("ar");
 		Paging page = null;
 		String listSelect = request.getParameter("listSelect");
+
 		if(obj == null)
 			page =new Paging();
 		else
@@ -37,7 +38,7 @@ public class CourseAction  implements Action{
 			ar = (CourseVO[])obj2;
 		
 		request.setAttribute("page", page);
-		request.setAttribute("ar", ar);
+		request.setAttribute("ar",ar);
 		
 		if(listSelect.equals("1"))
 			return "/jsp/admin/courseReg/courselog.jsp";
