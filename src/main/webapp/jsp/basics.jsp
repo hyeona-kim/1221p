@@ -94,11 +94,12 @@ thead tr{
 			<h2>교육과정등록</h2>
 		</header>
 		<article>
+			<form action="Controller?type=addCourse" method="post">
 			<table id="table">
 			<thead>
 				<tr>
 					<td colspan="4">
-						│과정등록
+						과정등록
 					</td>
 				</tr>
 			</thead>
@@ -166,7 +167,7 @@ thead tr{
 						<td><input type="text"></td>
 						<th><label>회차</label></th>
 						<td>
-						<input type="text" name="c_round_num++">
+						<input type="text" name="c_round_num">
 						</td>
 					</tr>
 				</tbody>
@@ -178,8 +179,8 @@ thead tr{
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="right">
-							<input type="button" value="등록" onclick="javascript:location.href=">
+						<td colspan="2" align="right" id="course_add_btn">
+							<input type="button" value="등록" onclick="addStaff()">
 						</td>
 						<td colspan="2" align="left">
 							<input type="button" value="목록" onclick="javascript:location.href=">
@@ -187,13 +188,17 @@ thead tr{
 					</tr>
 				</tfoot>	
 			</table>
+		</form>
 		
 		</article>
 	</div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-
-	
+function addStaff() {
+    // 양식(form)을 서버로 제출
+    document.forms[0].submit();
+}
 </script>
 </body>
 </html>

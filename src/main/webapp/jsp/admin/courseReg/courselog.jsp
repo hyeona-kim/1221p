@@ -169,7 +169,7 @@ th, td {
         }
 		$( "#dialog" ).dialog({
             autoOpen: false,
-            width: 400,
+            width: 1000,
             modal: true,
             buttons: {
                 "닫기": function() {
@@ -180,7 +180,7 @@ th, td {
 		
 		$( "#dialog2" ).dialog({
             autoOpen: false,
-            width: 400,
+            width: 1000,
             modal: true,
             buttons: {
                 "닫기": function() {
@@ -190,7 +190,7 @@ th, td {
         });
 		$( "#dialog3" ).dialog({
             autoOpen: false,
-            width: 400,
+            width: 700,
             modal: true,
             buttons: {
                 "닫기": function() {
@@ -201,5 +201,4 @@ th, td {
 		
 	</script>
 </body>
-
 </html>
