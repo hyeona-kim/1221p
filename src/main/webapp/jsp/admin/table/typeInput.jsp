@@ -46,6 +46,15 @@
 	#btn>form>input:first-child{
 		background-color: #99ccff;
 	}
+	#btn>form>input:first-child:hover{
+		background-color: #88bbee;
+	}
+	#btn>form>input:last-child{
+		background-color: #c0c0c0;
+	}
+	#btn>form>input:last-child:hover{
+		background-color: #d1d1d1;
+	}
 </style>
 </head>
 <body>
@@ -129,13 +138,14 @@
 	</div>
 	<div id="btn">
 		<form>
-			<input type="button" value="저장" onclick="save()"/>
-			<input type="button" value="취소" onclick="cancel()"/>
+			<input type="button" value="저장" id="save" onclick="save()"/>
+			<input type="button" value="취소" id="cancel" onclick="cancel()"/>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	
 	<script>
+
 		function save() {
 			
 		}
