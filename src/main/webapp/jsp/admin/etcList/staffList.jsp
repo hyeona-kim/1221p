@@ -133,8 +133,8 @@
 								<tr><td colspan="12"><button type="button" id="staff_add_btn">교직원 등록</button></td></tr>
 							</thead>
 							<tbody>
-								<tr>
 								<%-- ===== 출력할 교직원 항목 ===== --%>
+								<tr>
 									<th>번호</th>
 									<th>성명</th>
 									<th>교수코드</th>
@@ -149,7 +149,7 @@
 									<th colspan="2">관리</th>
 								</tr>
 								<%-- ===== 교직원 목록 출력 ===== --%>
-								<sf:if test="${vo ne null}">
+								<sf:if test="${vo ne null}"> <%-- vo는 로그인 정보 --%>
 									<sf:forEach items="${requestScope.ar}" varStatus="vs" var="vo">
 										<tr>
 											<td>${vs.index+1}</td>
@@ -161,7 +161,7 @@
 											<td>${vo.sf_phone}</td>
 											<td>${vo.sf_hire_date}</td>
 											<td>${vo.sf_fire_date}</td>
-											<%-- 이 부분은 수정해야함
+											<%-- [수정필요]
 												 사용권한 번호를 이용해서
 												 사용권한명을 가져와야함 --%>
 											<sf:if test="${vo.rt_idx ne null}">
@@ -170,7 +170,7 @@
 											<sf:if test="${vo.rt_idx eq null}">
 												<td></td>
 											</sf:if>
-											<%-- 이것도 if문을 사용해서 총책임자만 표시하기 --%>
+											<%-- 사용권한이 9인 사람만 총책임자 마크 표시 --%>
 											<sf:if test="${vo.sf_mgr eq '9'}">
 												<td><span id="director">총책임자</span></td>
 											</sf:if>
@@ -206,22 +206,20 @@
 			$(".selected").removeClass("selected")
 			$("#etclist").addClass("selected");
 			
-		});
-		
-		$("#staff_add_btn").bind("click", function(){
-			$.ajax({
-				url: "${pageContext.request.contextPath}/jsp/admin/etcList/add_ajax.jsp",
-				type: "post"
-			}).done(function(result){
-				console.log(result);
-				$("#addForm").html(result);
-			});
-			
-			$("#addForm").dialog({
-				title : '교직원등록',
-				modal : true,
-				width : 1000,
-				height : 600
+			$("#staff_add_btn").bind("click", function(){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/jsp/admin/etcList/add_ajax.jsp",
+					type: "post"
+				}).done(function(result){
+					$("#addForm").html(result);
+				});
+				
+				$("#addForm").dialog({
+					title : '교직원등록',
+					modal : true,
+					width : 1000,
+					height : 600
+				});
 			});
 		});
 			
