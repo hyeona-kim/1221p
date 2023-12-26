@@ -11,10 +11,18 @@ import mybatis.vo.TraineeVO;
 
 public class SchoolDAO {
 	
+	public static int getTotalRecord() {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.selectOne("suggestion.count");
+		ss.close();
+		return cnt;
+	}
+	
 	public static TraineeVO[] getList() {
 		TraineeVO[] ar = null;
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
+		
 		List<TraineeVO> list = ss.selectList("trainee.all");
 		
 		if (list!= null && !list.isEmpty()) {
@@ -36,12 +44,16 @@ public class SchoolDAO {
 		ss.close();
 	}
 	
-	public static SuggestionVO[] getSuggList() {
+	public static SuggestionVO[] getSuggList(int begin, int end) {
 		SuggestionVO[] ar = null;
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
 		
-		List<SuggestionVO> list = ss.selectList("suggestion.all");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("begin", String.valueOf(begin));
+		map.put("end", String.valueOf(end));
+		
+		List<SuggestionVO> list = ss.selectList("suggestion.all", map);
 		
 		if (list != null && !list.isEmpty()) {
 			ar = new SuggestionVO[list.size()];
