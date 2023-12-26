@@ -17,4 +17,10 @@
 		insert into suggestion_t (sg_subject, sg_writer, sg_write_date, sg_hit, sg_content, sg_file, notice, status)
 		values (#{sg_subject}, #{sg_writer}, now(), 0, #{sg_content}, #{sg_file}, #{notice}, 0)
 	</insert>
+	
+	<!-- 건의사항 답변 추가하는 기능 -->
+	<insert id="addReply" parameterType="Map">
+		insert into suggestion_t (sg_subject, sg_writer, sg_write_date, sg_hit, sg_content, sg_file, notice, status)
+		values (#{sg_subject}, #{sg_writer}, now(), 0, #{sg_content}, #{sg_file}, #{notice}, 0)
+	</insert>
 </mapper>

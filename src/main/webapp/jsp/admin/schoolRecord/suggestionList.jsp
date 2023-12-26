@@ -95,13 +95,62 @@
 	#addForm th{
 		width: 20%;
 	}
-	#addForm .phone{
-		width: 50px;
-	}
 	#addForm .input{
 		width: 350px;
 	}
 	#addForm tfoot td{
+		border: none;
+	}
+	#sugContent table caption{ text-indent: -9999px; }
+	#sugContent table {
+		width: 950px;
+		height: 450px;
+		border-collapse: collapse;
+		position: absolute;
+		
+	}
+	#sugContent table th, #sugContent table td{
+		border: 1px solid #e9e9e6;
+		padding: 5px;
+	}
+	#sugContent {
+		text-align: center;
+		margin: 0px auto;
+		padding: 10px;
+	}
+	#sugContent .left {
+		text-align: left;
+	}
+	#sugContent th{
+		width: 20%;
+	}
+	#sugContent tfoot td{
+		border: none;
+	}
+	#replyForm table caption{ text-indent: -9999px; }
+	#replyForm table {
+		width: 950px;
+		height: 450px;
+		border-collapse: collapse;
+		position: absolute;
+		
+	}
+	#replyForm table th, #replyForm table td{
+		border: 1px solid #e9e9e6;
+		padding: 5px;
+	}
+	#replyForm {
+		text-align: center;
+		margin: 0px auto;
+		padding: 10px;
+	}
+	#replyForm .left {
+		text-align: left;
+	}
+	#replyForm th{
+		width: 20%;
+	}
+	#replyForm tfoot td{
 		border: none;
 	}
 	#notice{
@@ -123,6 +172,9 @@
 		color: white; 
 		text-decoration: none;
 	}
+	.sug_list_btn{ background-color: #f0f0ef; }
+	.sug_reply_btn{ background-color: #cc1919; }
+	.sug_print_btn{ background-color: #1876c7; }
 	.sug_edit_btn{ background-color: #1876c7; }
 	.sug_del_btn{ background-color: #cc1919; }
 </style>
@@ -181,7 +233,10 @@
 										<sg:if test="${svo.notice eq '1'}">
 											<span id="notice">공지</span>
 										</sg:if>
-										<a href="" id="sug_subject">${svo.sg_subject}</a>
+										<a href="javascript:viewContent('${svo.sg_subject}','${svo.sg_write_date}'
+																		,'${svo.sg_hit}','${svo.sg_content}')">
+											${svo.sg_subject}
+										</a>
 									</td>										
 									<td>${svo.sg_file}</td>
 									<td>***</td>
@@ -193,11 +248,23 @@
 						</tbody>
 					</table>
 				</div>
-				<%-- ===== 고충 및 건의사항 작성 폼 ===== --%>
+				<%-- ===== 고충 및 건의사항 작성 폼 시작 ===== --%>
 				<div id="addForm">
 				
 				</div>
-				<%-- ===== 고충 및 건의사항 작성 폼 ===== --%>
+				<%-- ===== 고충 및 건의사항 작성 폼 끝 ===== --%>
+				
+				<%-- ===== 건의사항 내용 시작 ===== --%>
+				<div id="sugContent">
+				
+				</div>
+				<%-- ===== 건의사항 내용 끝 ===== --%>
+				
+				<%-- ===== 건의사항 답변 작성 폼 시작 ===== --%>
+				<div id="replyForm">
+				
+				</div>
+				<%-- ===== 건의사항 답변 작성 폼 끝 ===== --%>
 			</div>
 		</div>
 	</article>
@@ -224,6 +291,7 @@
 					height : 600
 				});
 			});
+			
 		});
 		
 		<%-- 건의사항 작성 폼에서 [등록] 버튼을 눌렀을때 수행 --%>
@@ -231,6 +299,52 @@
 			// 유효성 검사 해야함
 			
 			document.forms[0].submit();
+		};
+		
+		<%-- 글의 제목을 클릭했을 때 내용 보기 --%>
+		function viewContent(subject, date, hit, content) {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/view_ajax.jsp",
+				type: "post",
+				data: "subject="+encodeURIComponent(subject)+
+					  "&date="+encodeURIComponent(date)+
+					  "&hit="+encodeURIComponent(hit)+
+					  "&content="+encodeURIComponent(content)
+			}).done(function(result){
+				$("#sugContent").html(result);
+			});
+			
+			$("#sugContent").dialog({
+				title : '고충 및 건의사항',
+				modal : true,
+				width : 1000,
+				height : 600
+			});
+		};
+		
+		<%-- 건의사항 보기화면에서 [답변]을 눌렀을때 수행 --%>
+		function reply(subject, content) {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/reply_ajax.jsp",
+				type: "post",
+				data: "subject="+subject+
+					  "&content="+content+
+					  "&writer=${vo.sf_name}"
+			}).done(function(result){
+				$("#replyForm").html(result);
+			});
+			
+			$("#replyForm").dialog({
+				title : '고충 및 건의사항 답변 작성',
+				modal : true,
+				width : 1000,
+				height : 600
+			});
+		};
+		
+		<%-- 답변 작성에서 [등록]을 눌렀을때 수행 --%>
+		function addReply(frm) {
+			frm.submit();
 		};
 	</script>
 </body>
