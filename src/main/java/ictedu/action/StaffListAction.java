@@ -17,7 +17,7 @@ public class StaffListAction implements Action{
 		
 		request.setAttribute("ar",ar);
 		
-		return "/jsp/admin/etcList/teacher_list.jsp";
+		return "/jsp/admin/etcList/staffList.jsp";
 	}
 
 }
