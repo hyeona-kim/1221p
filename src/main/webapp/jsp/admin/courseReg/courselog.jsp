@@ -11,26 +11,73 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-th, td {
-	 	margin: 0;
-        padding: 0;
-        border: 1px solid black;
-        text-align: center;
-    }
-    table {
+	table tfoot ol.page {
+	    list-style:none;
+	}
+	
+	table tfoot ol.page li {
+	    float:left;
+	    margin-right:8px;
+	}
+	
+	table tfoot ol.page li a {
+	    display:block;
+	    padding:3px 7px;
+	    border:1px solid #00B3DC;
+	    color:#2f313e;
+	    font-weight:bold;
+	    text-decoration: none;
+	}
+	
+	table tfoot ol.page li a:hover {
+	    background:#00B3DC;
+	    color:white;
+	    font-weight:bold;
+	}
+	.disable {
+	    padding:3px 7px;
+	    border:1px solid silver;
+	    color:silver;
+	}
+	
+	.now {
+	   padding:3px 7px;
+	    border:1px solid #ff4aa5;
+	    background:#ff4aa5;
+	    color:white;
+	    font-weight:bold;
+	}
+	#staffWrap{
+		width: 95%;
+		margin: auto;
+		margin-top: 20px;
+	}
+	#courseList_top {
+		background: black;
+		color: white;
+		height: 40px;
+		line-height: 40px;
+	}
+	
+	#searchCourse, #makeCourse{
+		margin-top:10px;
 		border-collapse: collapse;
 		width: 100%;
-		border-spacing: 0;
 	}
-	#top{
-		margin: 10px;
+	#searchCourse td, #searchCourse th, #makeCourse td, #makeCourse th{
+		border: 1px solid #ddd;
+		height: 40px;
+		padding-left: 10px;
 	}
-	#t2head, #t1td{
-		background-color: skyblue;
+	#searchCourse th, #makeCourse th{background-color: #ddd;}
+	
+	#searchCourse caption, #makeCourse caption{
+		text-indent: -9999px;
+		height: 0;
 	}
 	#ttop{
-		 float: right;
-		 margin-bottom: 10px;
+		margin-top:10px;
+		text-align: right;
 	}
 </style>
 
@@ -40,115 +87,154 @@ th, td {
 
 </head>
 <body>
-<% 
-	Object obj = request.getAttribute("ar");
-	CourseVO[] cvo = null;
-	if (obj != null) {
-		cvo = (CourseVO[])obj;
-	};
-%>
-
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
-		<jsp:include page="./leftList.jsp"></jsp:include>
+			<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
 				<!--  여기서 표시될 테이블들 가지고오기 -->
-	<div id="ttop">
-			<button type="button" onclick="set()">과정등록</button>	
-			<button type="button" onclick="set2()">과정타입수정</button>	
-			<button type="button" onclick="set3()">강의실관리</button>	
-	</div>
+					
+					<div id="staffWrap">
+						<div id="courseList_top">교육과정리스트</div>
+						<div id="ttop">
+							<button type="button" onclick="set()">과정등록</button>	
+							<button type="button" onclick="set2()">과정타입수정</button>	
+							<button type="button" onclick="set3()">강의실관리</button>	
+						</div>
+						<form>
+						<table id="searchCourse">
+						<caption>과정검색</caption>
+							<thead>
+								<tr>
+									<th>검색</th>
+									<td>
+										<select id="numPerPage">
+											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
+											<option>표시개수</option>
+											<option>5</option>
+											<option>10</option>
+											<option>15</option>
+										</select>
+										<select id="selectYear">
+
+										</select>
+									</td>
+									<td>
+										<select id="searchType">
+											<option value="1">훈련강사</option>
+											<option value="2">과정타입</option>
+											<option value="3">강의실</option>
+										</select>
+										<input type="text" id="searchValue"/>
+										<button type="button" id="search_bt">검 색</button>
+									</td>
+								</tr>
+							</thead>
+						</table>
+						</form>
+						<table id="makeCourse">
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>과정명</th>
+									<th>과정코드</th>
+									<th>과정타입</th>
+									<th>담당교수</th>
+									<th>개강일</th>
+									<th>종료일</th>
+									<th>요일</th>
+									<th>회차</th>
+									<th>모집인원</th>
+									<th>강의실</th>
+									<th>관리</th>
+								</tr>
+							</thead>
+							<tbody>
+							<c:forEach var="cvo" items="${ar }" >
+							<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
+								<tr>
+									<td>${num+(vs.index)-2 }</td>
+									<td>${cvo.c_name }</td>
+									<td>W1805300001</td>
+									<td>${cvo.ct_idx} </td>
+									<td>${cvo.t_idx }</td>
+									<td>${cvo.start_date }</td>
+									<td>${cvo.end_date }</td>
+									<td>월화수목금</td>
+									<td>${cvo.c_round_num }</td>
+									<td>${cvo.c_peo_num }</td>
+									<td>${cvo.r_idx }</td>
+									<td>
+										<button type="button">교과목 등록/수정</button>
+										<button type="button">학습안내서 등록/수정</button>
+										<button type="button" onclick="set4()">수정</button>
+										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
+										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
+									</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+							<tfoot>
+						<tr>
+							<td colspan="12">
+								<ol class="page">
+			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
+		<li class="disable">&lt;</li>
+	</c:if>	
 	
-	<div id="top">
-		<table id="t1">
-			<thead>
-				<tr>
-					<td id="t1td">검색</td>
-					<td>
-						<select>
-							<option>년도선택</option>
-							<c:forEach begin="2000" end="2024" var="year">
-     							  <option value="${year}">${year}</option>
-    						</c:forEach>
-						</select>
-					</td>
-					<td>
-						<select>
-							<option>훈련강사</option>
-							<option>과정타입</option>
-							<option>강의실</option>
-						</select>
-						<input type="text"/>
-						<button type="button">검 색</button>
-					</td>
-				</tr>
-			</thead>
-		</table>
-	</div>
+	<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
+	<li><a href="Controller?type=list&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
+	</c:if>
+
+	<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
+		<c:if test="${vs.index eq page.nowPage }">
+			<li class="now">${vs.index }</li>
+		</c:if>
+		<c:if test="${vs.index ne page.nowPage }">
+			<li><a href="Controller?type=list&cPage=${vs.index}">${vs.index}</a></li>
+		</c:if>
+	</c:forEach>
 	
-	<div id="bottom">
-		<table id="t2">
-			<thead id="t2head">
-				<tr>
-					<td>과정명</td>
-					<td>과정코드</td>
-					<td>과정타입</td>
-					<td>담당교수</td>
-					<td>개강일</td>
-					<td>종료일</td>
-					<td>요일</td>
-					<td>회차</td>
-					<td>인원</td>
-					<td>강의실</td>
-					<td>관리</td>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="cvo" items="${ar }" >
-					<tr>
-						<td>${cvo.c_idx }</td>
-						<td>W1805300001</td>
-						<td>${cvo.ct_idx} </td>
-						<td>${cvo.t_idx }</td>
-						<td>${cvo.start_date }</td>
-						<td>${cvo.end_date }</td>
-						<td>월화수목금</td>
-						<td>${cvo.c_round_num }</td>
-						<td>${cvo.c_peo_num }</td>
-						<td>${cvo.r_idx }</td>
-						<td>
-							<button type="button">교과목 등록/수정</button>
-							<button type="button">학습안내서 등록/수정</button>
-							<button type="button">수정</button>
-							<button type="button">삭제</button>
-						</td>
-					</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-	</div>
+	<c:if test="${page.endPage < page.totalPage }">
+		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
+	</c:if>
+	<c:if test="${page.endPage >= page.totalPage }">
+		<li class="disable">&gt;</li>	
+	</c:if>
+                              </ol>
+                          </td>
+						</tr>
+					</tfoot>
+						</table>
+							</form>
+					</div>
+				</div>
+			</div>
+		</article>
+		<div id="dialog" hidden="" title="교육과정등록">
+			<div>
+				<jsp:include page="../../basics.jsp"></jsp:include>
 			</div>
 		</div>
-	</article>
-	<div id="dialog" hidden="" title="교육과정등록">
-		<div>
-			<jsp:include page="../../basics.jsp"></jsp:include>
-		</div>
-	</div>
-	
-	<div id="dialog2" hidden="" title="과정타입수정">
-		<div>
+		
+		<div id="dialog2" hidden="" title="과정타입수정">
+			<div>
 				<jsp:include page="../table/typeInput.jsp"></jsp:include>
+			</div>
 		</div>
-	</div>
-	
-	<div id="dialog3" hidden="" title="강의실관리">
-		<div>
+		
+		<div id="dialog3" hidden="" title="강의실관리">
+			<div>
 				<jsp:include page="../table/classApply.jsp"></jsp:include>
+			</div>
 		</div>
-	</div>
-	
+		
+		<div id="dialog4" hidden="" title="과정수정">
+			<div>
+				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
+			</div>
+		</div>
+		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
@@ -156,10 +242,36 @@ th, td {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
+			let now = new Date();	// 현재 날짜 및 시간
+			let year = now.getFullYear();
+			
+			let str = "<option>년도선택</option>";
+			for(let i=year+1; i>year-5; i--){
+				str+= "<option value="+i+">"+i+"</option>";
+			}
+			$("#selectYear").html(str);
+			
+			$("#searchType").on("change",function(){
+				select = this.value;
+			});
+			$("#selectYear").on("change",function(){
+				select_year = this.value;
+			});
+			$("#numPerPage").on("change",function(){
+				numPerPage = this.value;
+			});
+			$("#search_bt").click(function(){
+				let value = $("#searchValue").val();
+				//console.log(select+","+value);s
+				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+			});	
 		
 		});
 		function set() {
-            $("#dialog").dialog("open");
+            $("#dialog").dialog("open",{
+            	width:500,
+            	height:600
+            });
         }
 		function set2() {
             $("#dialog2").dialog("open");
@@ -167,9 +279,12 @@ th, td {
 		function set3() {
             $("#dialog3").dialog("open");
         }
+		function set4() {
+            $("#dialog4").dialog("open");
+        }
 		$( "#dialog" ).dialog({
             autoOpen: false,
-            width: 400,
+            width:1200,
             modal: true,
             buttons: {
                 "닫기": function() {
@@ -180,7 +295,7 @@ th, td {
 		
 		$( "#dialog2" ).dialog({
             autoOpen: false,
-            width: 400,
+            width: 1200,
             modal: true,
             buttons: {
                 "닫기": function() {
@@ -190,7 +305,17 @@ th, td {
         });
 		$( "#dialog3" ).dialog({
             autoOpen: false,
-            width: 400,
+            width: 700,
+            modal: true,
+            buttons: {
+                "닫기": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+		$( "#dialog4" ).dialog({
+            autoOpen: false,
+            width: 1200,
             modal: true,
             buttons: {
                 "닫기": function() {
@@ -199,7 +324,13 @@ th, td {
             }
         });
 		
+	
+		function del(frm){
+			frm.action = "Controller?type=delCourse";
+			
+			frm.submit();
+		}
+		
 	</script>
 </body>
-
 </html>

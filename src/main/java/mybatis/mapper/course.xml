@@ -4,14 +4,50 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="course">
 
-<insert id="add" parameterType="Map">
-		INSERT INTO course_t(subject,start_date,end_date,course_fee,c_peo_num,c_round_num)
-		values(subject,start_date,end_date,course_fee,c_peo_num,c_round_num)
-	</insert>
   
-<select id="list" resultType="mybatis.vo.CourseVO">
-	select * from course_t
-</select>
+	<select id="list" parameterType="Map" resultType="mybatis.vo.CourseVO">
+		select * from (select @RN:=@RN+1 as rnum, a.*from(select * from course_t order by c_idx )a , 
+			(select @RN:=0) b) c where c.rnum between #{begin} and #{end}
+	</select>
 
+	<insert id="add" parameterType="Map">
+			INSERT INTO course_t(c_name,start_date,end_date,course_fee,c_peo_num, c_round_num)
+			values(#{c_name}, #{start_date}, #{end_date}, #{course_fee}, #{c_peo_num}, #{c_round_num})
+	</insert>
+
+	<!--  과정삭제 status값을 1로 변경 -->
+	<update id="del" parameterType="String">
+			update course_t
+			set c_status = 1
+			where c_idx = #{c_idx}
+	</update>
+	
+	<update id="edit" parameterType="map">
+		update bbs_t
+		<trim prefix="SET" suffixOverrides=","> 
+        c_name = #{c_name},
+        start_date = #{start_date},
+        end_date = #{end_date},
+        course_fee = #{course_fee},
+        c_peo_num = #{c_peo_num},
+        c_round_num = #{c_round_num}
+ 		 </trim>
+			where c_idx = #{c_idx}
+  </update>
+  
+	<select id="search" parameterType="map" resultType="mybatis.vo.CourseVO">
+		select * from (select @RN:=@RN+1 as rnum, a.*from(select * from course_t)a , 
+		(select @RN:=0) b) c 
+		<trim prefix="where">
+		<if test="select == 1">t_idx = #{value} and</if>
+		<if test="select == 2">ct_idx = #{value} and</if>
+		<if test="select == 3">r_idx = #{value} and</if>
+		c.rnum between #{begin} and #{end}
+		</trim>
+	</select>
+	
+	<select id="count" resultType="int" >
+		select count(*) from course_t 
+	</select>
 
 </mapper>
