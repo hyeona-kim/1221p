@@ -61,4 +61,40 @@ public class LmsBean {
 		return rvo;
 	}
 	
+	public StaffVO searchStaff2(String t_name) {
+		StaffVO tvo = null;
+		//모든 스테프를 가져오는 sql문장 가져오기
+		StaffVO[] ar = EtcDAO.getList();
+		for(StaffVO vo : ar) {
+			if(vo.getSf_name().equals(t_name)) {
+				tvo= vo;
+				break;
+			}
+		}
+		return tvo;
+	}
+	
+	public CourseTypeVO searchCourseType2(String ct_name) {
+		CourseTypeVO cvo= null;
+		CourseTypeVO[] ar = CourseTypeDAO.getList();
+		for(CourseTypeVO vo : ar) {
+			if(vo.getCt_name().equals(ct_name)) {
+				cvo = vo;
+				break;
+			}
+		}
+		return cvo;
+	}
+	
+	public RoomVO searchRoom2(String r_name) {
+		RoomVO rvo  = null;
+		RoomVO[] ar = RoomDAO.getList();
+		for(RoomVO vo : ar) {
+			if(vo.getR_name().equals(r_name)) {
+				rvo = vo;
+				break;
+			}
+		}
+		return rvo;
+	}
 }

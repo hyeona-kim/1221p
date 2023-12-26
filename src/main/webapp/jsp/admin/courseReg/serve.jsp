@@ -85,14 +85,14 @@ table tfoot ol.page {
 			<div class="right">
 				<div id="staffWrap">
 					<div id="staffList_top">과정별 교수계획서 및 학습 안내서</div>
-					<form action="" method="post">
+					<form>
 						<table id="searchTime">
 						<caption>과정검색</caption>
 							<thead>
 								<tr>
 									<th>검색</th>
 									<td>
-										<select>
+										<select id="numPerPage">
 											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
 											<option>표시개수</option>
 											<option>5</option>
@@ -109,13 +109,13 @@ table tfoot ol.page {
 											<option value="2">과정타입</option>
 											<option value="3">강의실</option>
 										</select>
-										<input type="text"/>
+										<input type="text" id="searchValue"/>
 										<button type="button" id="search_bt">검 색</button>
 									</td>
 								</tr>
 							</thead>
 						</table>
-					</form>
+					</form>	
 				<table id="makeTime">
 				<caption>과정별 교수계획서 및 학습 안내서 리스트</caption>
 					<thead>
@@ -163,8 +163,6 @@ table tfoot ol.page {
                           </td>
 						</tr>
 					</tfoot>
-					<tbody>
-		
 						<c:forEach var="vo2" items="${requestScope.ar }" varStatus="vs">
 						<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 						<tr>
@@ -192,6 +190,8 @@ table tfoot ol.page {
 		$(function() {
 			//$().removeClass("selected");
 			let select ="";
+			let select_year = "";
+			let numPerPage = "";
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
 			let now = new Date();	// 현재 날짜 및 시간
@@ -205,11 +205,18 @@ table tfoot ol.page {
 			$("#searchType").on("change",function(){
 				select = this.value;
 			});
-			$("#search_bt").click(function() {
-				
-			});		
+			$("#selectYear").on("change",function(){
+				select_year = this.value;
+			});
+			$("#numPerPage").on("change",function(){
+				numPerPage = this.value;
+			});
+			$("#search_bt").click(function(){
+				let value = $("#searchValue").val();
+				//console.log(select+","+value);s
+				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+			});	
 		});
-		
 	</script>
 </body>
 </c:if>
