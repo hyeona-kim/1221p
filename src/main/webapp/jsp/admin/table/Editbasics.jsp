@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +100,7 @@ thead tr{
 			<thead>
 				<tr>
 					<td colspan="4">
-						과정등록
+						과정수정
 					</td>
 				</tr>
 			</thead>
@@ -107,7 +108,7 @@ thead tr{
 					<tr>
 						<th><label>과정명</label></th>
 						<td>
-							<input type="text" name="c_name" />
+							<input type="text" name="c_name">${vo.c_name }</input>
 						</td>
 						<th><label>과정구분</label></th>
 						<td>
