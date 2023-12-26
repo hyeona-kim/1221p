@@ -86,33 +86,37 @@ table tfoot ol.page {
 				<div id="staffWrap">
 					<div id="staffList_top">과정별 교수계획서 및 학습 안내서</div>
 					<table id="searchTime">
-					<caption>과정별 교수계획서 및 학습 안내서 검색</caption>
-						<tr>
-							<th>검색</th>
-							<td>
-								<select>
-									<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
-									<option>표시개수</option>
-									<option>5</option>
-									<option>10</option>
-									<option>15</option>
-								</select>
-								<select>
-									<option value="년도선택">년도선택</option>
-									<c:forEach begin="2000" end="2023" var="year">
-										<option value="${year }">${year }</option>		
-									</c:forEach>
-								</select>
-							</td>
-							<td>
-								<select>
-									<option>훈련강사</option>
-								</select>
-								<input type="text" size="14" />
-								<button type="button">검색</button>
-							</td>
-						</tr>
-					</table>	
+						<caption>과정검색</caption>
+							<thead>
+								<tr>
+									<th>검색</th>
+									<td>
+										<select>
+											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
+											<option>표시개수</option>
+											<option>5</option>
+											<option>10</option>
+											<option>15</option>
+										</select>
+										<select>
+											<option>년도선택</option>
+											<c:forEach begin="2000" end="2024" var="year">
+				     							  <option value="${year}">${year}</option>
+				    						</c:forEach>
+										</select>
+									</td>
+									<td>
+										<select>
+											<option>훈련강사</option>
+											<option>과정타입</option>
+											<option>강의실</option>
+										</select>
+										<input type="text"/>
+										<button type="button">검 색</button>
+									</td>
+								</tr>
+							</thead>
+						</table>
 				<table id="makeTime">
 				<caption>과정별 교수계획서 및 학습 안내서 리스트</caption>
 					<thead>
@@ -166,24 +170,24 @@ table tfoot ol.page {
 						<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 						<tr>
 							<td>${num+(vs.index)-2 }</td>
-								<td>${vo2.c_name}</td>
-								<td>${vo2.c_code}</td>
-								<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
-								<td>${vo2.t_idx}</td>
-								<td>${vo2.start_date }</td>
-								<td>${vo2.end_date }</td>
-								<td>${vo2.ti_idx}</td>
-								<td>${vo2.c_round_num }</td>
-								<td>${vo2.c_peo_num}</td>
-								<td>과정별 학습 안내서</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				</div>
+							<td>${vo2.c_name}</td>
+							<td>${vo2.c_code}</td>
+							<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
+							<td>${vo2.t_idx}</td>
+							<td>${vo2.start_date }</td>
+							<td>${vo2.end_date }</td>
+							<td>${vo2.ti_idx}</td>
+							<td>${vo2.c_round_num }</td>
+							<td>${vo2.c_peo_num}</td>
+							<td><button type="button">과정별 학습 안내서</button></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			</div>
 		</div>
-	</article>
+	</div>
+</article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script>
 		$(function() {

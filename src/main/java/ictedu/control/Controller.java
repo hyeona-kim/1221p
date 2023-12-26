@@ -100,7 +100,7 @@ public class Controller extends HttpServlet {
 		String viewPath = action.execute(request, response);
 
 		if(viewPath ==null)
-			response.sendRedirect("Controller?type=list");
+			response.sendRedirect("Controller?type=index");
 		else {
 			RequestDispatcher disp = request.getRequestDispatcher(viewPath);
 			disp.forward(request, response);
