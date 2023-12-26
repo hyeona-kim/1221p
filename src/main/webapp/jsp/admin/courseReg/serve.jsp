@@ -137,29 +137,29 @@ table tfoot ol.page {
 							<td colspan="10">
 								<ol class="page">
 			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-		<li class="disable">&lt;</li>
-	</c:if>	
+				<li class="disable">&lt;</li>
+			</c:if>	
 	
-	<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-	<li><a href="Controller?type=list&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
-	</c:if>
+			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
+				<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
+			</c:if>
 
-	<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-		<c:if test="${vs.index eq page.nowPage }">
-			<li class="now">${vs.index }</li>
-		</c:if>
-		<c:if test="${vs.index ne page.nowPage }">
-			<li><a href="Controller?type=list&cPage=${vs.index}">${vs.index}</a></li>
-		</c:if>
-	</c:forEach>
+			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
+				<c:if test="${vs.index eq page.nowPage }">
+					<li class="now">${vs.index }</li>
+				</c:if>
+				<c:if test="${vs.index ne page.nowPage }">
+					<li><a href="Controller?type=course&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
+				</c:if>
+			</c:forEach>
 	
-	<c:if test="${page.endPage < page.totalPage }">
-		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
-	</c:if>
-	<c:if test="${page.endPage >= page.totalPage }">
-		<li class="disable">&gt;</li>	
-	</c:if>
-                              </ol>
+			<c:if test="${page.endPage < page.totalPage }">
+				<li><a href="Controller?type=course&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
+			</c:if>
+			<c:if test="${page.endPage >= page.totalPage }">
+				<li class="disable">&gt;</li>	
+			</c:if>
+                      		</ol>
                           </td>
 						</tr>
 					</tfoot>
@@ -189,17 +189,19 @@ table tfoot ol.page {
 	<script>
 		$(function() {
 			//$().removeClass("selected");
-			let select ="";
-			let select_year = "";
-			let numPerPage = "";
-			$(".selected").removeClass("selected")
-			$("#secondmenu").addClass("selected");
 			let now = new Date();	// 현재 날짜 및 시간
 			let year = now.getFullYear();
 			let str = "<option>년도선택</option>";
+			let select =$("#searchType").val();
+			let select_year = $("#selectYear").val();
+			let numPerPage = $("#numPerPage").val();
+			$(".selected").removeClass("selected")
+			$("#secondmenu").addClass("selected");
+			
 			for(let i=year+1; i>year-5; i--){
 				str+= "<option value="+i+">"+i+"</option>";
 			}
+			
 			$("#selectYear").html(str);
 			
 			$("#searchType").on("change",function(){
@@ -213,8 +215,20 @@ table tfoot ol.page {
 			});
 			$("#search_bt").click(function(){
 				let value = $("#searchValue").val();
-				//console.log(select+","+value);s
-				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+				if(value == null){
+					location.href= "Controller?type=course&listSelect=${param.listSelect}";
+				}else{
+				
+					if(select == "")
+						select ="1";
+					if(select_year == "")
+						select_year = year+1;
+					if(numPerPage == "")
+						numPerPage = "5";
+					let value = $("#searchValue").val();
+					//console.log(select+","+value);s
+					location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+				}
 			});	
 		});
 	</script>

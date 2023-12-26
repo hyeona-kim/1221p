@@ -77,6 +77,7 @@ public class LmsBean {
 	public CourseTypeVO searchCourseType2(String ct_name) {
 		CourseTypeVO cvo= null;
 		CourseTypeVO[] ar = CourseTypeDAO.getList();
+		System.out.println(ar.length);
 		for(CourseTypeVO vo : ar) {
 			if(vo.getCt_name().equals(ct_name)) {
 				cvo = vo;
