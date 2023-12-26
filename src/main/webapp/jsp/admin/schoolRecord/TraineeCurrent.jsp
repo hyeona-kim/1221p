@@ -201,7 +201,7 @@ table tfoot ol.page {
 		$(function() {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
-			$("#secondmenu").addClass("selected");
+			$("#thirdmenu").addClass("selected");
 		});
 	</script>
 </body>

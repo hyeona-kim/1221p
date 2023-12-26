@@ -51,5 +51,15 @@ public class SchoolDAO {
 		
 		return ar;
 	}
-
+	
+	public static void addReply(HashMap<String, String> map) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.insert("suggestion.addReply", map);
+		if(cnt > 0) {
+			ss.commit();
+		}else {
+			ss.rollback();
+		}
+		ss.close();
+	}
 }
