@@ -122,11 +122,8 @@
 											<option>10</option>
 											<option>15</option>
 										</select>
-										<select>
-											<option>년도선택</option>
-											<c:forEach begin="2000" end="2024" var="year">
-				     							  <option value="${year}">${year}</option>
-				    						</c:forEach>
+										<select id="selectYear">
+											
 										</select>
 									</td>
 									<td>
@@ -243,6 +240,14 @@
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
+			let now = new Date();	// 현재 날짜 및 시간
+			let year = now.getFullYear();
+			
+			let str = "<option>년도선택</option>";
+			for(let i=year+1; i>year-5; i--){
+				str+= "<option value="+i+">"+i+"</option>";
+			}
+			$("#selectYear").html(str);
 		
 		});
 		function set() {
