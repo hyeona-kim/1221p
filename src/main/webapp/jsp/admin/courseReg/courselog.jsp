@@ -87,14 +87,6 @@
 
 </head>
 <body>
-<% 
-	Object obj = request.getAttribute("ar");
-	CourseVO[] cvo = null;
-	if (obj != null) {
-		cvo = (CourseVO[])obj;
-	};
-%>
-
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
@@ -109,39 +101,37 @@
 							<button type="button" onclick="set2()">과정타입수정</button>	
 							<button type="button" onclick="set3()">강의실관리</button>	
 						</div>
-			<form action="Controller" method="post">
+						<form>
 						<table id="searchCourse">
 						<caption>과정검색</caption>
 							<thead>
 								<tr>
 									<th>검색</th>
 									<td>
-										<select>
+										<select id="numPerPage">
 											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
 											<option>표시개수</option>
 											<option>5</option>
 											<option>10</option>
 											<option>15</option>
 										</select>
-										<select>
-											<option>년도선택</option>
-											<c:forEach begin="2000" end="2024" var="year">
-				     							  <option value="${year}">${year}</option>
-				    						</c:forEach>
+										<select id="selectYear">
+
 										</select>
 									</td>
 									<td>
-										<select>
-											<option>훈련강사</option>
-											<option>과정타입</option>
-											<option>강의실</option>
+										<select id="searchType">
+											<option value="1">훈련강사</option>
+											<option value="2">과정타입</option>
+											<option value="3">강의실</option>
 										</select>
-										<input type="text"/>
-										<button type="button">검 색</button>
+										<input type="text" id="searchValue"/>
+										<button type="button" id="search_bt">검 색</button>
 									</td>
 								</tr>
 							</thead>
 						</table>
+						</form>
 						<table id="makeCourse">
 							<thead>
 								<tr>
@@ -252,6 +242,29 @@
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
+			let now = new Date();	// 현재 날짜 및 시간
+			let year = now.getFullYear();
+			
+			let str = "<option>년도선택</option>";
+			for(let i=year+1; i>year-5; i--){
+				str+= "<option value="+i+">"+i+"</option>";
+			}
+			$("#selectYear").html(str);
+			
+			$("#searchType").on("change",function(){
+				select = this.value;
+			});
+			$("#selectYear").on("change",function(){
+				select_year = this.value;
+			});
+			$("#numPerPage").on("change",function(){
+				numPerPage = this.value;
+			});
+			$("#search_bt").click(function(){
+				let value = $("#searchValue").val();
+				//console.log(select+","+value);s
+				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+			});	
 		
 		});
 		function set() {

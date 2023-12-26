@@ -84,40 +84,46 @@ table tfoot ol.page {
 			<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
 				<div id="staffWrap">
-					<div id="staffList_top">과정별 교수계획서 및 학습 안내서</div>
-					<form>
-						<table id="searchTime">
+					<div id="staffList_top">훈련생 현황</div>
+					<table id="searchTime">
 						<caption>과정검색</caption>
 							<thead>
 								<tr>
 									<th>검색</th>
 									<td>
-										<select id="numPerPage">
+										<select>
 											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
 											<option>표시개수</option>
 											<option>5</option>
 											<option>10</option>
 											<option>15</option>
 										</select>
-										<select id="selectYear">
-
+										<select>
+											<option>년도선택</option>
+											<c:forEach begin="2000" end="2024" var="year">
+				     							  <option value="${year}">${year}</option>
+				    						</c:forEach>
 										</select>
 									</td>
 									<td>
-										<select id="searchType">
-											<option value="1">훈련강사</option>
-											<option value="2">과정타입</option>
-											<option value="3">강의실</option>
+										<select>
+												<option>번호</option>
+												<option>과정명</option>
+												<option>담당교수</option>
+												<option>개강일</option>
+												<option>종료일</option>
+												<option>요일</option>
+												<option>회차</option>
+												<option>모집인원</option>
 										</select>
-										<input type="text" id="searchValue"/>
-										<button type="button" id="search_bt">검 색</button>
+										<input type="text"/>
+										<button type="button">검 색</button>
 									</td>
 								</tr>
 							</thead>
 						</table>
-					</form>	
 				<table id="makeTime">
-				<caption>과정별 교수계획서 및 학습 안내서 리스트</caption>
+				<caption>훈련현황 리스트</caption>
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -163,22 +169,27 @@ table tfoot ol.page {
                           </td>
 						</tr>
 					</tfoot>
+					<tbody>
+		
 						<c:forEach var="vo2" items="${requestScope.ar }" varStatus="vs">
-						<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
-						<tr>
-							<td>${num+(vs.index)-2 }</td>
-							<td>${vo2.c_name}</td>
-							<td>${vo2.c_code}</td>
-							<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
-							<td>${vo2.t_idx}</td>
-							<td>${vo2.start_date }</td>
-							<td>${vo2.end_date }</td>
-							<td>${vo2.ti_idx}</td>
-							<td>${vo2.c_round_num }</td>
-							<td>${vo2.c_peo_num}</td>
-							<td><button type="button">과정별 학습 안내서</button></td>
-						</tr>
-					</c:forEach>
+				<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
+					<tr>
+						<td>${num+(vs.index)+1 }</td>
+						<td>${vo2.c_name}</td>
+						<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
+						<td>${vo2.t_idx}</td>
+						<td>${vo2.start_date }</td>
+						<td>${vo2.end_date }</td>
+						<td>${vo2.ti_idx}</td>
+						<td>${vo2.c_round_num }</td>
+						<td>${vo2.c_peo_num}</td>
+						<td>관리</td>
+						<td>
+						<input type="button" value="과정별 훈련생 현황">
+						<input type="button" value="면접평가 결과표">
+						</td>
+					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 			</div>
@@ -189,33 +200,8 @@ table tfoot ol.page {
 	<script>
 		$(function() {
 			//$().removeClass("selected");
-			let select ="";
-			let select_year = "";
-			let numPerPage = "";
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
-			let now = new Date();	// 현재 날짜 및 시간
-			let year = now.getFullYear();
-			let str = "<option>년도선택</option>";
-			for(let i=year+1; i>year-5; i--){
-				str+= "<option value="+i+">"+i+"</option>";
-			}
-			$("#selectYear").html(str);
-			
-			$("#searchType").on("change",function(){
-				select = this.value;
-			});
-			$("#selectYear").on("change",function(){
-				select_year = this.value;
-			});
-			$("#numPerPage").on("change",function(){
-				numPerPage = this.value;
-			});
-			$("#search_bt").click(function(){
-				let value = $("#searchValue").val();
-				//console.log(select+","+value);s
-				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
-			});	
 		});
 	</script>
 </body>
