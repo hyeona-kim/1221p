@@ -2,7 +2,7 @@ package ictedu.util;
 
 public class Paging {
 	int nowPage =1; 	// 현재 페이지 값 == cPage
-	int numPerPage =10;		// 한 페이지당 보여질 게시물의 수 
+	int numPerPage =5;		// 한 페이지당 보여질 게시물의 수 
 	
 	int totalRecord; //총게시물의 수 
 	int pagePerBlock = 10; // 한 블럭당 표현할 페이지 수 
@@ -32,7 +32,7 @@ public class Paging {
 		// 현재 페이지값이 총 페이지 값을 넘기지못하도록 설정
 		if(nowPage > totalPage)
 			nowPage = totalPage;
-		
+
 		this.nowPage = nowPage;
 		// 시작 행 번호와 마지막 행번호 설정
 		begin = (nowPage-1)*numPerPage+1;

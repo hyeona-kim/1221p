@@ -7,15 +7,18 @@ import org.apache.ibatis.session.SqlSession;
 
 import mybatis.service.FactoryService;
 import mybatis.vo.CourseVO;
-import mybatis.vo.StaffVO;
 
 public class CourseDAO {
 	
-	public static CourseVO[] getCourseList() {
+	public static CourseVO[] getCourseList(int begin, int end) {
 		CourseVO[] ar = null;
 		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("begin",String.valueOf(begin));
+		map.put("end", String.valueOf(end));
+		
 		SqlSession ss = FactoryService.getFactory().openSession();
-		List<CourseVO> list = ss.selectList("course.list");
+		List<CourseVO> list = ss.selectList("course.list",map);
 		if (list!= null && !list.isEmpty()) {
 			ar = new CourseVO[list.size()];
 			list.toArray(ar);
@@ -35,4 +38,29 @@ public class CourseDAO {
 		}
 		ss.close();
 	}
+	
+	public static CourseVO[] SearchCourse(HashMap<String, String> map) {
+		CourseVO[] ar = null;
+		
+		SqlSession ss = FactoryService.getFactory().openSession();
+		List<CourseVO> list = ss.selectList("course.search",map);
+		if (list!= null && !list.isEmpty()) {
+			ar = new CourseVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		ss.close();
+		return ar;
+	}
+	
+	public static int getCount() {
+		
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.selectOne("course.count");
+		
+		ss.close();
+		
+		return cnt;
+	}
+	
 }
