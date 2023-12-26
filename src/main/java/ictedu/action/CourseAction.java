@@ -30,6 +30,7 @@ public class CourseAction  implements Action{
 		request.setAttribute("page", page);
 		request.setAttribute("ar", ar);
 		
+		
 		return "/jsp/admin/courseReg/courselog.jsp";
 	}
 

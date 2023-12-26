@@ -85,7 +85,8 @@ table tfoot ol.page {
 			<div class="right">
 				<div id="staffWrap">
 					<div id="staffList_top">과정별 교수계획서 및 학습 안내서</div>
-					<table id="searchTime">
+					<form action="" method="post">
+						<table id="searchTime">
 						<caption>과정검색</caption>
 							<thead>
 								<tr>
@@ -98,25 +99,23 @@ table tfoot ol.page {
 											<option>10</option>
 											<option>15</option>
 										</select>
-										<select>
-											<option>년도선택</option>
-											<c:forEach begin="2000" end="2024" var="year">
-				     							  <option value="${year}">${year}</option>
-				    						</c:forEach>
+										<select id="selectYear">
+
 										</select>
 									</td>
 									<td>
-										<select>
-											<option>훈련강사</option>
-											<option>과정타입</option>
-											<option>강의실</option>
+										<select id="searchType">
+											<option value="1">훈련강사</option>
+											<option value="2">과정타입</option>
+											<option value="3">강의실</option>
 										</select>
 										<input type="text"/>
-										<button type="button">검 색</button>
+										<button type="button" id="search_bt">검 색</button>
 									</td>
 								</tr>
 							</thead>
 						</table>
+					</form>
 				<table id="makeTime">
 				<caption>과정별 교수계획서 및 학습 안내서 리스트</caption>
 					<thead>
@@ -192,9 +191,25 @@ table tfoot ol.page {
 	<script>
 		$(function() {
 			//$().removeClass("selected");
+			let select ="";
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
+			let now = new Date();	// 현재 날짜 및 시간
+			let year = now.getFullYear();
+			let str = "<option>년도선택</option>";
+			for(let i=year+1; i>year-5; i--){
+				str+= "<option value="+i+">"+i+"</option>";
+			}
+			$("#selectYear").html(str);
+			
+			$("#searchType").on("change",function(){
+				select = this.value;
+			});
+			$("#search_bt").click(function() {
+				
+			});		
 		});
+		
 	</script>
 </body>
 </c:if>
