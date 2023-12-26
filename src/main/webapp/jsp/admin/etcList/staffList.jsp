@@ -227,7 +227,6 @@
 			
 		function addStaff() {
 			// 유효성 검사 해야함
-			
 			document.forms[0].submit();
 		};
 	</script>

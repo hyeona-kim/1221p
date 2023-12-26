@@ -280,7 +280,7 @@
         });
 		$( "#dialog3" ).dialog({
             autoOpen: false,
-            width: 1200,
+            width: 700,
             modal: true,
             buttons: {
                 "닫기": function() {
@@ -291,5 +291,4 @@
 		
 	</script>
 </body>
-
 </html>
