@@ -12,7 +12,7 @@ public class TraineecurrentAction implements Action{
 		
 		Paging page = new Paging();
 		
-		page.setTotalPage(TraineecurrentDAO.getCount());
+		page.setTotalRecord(TraineecurrentDAO.getCount());
 		
 		String cPage = request.getParameter("cPage");
 		

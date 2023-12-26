@@ -174,7 +174,7 @@ table tfoot ol.page {
 						<c:forEach var="vo2" items="${requestScope.ar }" varStatus="vs">
 				<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 					<tr>
-						<td>${num+(vs.index)+1 }</td>
+						<td>${vs.index+1}</td>
 						<td>${vo2.c_name}</td>
 						<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
 						<td>${vo2.t_idx}</td>

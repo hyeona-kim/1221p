@@ -225,9 +225,7 @@
 		</div>
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
-			<div>
-				<jsp:include page="../table/typeInput.jsp"></jsp:include>
-			</div>
+			
 		</div>
 		
 		<div id="dialog3" hidden="" title="강의실관리">
@@ -237,9 +235,7 @@
 		</div>
 		
 		<div id="dialog4" hidden="" title="과정수정">
-			<div>
-				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
-			</div>
+			
 		</div>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
