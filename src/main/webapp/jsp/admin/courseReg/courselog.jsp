@@ -206,7 +206,7 @@
 						</tr>
 					</tfoot>
 						</table>
-							</form>
+
 					</div>
 				</div>
 			</div>

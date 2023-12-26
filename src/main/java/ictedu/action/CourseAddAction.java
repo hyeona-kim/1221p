@@ -10,10 +10,14 @@ import mybatis.dao.EtcDAO;
 import mybatis.vo.CourseVO;
 
 public class CourseAddAction implements Action {
+	
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		// �뙆�씪誘명꽣�뱾 諛쏄린
+		
+		System.out.println("들어옴");
+		
+		
 		String c_name = request.getParameter("c_name");
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
@@ -22,7 +26,6 @@ public class CourseAddAction implements Action {
 		String c_round_num = request.getParameter("c_round_num");
 		String listSelect = request.getParameter("listSelect");
 		
-		//諛쏆� 媛앹껜�뱾�쓣 map�쑝濡� 吏��젙
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("c_name", c_name);
 		map.put("start_date", start_date);
