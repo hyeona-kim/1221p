@@ -52,25 +52,36 @@
 						<%-- ========== 교직원현황 테이블 시작 ========== --%>
 						<div id="staffList_top">과정별시간표만들기</div>
 						<table id="searchTime">
-						<caption>시간표 검색</caption>
-							<tr>
-								<th>검색</th>
-								<td>
-									<select>
-										<option value="년도선택">년도선택</option>
-										<c:forEach begin="2000" end="2023" var="year">
-											<option value="${year }">${year }</option>		
-										</c:forEach>
-									</select>
-								</td>
-								<td>
-									<select>
-										<option>과정타입</option>
-									</select>
-									<input type="text" size="14" />
-									<button type="button">검색</button>
-								</td>
-							</tr>
+						<caption>과정검색</caption>
+							<thead>
+								<tr>
+									<th>검색</th>
+									<td>
+										<select>
+											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
+											<option>표시개수</option>
+											<option>5</option>
+											<option>10</option>
+											<option>15</option>
+										</select>
+										<select>
+											<option>년도선택</option>
+											<c:forEach begin="2000" end="2024" var="year">
+				     							  <option value="${year}">${year}</option>
+				    						</c:forEach>
+										</select>
+									</td>
+									<td>
+										<select>
+											<option>훈련강사</option>
+											<option>과정타입</option>
+											<option>강의실</option>
+										</select>
+										<input type="text"/>
+										<button type="button">검 색</button>
+									</td>
+								</tr>
+							</thead>
 						</table>
 						<table id="makeTime">
 							<colgroup>
