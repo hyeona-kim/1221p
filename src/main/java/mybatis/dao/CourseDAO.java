@@ -74,6 +74,14 @@ public class CourseDAO {
 		return cnt;
 	}
 	
+	public static int getSearchCount(HashMap<String, String> map) {	
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.selectOne("course.search_count",map);
+		ss.close();
+		
+		return cnt;
+	}
+	
 	 public static CourseVO getCourse(String c_idx) {
 	        SqlSession ss = FactoryService.getFactory().openSession();
 	        CourseVO cvo = null;

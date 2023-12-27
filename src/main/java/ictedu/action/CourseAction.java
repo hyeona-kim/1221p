@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import ictedu.util.Paging;
 import mybatis.dao.CourseDAO;
+import mybatis.dao.CourseTypeDAO;
+import mybatis.vo.CourseTypeVO;
 import mybatis.vo.CourseVO;
 
 public class CourseAction  implements Action{
@@ -13,6 +15,7 @@ public class CourseAction  implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		Object obj = request.getAttribute("page");
 		Object obj2 = request.getAttribute("ar");
+		Object obj3 = request.getAttribute("c_ar");
 		Paging page = null;
 		String listSelect = request.getParameter("listSelect");
 
@@ -39,6 +42,14 @@ public class CourseAction  implements Action{
 		
 		request.setAttribute("page", page);
 		request.setAttribute("ar",ar);
+		
+		CourseTypeVO[] c_ar = null;
+		if(obj3 == null)
+			c_ar = CourseTypeDAO.getList();
+		else
+			c_ar = (CourseTypeVO[]) obj3;
+		
+		request.setAttribute("c_ar", c_ar);
 		
 		if(listSelect.equals("1"))
 			return "/jsp/admin/courseReg/courselog.jsp";
