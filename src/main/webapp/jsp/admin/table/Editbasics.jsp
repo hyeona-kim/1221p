@@ -169,7 +169,7 @@ thead tr{
 						<th><label>회차</label></th>
 						<td>
 						<input type="text" name="c_round_num" value="${select_vo.c_round_num }">
-						<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
+						<input type="hidden" name="c_idx" value="${select_vo.c_idx }"/>
 						</td>
 					</tr>
 				</tbody>
@@ -199,6 +199,7 @@ thead tr{
 <script>
 function addCourse(frm) {
     // 양식(form)을 서버로 제출
+    frm.action = "Controller?type=editCourse";
     frm.submit();
 }
 </script>
