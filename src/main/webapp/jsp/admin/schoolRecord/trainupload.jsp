@@ -175,10 +175,7 @@ table tfoot ol.page {
 			$(".selected").removeClass("selected")
 			$("#thirdmenu").addClass("selected");
 		});
-		
-		
-		
-		
+
 		function edit(tn_idx){
 			console.log(tn_idx);
 			
@@ -188,7 +185,6 @@ table tfoot ol.page {
 			document.frm.submit();
 	
 		}
-		
 		function traindel(tn_idx){
 			
 			console.log(tn_idx);
@@ -198,10 +194,7 @@ table tfoot ol.page {
 			document.frm.submit();
 			
 		}
-		
-		
-	
-	
+
 	</script>
 </body>
 </c:if>

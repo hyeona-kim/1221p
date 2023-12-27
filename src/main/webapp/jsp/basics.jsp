@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +15,8 @@
 	}
 	
 	body{
-	margin:0;
-	padding:0;
-	
+		margin:0;
+		padding:0;
 	}
 	
 	h2{
@@ -36,23 +36,17 @@
 		border: 1px solid #EAEAEA;
 		border-collapse: collapse;
 		margin-top: 50px;
-	
-		
+
 	}
 	
 	th,td{
 		border-bottom : 1px solid #EAEAEA;
 		padding:10px;
-		
 	}
 
 table th{
-	
 	background-color: #D6F0FF;
-
 }
-
-
 
 div#box{
 	display: inline-block;
@@ -63,9 +57,7 @@ div#box{
 	margin:0;
 	margin-left:6px;
 	font-weight: bold; 
-	
-	
-	
+
 }
 
 tfoot>tr:first-child td{
@@ -75,16 +67,12 @@ tfoot>tr:first-child td{
 	border-bottom: none;
 	font-size: 15px;
 	padding-top:10ppx;
-
-
 }
 
 thead tr{
 	font-weight: bold;
 	border-bottom: 1px solid black;
-
 }
-
 </style>
 
 </head>
@@ -114,7 +102,9 @@ thead tr{
 						<td>
 						<select>
 							<option value="0">선택하세요</option>
-							<option value="1">국가기반</option>
+							<c:forEach items="${requestScope.c_ar}" var="c_ar">
+								<option value="1">${c_ar.ct_name }</option>
+							</c:forEach>
 						</select>
 						</td>
 					</tr>
@@ -127,7 +117,9 @@ thead tr{
 						<td>
 						<select>
 							<option value="t1">선택하세요</option>
-							<option value="t2">-</option>
+							<c:forEach items="${requestScope.s_ar}" var="s_ar">
+								<option value="1">${s_ar.sf_name }</option>
+							</c:forEach>
 						</select>
 						</td>
 					</tr>

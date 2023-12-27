@@ -6,4 +6,18 @@
 	<select id="all" resultType="mybatis.vo.RoomVO">
 		select * from room_t
 	</select>
+	
+	 <select id="key" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM room_t WHERE r_idx = #{r_idx}	
+    </select>
+
+    <insert id="add" parameterType="mybatis.vo.RoomVO">
+           INSERT INTO room_t (r_idx, r_name, r_sep, r_status)
+           VALUES (#{r_idx}, #{r_name}, #{r_sep}, #{r_status})
+    </insert>
+    <update id="update" parameterType="mybatis.vo.RoomVO">
+           UPDATE room_t
+           SET r_name = #{r_name}, r_sep = #{r_sep}, r_status = #{r_status}
+           WHERE r_idx = #{r_idx}    
+    </update>
 </mapper>

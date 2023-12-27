@@ -181,8 +181,8 @@
 												<td></td>
 											</sf:if>
 											<td colspan="2">
-												<a href="" class="staff_edit_btn staff_btn">수정</a>
-												<a href="" class="staff_del_btn staff_btn">삭제</a>
+												<a href="javascript:editStaff(${vo.sf_idx})" class="staff_edit_btn staff_btn">수정</a>
+												<a href="javascript:delStaff(${vo.sf_idx})" class="staff_del_btn staff_btn">삭제</a>
 											</td>
 										</tr>
 									</sf:forEach>
@@ -211,7 +211,9 @@
 			$(".selected").removeClass("selected")
 			$("#etclist").addClass("selected");
 			
-			$("#staff_add_btn").bind("click", function(){
+			<%-- [교직원등록]버튼을 클릭했을 때
+			 비동기통신을 이용해 dialog를 띄우는 기능 --%>
+			$("#staff_add_btn").bind("click", function() {
 				$.ajax({
 					url: "${pageContext.request.contextPath}/jsp/admin/etcList/add_ajax.jsp",
 					type: "post"
@@ -227,6 +229,34 @@
 				});
 			});
 		});
+		
+		<%-- 교직원현황 - [수정]버튼을 클릭했을 때
+		 비동기통신을 이용해 dialog를 띄우는 기능 --%>
+		function editStaff(idx) {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/jsp/admin/etcList/edit_ajax.jsp",
+				type: "post"
+			}).done(function(result){
+				$("#addForm").html(result);
+			});
+			
+			$("#addForm").dialog({
+				title : '교직원수정',
+				modal : true,
+				width : 1000,
+				height : 600
+			});
+		};
+		
+		<%-- 교직원현황 - [삭제]버튼을 클릭했을 때 data를 삭제하는 곳
+			 교직원의 status를 0->1 로 변경해서 보이지 않게 한다--%>
+		function delStaff(idx) {
+			if(confirm("삭제하시겠습니까?")){
+				location.href="Controller?type=delStaff&sf_idx="+idx;
+			}else{
+				return false;
+			}
+		};
 		
 		<%-- 교직원등록에서 인증선택의 option을 변경할 때 수행하는 곳 --%>
 		function changeCertifi() {
@@ -267,15 +297,14 @@
 		<%-- 교직원등록에서 [저장]버튼을 눌렀을 때 수행하는 곳 --%>
 		function addStaff() {
 			// 유효성 검사 해야함
-			let signature = document.getElementById("signature");
-			console.log(signature);
-			if(signature.isEmpty()){
+			
+			/* if(url.isEmpty()){
 				alert("내용을 입력하세요");
 			}else {
 				alert("내용있음");
-			}
+			} */
 			
-			// document.forms[0].submit();
+			document.forms[0].submit();
 		};
 	</script>
 </body>

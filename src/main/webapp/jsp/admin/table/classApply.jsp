@@ -72,6 +72,8 @@
 <body>
 	<header id="header">강의실 등록/수정</header>
 	<div id="wrap1">
+		<form action="Controller" method="post" name="rm">
+         <input type="hidden" name="type"  value="addRoom"/>
 		<table id="t1">
 			<thead>
 				<tr id="tr">
@@ -125,15 +127,31 @@
 			</c:if>
 			</tbody>
 		</table>	
+		</form>
 	</div>
 	
 	<div id="ad">
-		<button type="button">강의실추가</button>
+		<input type="button" value="강의실추가"/>
 	</div>
 	
 	<div id="sa">
-		<button type="button" >저장</button>
-		<button type="button">닫기</button>
+			<input type="button"  id="sav"  value="저장"/>
+			<input type="button"  id="cl" value="닫기"/>
 	</div>
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	
+	<script>
+		  $(function(){
+		         $("#sav").click(function(){
+	
+		            document.rm.submit();
+		         });
+		   });
+		  $(function() {
+			$("#cl").click(function() {
+				location.href="Controller?type=course&listSelect=1"
+			});
+		});
+	</script>
 </body>
 </html>

@@ -18,11 +18,6 @@ public class SearchCourseAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-		// 寃��깋�쓣 �빐�꽌 媛��졇���꽌 page��, ar �쓣 媛��졇���빞 �븳�떎.
-		//留뚯빟�뿉 寃��깋李쎌뿉 怨듬갚�씠 �엯�젰�릱�쓣�븣�뿉�뒗 ar�뿉 null�쓣 ���옣�븯怨� ��吏� �뿬�빞�븳�떎. 洹몃읆 courseAction�뿉�꽌 ar�쓣 �깉濡�寃� 諛쏆븘�꽌 �쟾泥대�� 媛��졇�삤�뒗 ar濡� 吏��젙�빐�꽌 諛쏄린 �븣臾몄씠�떎.
-		// page�뒗 page select�뿉 �엯�젮�릺�뒗 value媛믪쓣 媛��졇�삤怨� 
-		// selectYear�뿉�꽌�쓽 �뿰�룄�뒗 媛쒓컯�씪�쓽 �뿰�룄瑜� �쑜�븳�떎.
-		request.removeAttribute("ar");
 		request.removeAttribute("page");
 
 		String numPerPage = request.getParameter("num");
@@ -33,8 +28,7 @@ public class SearchCourseAction implements Action{
 		String cPage = request.getParameter("cPage");
 		 
 		Paging page = null;
-		System.out.println(numPerPage);
-		
+
 		if(value == null || value.length()<1) {
 			value = null;
 		}
@@ -82,7 +76,7 @@ public class SearchCourseAction implements Action{
 		map.put("begin", String.valueOf(page.getBegin()));
 		map.put("end", String.valueOf(page.getEnd()));
 		
-		System.out.println(select);
+
 		CourseVO[] ar = CourseDAO.SearchCourse(map);
 	
 		request.setAttribute("ar", ar);
