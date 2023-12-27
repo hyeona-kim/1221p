@@ -27,13 +27,13 @@ public class TrainuploadEditAction implements Action {
 			
 			// 게시물의 기본키 tn_idx 파라미터 받아야 수정가능
 			String tn_idx = request.getParameter("tn_idx");
-			
+			System.out.println(tn_idx);
 			// 해당 게시물의 객체(TrainuploadVO)가져옴
 			
 			TrainuploadVO vo = TrainuploadDAO.getUpload(tn_idx);
 			
 			request.setAttribute("vo3", vo);
-			viewPath = "Controller?type=TrainuploadEdit.jsp";
+			viewPath = "/jsp/admin/schoolRecord/TrainuploadEdit.jsp";
 		}else if(enc_type !=null && enc_type.startsWith("multipart")){
 			//db에 업데이트 하고 요청방식이 post방식 글등록할때 파일을 무조건 선택하고 보냈기 때문에
 			// multipart으로 시작

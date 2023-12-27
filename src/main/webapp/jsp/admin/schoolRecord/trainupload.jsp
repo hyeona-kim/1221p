@@ -161,8 +161,6 @@ table tfoot ol.page {
 		<input type="hidden" name="tn_idx" value=""/>
 		
 		<input type="hidden" name="cPage" value="${param.cPage }"/>
-		<input type="hidden" name="tn_idx" value="${vo3.tn_idx }"/>
-		
 	</form>
 	
 </article>
@@ -173,21 +171,16 @@ table tfoot ol.page {
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
 		});
-		
-		
-		
-		
+
 		function edit(tn_idx){
 			console.log(tn_idx);
 			document.frm.type.value="trainuploadedit";
 			document.frm.tn_idx.value=tn_idx;
 			console.log(document.frm.type.value);
-			//document.frm.submit();
+			document.frm.submit();
 	
 		}
-		
-	
-		
+
 	</script>
 </body>
 </c:if>

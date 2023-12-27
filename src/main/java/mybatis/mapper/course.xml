@@ -41,18 +41,18 @@
 	</update>
 	
 	<update id="edit" parameterType="map">
-		update course_t
-		<trim prefix="SET" suffixOverrides=","> 
+    update course_t
+    <set>
         c_name = #{c_name},
         start_date = #{start_date},
         end_date = #{end_date},
         course_fee = #{course_fee},
         c_peo_num = #{c_peo_num},
         c_round_num = #{c_round_num}
- 		 </trim>
-			where c_idx = #{c_idx}
-  	</update>
-	
+	    </set>
+	    where c_idx = #{c_idx}
+	</update>
+
 	<select id="count" resultType="int" >
 		select count(*) from course_t 
 	</select>
