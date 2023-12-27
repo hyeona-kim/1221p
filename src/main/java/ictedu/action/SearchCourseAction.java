@@ -59,37 +59,32 @@ public class SearchCourseAction implements Action{
 			RoomVO vo = bean.searchRoom2(value);
 			value = vo.getR_idx();
 		}
-		
-		System.out.println("변환된 value값"+value);
 	
-
 		if(numPerPage!=null && numPerPage.length()>0 )
 			page = new Paging(Integer.parseInt(numPerPage),5);
 		else 
-			page = new Paging(); 
-		
-		if(cPage == null)
-	        page.setNowPage(1);
-	    else {
-	       int nowPage = Integer.parseInt(cPage);
-	       page.setNowPage(nowPage);
-	    }
+			page = new Paging();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("year", year);
 		map.put("select", select);
 		map.put("value", value);
+		page.setTotalRecord(CourseDAO.getSearchCount(map));
+
+		 
+		if(cPage == null) {
+	        page.setNowPage(1);
+		}else {
+	       int nowPage = Integer.parseInt(cPage);
+	       page.setNowPage(nowPage);
+	    }
 		
-		page.setTotalRecord(1);
-		System.out.println(page.getBegin());
-		map.put("begin", "0");
-		map.put("end", "5");
-		
+		map.put("begin", String.valueOf(page.getBegin()));
+		map.put("end", String.valueOf(page.getEnd()));
 		
 		System.out.println(select);
 		CourseVO[] ar = CourseDAO.searchCourse(map);
 	
-		System.out.println(ar);
 		request.setAttribute("ar", ar);
 		request.setAttribute("page", page);
 		
