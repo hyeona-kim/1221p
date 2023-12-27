@@ -16,7 +16,7 @@
 	<!-- 원글 저장 -->
 	<insert id="add" parameterType="Map">
 		insert into trainupload_t(subject, content, file_name,ori_name, tn_name,status)
-		values(#{subject},#{content},,#{f_name},,#{oname},#{tn_name},0)
+		values(#{subject},#{content},#{f_name},#{oname},#{tn_name},0)
 	</insert>
 	
 	<!-- 원글 보기 -->
