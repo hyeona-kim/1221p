@@ -6,19 +6,18 @@ import javax.servlet.http.HttpServletResponse;
 import ictedu.util.Paging;
 import mybatis.dao.TraineecurrentDAO;
 import mybatis.dao.TrainuploadDAO;
-import mybatis.vo.CourseVO;
 import mybatis.vo.TrainuploadVO;
 
 public class TrainuploadAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
+	
 		Paging page = new Paging();
 		
 		page.setTotalRecord(TraineecurrentDAO.getCount());
 		
 		String cPage = request.getParameter("cPage");
 		
-		if(cPage == null)
+		if(cPage == null || cPage.length()==0 )
 			page.setNowPage(1);
 		else {
 			int nowPage = Integer.parseInt(cPage);
