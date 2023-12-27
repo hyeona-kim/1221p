@@ -223,6 +223,7 @@
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
 			<div>
+				<jsp:include page="../table/typeInput.jsp"></jsp:include>
 			</div>
 		</div>
 		

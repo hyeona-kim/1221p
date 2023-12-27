@@ -82,7 +82,7 @@
 						</td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text"  name ="name" value="${cvo.ct_color }"/>
+							<input type="text"  name ="text" value="${cvo.ct_color }"/>
 							<input type="color"  name ="color"  value="${cvo.ct_color }"/>
 						</td>
 					</tr>

@@ -14,9 +14,10 @@ public class CourseTypeAddAction implements Action {
 		String[] ct_color = request.getParameterValues("text");
 		String listSelect = request.getParameter("listSelect");
 		CourseTypeVO vo = new CourseTypeVO();
+		
 		if(ct_name != null && !ct_name.equals("")) {
 			for(int i = 0; i < ct_name.length;i++) {
-				if(ct_name[i] != null && !ct_name[i].equals("")) {
+				if(ct_name[i] != null && !ct_name[i].isEmpty()) {
 					vo.setCt_name(ct_name[i]);
 					vo.setCt_color(ct_color[i]);
 					vo.setCt_idx(Integer.toString(i+1));
