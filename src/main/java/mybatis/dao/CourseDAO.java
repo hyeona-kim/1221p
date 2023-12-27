@@ -47,6 +47,8 @@ public class CourseDAO {
 			ss.commit();
 		else
 			ss.rollback();
+		ss.close();
+		
 		return cnt;
 	}
 	

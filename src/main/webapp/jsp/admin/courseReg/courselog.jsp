@@ -171,7 +171,7 @@
 										<button type="button">학습안내서 등록/수정</button>
 										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
 										<button type="button" onclick="editC('${cvo.c_idx}')">수정</button>
-										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
+										<button type="button" id="c_del_btn" onclick="del('${cvo.c_idx}')">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -357,10 +357,11 @@
         });
 		
 	
-		function del(frm){
+		function del(c_idx){
 			frm.action = "Controller?type=delCourse";
+			document.frm.c_idx.value =c_idx; 
 			
-			frm.submit();
+			document.frm.submit();
 		}
 		
 	</script>

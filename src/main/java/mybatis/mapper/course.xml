@@ -4,11 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="course">  
+
 	<select id="search" parameterType="Map" resultType="mybatis.vo.CourseVO">
 		select * 
 		from 
 		(select @RN:=@RN+1 as rnum, a.* 
-		from (select * from course_t
+		from (select * from course_t  WHERE c_status = 0
 				<trim prefix="where" suffixOverrides="and">
 					<if test="select !=null and select == 1">t_idx =#{value} and</if>
 					<if test="select !=null and select == 2">ct_idx =#{value} and</if>
@@ -20,13 +21,13 @@
 	</select>
 
 	<select id="list" parameterType="Map" resultType="mybatis.vo.CourseVO">
-		select * from (select @RN:=@RN+1 as rnum, a.* from(select * from course_t order by c_idx )a , 
+		select * from (select @RN:=@RN+1 as rnum, a.* from(select * from course_t WHERE c_status = 0  order by c_idx )a , 
 			(select @RN:=0) b) c where c.rnum between #{begin} and #{end}
 	</select>
 
 	<insert id="add" parameterType="Map">
-			INSERT INTO course_t(c_name,start_date,end_date,course_fee,c_peo_num, c_round_num)
-			values(#{c_name}, #{start_date}, #{end_date}, #{course_fee}, #{c_peo_num}, #{c_round_num})
+			INSERT INTO course_t(c_name,start_date,end_date,course_fee,c_peo_num, c_round_num, c_status)
+			values(#{c_name}, #{start_date}, #{end_date}, #{course_fee}, #{c_peo_num}, #{c_round_num}, 0)
 	</insert>
 
   <select id="getCourse" parameterType="String" resultType="mybatis.vo.CourseVO">
@@ -61,7 +62,7 @@
 		select count(*)
 		from 
 		(select @RN:=@RN+1 as rnum, a.* 
-		from (select * from course_t
+		from (select * from course_t  WHERE c_status = 0
 				<trim prefix="where" suffixOverrides="and">
 					<if test="select !=null and select == 1">t_idx =#{value} and</if>
 					<if test="select !=null and select == 2">ct_idx =#{value} and</if>
