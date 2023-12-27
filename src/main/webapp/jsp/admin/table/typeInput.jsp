@@ -73,17 +73,17 @@
 				</colgroup>
 				<tbody>
 				<c:if test="${c_ar ne null}">
-					<c:forEach var="cvo" items="${c_ar }">
+					<c:forEach var="tvo" items="${c_ar }">
 					<tr>
-						<td class="num" >${cvo.ct_idx }</td>
+						<td class="num" >${tvo.ct_idx }</td>
 						
 						<td>
-							<input type="text" name="name"  value="${cvo.ct_name }"/>
+							<input type="text" name="name"  value="${tvo.ct_name }"/>
 						</td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text"  name ="name" value="${cvo.ct_color }"/>
-							<input type="color"  name ="color"  value="${cvo.ct_color }"/>
+							<input type="text"  name ="text" value="${tvo.ct_color }"/>
+							<input type="color"  name ="color"  value="${tvo.ct_color }"/>
 						</td>
 					</tr>
 					</c:forEach>
