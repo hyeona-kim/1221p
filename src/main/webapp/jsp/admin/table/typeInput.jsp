@@ -75,66 +75,66 @@
 					<tr>
 						<td class="num">1</td>
 						<td>
-							<input type="text" id="type1"  value="${ar[0].ct_name }"/>
+							<input type="text" id="type1"  value=""/>
 						</td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text1"  value="${ar[0].ct_color }"/>
-							<input type="color" id="color1"  value="${ar[0].ct_color }"/>
+							<input type="text" name ="text1"  value=""/>
+							<input type="color" id="color1"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">2</td>
-						<td><input type="text" id="type2"  value="${ar[1].ct_name }"/></td>
+						<td><input type="text" id="type2"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text2"  value="${ar[1].ct_color }"/>
-							<input type="color" id="color2"  value="${ar[1].ct_color }"/>
+							<input type="text" name ="text2"  value="$"/>
+							<input type="color" id="color2"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">3</td>
-						<td><input type="text" id="type3"  value="${ar[2].ct_name }"/></td>
+						<td><input type="text" id="type3"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text3"  value="${ar[2].ct_color }"/>
-							<input type="color" id="color3"  value="${ar[2].ct_color }"/>
+							<input type="text" name ="text3"  value=""/>
+							<input type="color" id="color3"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">4</td>
-						<td><input type="text" id="type4"  value="${ar[3].ct_name }"/></td>
+						<td><input type="text" id="type4"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text4"  value="${ar[3].ct_color }"/>
-							<input type="color" id="color4"  value="${ar[3].ct_color }"/>
+							<input type="text" name ="text4"  value=""/>
+							<input type="color" id="color4"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">5</td>
-						<td><input type="text" id="type5"  value="${ar[4].ct_name }"/></td>
+						<td><input type="text" id="type5"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text5"  value="${ar[4].ct_color }"/>
-							<input type="color" id="color5"  value="${ar[4].ct_color }"/>
+							<input type="text" name ="text5"  value=""/>
+							<input type="color" id="color5"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">6</td>
-						<td><input type="text" id="type6"  value="${ar[5].ct_name }"/></td>
+						<td><input type="text" id="type6"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text6"  value="${ar[5].ct_color }"/>
-							<input type="color" id="color6"  value="${ar[5].ct_color }"/>
+							<input type="text" name ="text6"  value=""/>
+							<input type="color" id="color6"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">7</td>
-						<td><input type="text" id="type7"  value="${ar[6].ct_name }"/></td>
+						<td><input type="text" id="type7"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text7"  value="${ar[6].ct_color }"/>
-							<input type="color" id="color7"  value="${ar[6].ct_color }"/>
+							<input type="text" name ="text7"  value=""/>
+							<input type="color" id="color7"  value=""/>
 						</td>
 					</tr>
 				</tbody>

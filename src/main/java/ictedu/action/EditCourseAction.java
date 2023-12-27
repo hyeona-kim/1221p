@@ -17,14 +17,15 @@ public class EditCourseAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		String viewPath = null;
+			String viewPath = null;
 
-        try {
             // c_idx 파라미터 받아오기
             String c_idx = request.getParameter("c_idx");
 
             // c_idx를 기반으로 CourseVO 객체 가져오기
             CourseVO vo = CourseDAO.getCourse(c_idx);
+            
+            request.setAttribute("vo", vo);
 
             // 폼으로부터 다른 파라미터들 가져오기
             String c_name = request.getParameter("c_name");
@@ -37,15 +38,12 @@ public class EditCourseAction implements Action {
 
             // CourseDAO의 edit 메소드 호출
             CourseDAO.edit(c_name, start_date, end_date, course_fee, c_peo_num, c_round_num);
-
+            
             // 수정된 게시물을 보여주기 위한 경로 설정
-            viewPath = "Controller?type=view&c_idx=" + c_idx;
-        } catch (Exception e) {
-            // 예외 처리
-            e.printStackTrace();
-        }
+            viewPath ="Controller?type=course&listSelect=1";
+    
 
         return viewPath;
-		}
-	}
-
+			}
+        }
+	

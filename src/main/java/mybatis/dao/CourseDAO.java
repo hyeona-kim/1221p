@@ -76,18 +76,20 @@ public class CourseDAO {
 	
 	 public static CourseVO getCourse(String c_idx) {
 	        SqlSession ss = FactoryService.getFactory().openSession();
-	        CourseVO vo = null;
+	        CourseVO cvo = null;
 
 	        try {
-	            vo = ss.selectOne("course.getCourse", c_idx);
+	            cvo = ss.selectOne("course.getCourse", c_idx);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
 	            ss.close();
 	        }
 
-	        return vo;
+	        return cvo;
 	    }
+	 
+	
 	
 	public static int edit(String c_name,String start_date,
 			String end_date, String course_fee, 

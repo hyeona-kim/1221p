@@ -23,7 +23,7 @@
 	</update>
 	
 	<update id="edit" parameterType="map">
-		update bbs_t
+		update course_t
 		<trim prefix="SET" suffixOverrides=","> 
         c_name = #{c_name},
         start_date = #{start_date},
@@ -35,7 +35,7 @@
 			where c_idx = #{c_idx}
   </update>
   
-  <select id="getCourse" parameterType="String" resultType="mybatis.vo.CourseVO">
+  <select id="getCourse" parameterType="map" resultType="mybatis.vo.CourseVO">
     SELECT * FROM course_t WHERE c_idx = #{c_idx}
   </select>
   

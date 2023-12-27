@@ -168,8 +168,8 @@
 									<td>
 										<button type="button">교과목 등록/수정</button>
 										<button type="button">학습안내서 등록/수정</button>
-										<button type="button" onclick="set4()">수정</button>
 										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
+										<button type="button" onclick="edit(${cvo.c_idx})">수정</button>
 										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
 									</td>
 								</tr>
@@ -218,6 +218,13 @@
 				</div>
 			</div>
 		</article>
+		
+		<form name="frm" action="Controller" method="post">
+			<input type="hidden" name="type" /> 
+			<input type="hidden" name="b_idx" value="${cvo.c_idx }" />
+		</form>
+		
+		
 		<div id="dialog" hidden="" title="교육과정등록">
 			<div>
 				<jsp:include page="../../basics.jsp"></jsp:include>
@@ -276,7 +283,9 @@
 			});	
 		
 		});
+		
 		function set() {
+		
             $("#dialog").dialog("open",{
             	width:500,
             	height:600
@@ -288,9 +297,11 @@
 		function set3() {
             $("#dialog3").dialog("open");
         }
-		function set4() {
-            $("#dialog4").dialog("open");
+		function edit() {
+			$("#dialog4").dialog("open");
+			document.frm.type.value = "editCourse"; 
         }
+		
 		$( "#dialog" ).dialog({
             autoOpen: false,
             width:1200,
