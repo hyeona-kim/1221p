@@ -11,7 +11,7 @@ import mybatis.vo.SuggestionVO;
 import mybatis.vo.TimeVO;
 
 public class LmsBean {
-	//������ ���� �ð�ǥ ti_idx���� �޾Ƽ� �װͿ� ���� TimeVO�� ��ȯ���ִ� ��ü �����
+	//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占시곤옙표 ti_idx占쏙옙占쏙옙 占쌨아쇽옙 占쌓것울옙 占쏙옙占쏙옙 TimeVO占쏙옙 占쏙옙환占쏙옙占쌍댐옙 占쏙옙체 占쏙옙占쏙옙占�
 	
 	public TimeVO searchTime(String ti_idx) {
 		TimeVO tvo = null;
@@ -27,7 +27,7 @@ public class LmsBean {
 	
 	public StaffVO searchStaff(String t_idx) {
 		StaffVO tvo = null;
-		//��� �������� �������� sql���� ��������
+		//占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 sql占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
 		StaffVO[] ar = EtcDAO.getList();
 		for(StaffVO vo : ar) {
 			if(vo.getSf_idx().equals(t_idx)) {
@@ -63,40 +63,23 @@ public class LmsBean {
 	}
 	
 	public StaffVO searchStaff2(String t_name) {
-		StaffVO tvo = null;
-		//��� �������� �������� sql���� ��������
-		StaffVO[] ar = EtcDAO.getList();
-		for(StaffVO vo : ar) {
-			if(vo.getSf_name().equals(t_name)) {
-				tvo= vo;
-				break;
-			}
-		}
-		return tvo;
+		StaffVO ar = null;
+		ar = EtcDAO.searchList(t_name);
+		
+		return ar;
 	}
 	
 	public CourseTypeVO searchCourseType2(String ct_name) {
-		CourseTypeVO cvo= null;
-		CourseTypeVO[] ar = CourseTypeDAO.getList();
-		System.out.println(ar.length);
-		for(CourseTypeVO vo : ar) {
-			if(vo.getCt_name().equals(ct_name)) {
-				cvo = vo;
-				break;
-			}
-		}
-		return cvo;
+		CourseTypeVO ar = null;
+		ar = CourseTypeDAO.SearchList(ct_name);
+		
+		return ar;
 	}
 	
 	public RoomVO searchRoom2(String r_name) {
-		RoomVO rvo  = null;
-		RoomVO[] ar = RoomDAO.getList();
-		for(RoomVO vo : ar) {
-			if(vo.getR_name().equals(r_name)) {
-				rvo = vo;
-				break;
-			}
-		}
-		return rvo;
+		RoomVO ar = null;
+		ar = RoomDAO.searchList(r_name);
+		
+		return ar;
 	}
 }

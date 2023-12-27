@@ -111,7 +111,7 @@
 										<td>
 											<select id="numPerPage">
 												<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
-												<option>표시개수</option>
+												<option value="5">표시개수</option>
 												<option>5</option>
 												<option>10</option>
 												<option>15</option>
@@ -282,15 +282,11 @@
 				let value = $("#searchValue").val();
 				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
 			});	
-		
-			<%
-			Object obj = request.getAttribute("select_vo");
-			if(obj != null){
-				%>
+			
+			<%Object obj = request.getAttribute("select_vo");
+			if(obj != null){%>
 			$("#dialog4").dialog("open");
-			<%
-			}
-			%>
+			<%}%>
 		});
 		
 		function set() {
@@ -359,7 +355,6 @@
 	
 		function del(frm){
 			frm.action = "Controller?type=delCourse";
-			
 			frm.submit();
 		}
 		
