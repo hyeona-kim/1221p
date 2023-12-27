@@ -24,5 +24,6 @@
     <mapper resource="mybatis/mapper/upskill.xml"/>
     <mapper resource="mybatis/mapper/serve.xml"/>
     <mapper resource="mybatis/mapper/traineecurrent.xml"/>
+    <mapper resource="mybatis/mapper/upload.xml"/>
   </mappers>
 </configuration>
