@@ -231,7 +231,6 @@
 		
 		<div id="dialog4" hidden="" title="과정수정">
 			<div>
-				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
 			</div>
 		</div>
 		

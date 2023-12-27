@@ -7,10 +7,14 @@ import mybatis.service.FactoryService;
 import mybatis.vo.CourseTypeVO;
 
 public class CourseTypeDAO {
-	public static void addType(HashMap<String, String> map){
+	public static void addType(CourseTypeVO vo){
 		SqlSession ss = FactoryService.getFactory().openSession();
-		int cnt = ss.insert("courseType.add", map);
-		if(cnt > 0) {
+		int key = ss.selectOne("courseType.key", vo.getCt_idx());
+		if(key == 0)
+			key = ss.insert("courseType.add", vo);
+		else
+			key = ss.update("courseType.update", vo);
+		if(key > 0) {
 			ss.commit();
 		}else {
 			ss.rollback();
@@ -29,4 +33,5 @@ public class CourseTypeDAO {
 		}
 		return ar;
 	}
+	
 }
