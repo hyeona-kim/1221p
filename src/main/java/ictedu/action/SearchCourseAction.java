@@ -18,10 +18,10 @@ public class SearchCourseAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-		// 검색을 해서 가져와서 page와, ar 을 가져와야 한다.
-		//만약에 검색창에 공백이 입력됐을때에는 ar에 null을 저장하고 움직 여야한다. 그럼 courseAction에서 ar을 새롭게 받아서 전체를 가져오는 ar로 지정해서 받기 때문이다.
-		// page는 page select에 입려되는 value값을 가져오고 
-		// selectYear에서의 연도는 개강일의 연도를 뜻한다.
+		// 寃��깋�쓣 �빐�꽌 媛��졇���꽌 page��, ar �쓣 媛��졇���빞 �븳�떎.
+		//留뚯빟�뿉 寃��깋李쎌뿉 怨듬갚�씠 �엯�젰�릱�쓣�븣�뿉�뒗 ar�뿉 null�쓣 ���옣�븯怨� ��吏� �뿬�빞�븳�떎. 洹몃읆 courseAction�뿉�꽌 ar�쓣 �깉濡�寃� 諛쏆븘�꽌 �쟾泥대�� 媛��졇�삤�뒗 ar濡� 吏��젙�빐�꽌 諛쏄린 �븣臾몄씠�떎.
+		// page�뒗 page select�뿉 �엯�젮�릺�뒗 value媛믪쓣 媛��졇�삤怨� 
+		// selectYear�뿉�꽌�쓽 �뿰�룄�뒗 媛쒓컯�씪�쓽 �뿰�룄瑜� �쑜�븳�떎.
 		request.removeAttribute("ar");
 		request.removeAttribute("page");
 
