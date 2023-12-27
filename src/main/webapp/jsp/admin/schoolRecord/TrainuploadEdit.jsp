@@ -209,6 +209,6 @@ table tfoot ol.page {
 </c:if>
 
 <c:if test="${requestScope.vo3 eq null }">
-	<c:redirect url="Controller?type=trainupload"/>
+<c:redirect url="Controller?type=trainupload"/>
 </c:if>
 </html>

@@ -14,45 +14,46 @@ import mybatis.vo.TrainuploadVO;
 
 public class TrainuploadEditAction implements Action {
 
+	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println(2);
+	
 		String enc_type = request.getContentType();
 		
 		String viewPath = null;
 		
 		if(enc_type !=null && enc_type.startsWith("application")) {
-			// ¼öÁ¤ÇÒ¶§ÀÇ ¿µ¿ª
+			// ìˆ˜ì •í• ë•Œì˜ ì˜ì—­
 			
-			// °Ô½Ã¹°ÀÇ ±âº»Å° tn_idx ÆÄ¶ó¹ÌÅÍ ¹Ş¾Æ¾ß ¼öÁ¤°¡´É
+			// ê²Œì‹œë¬¼ì˜ ê¸°ë³¸í‚¤ tn_idx íŒŒë¼ë¯¸í„° ë°›ì•„ì•¼ ìˆ˜ì •ê°€ëŠ¥
 			String tn_idx = request.getParameter("tn_idx");
 			System.out.println(tn_idx);
-			// ÇØ´ç °Ô½Ã¹°ÀÇ °´Ã¼(TrainuploadVO)°¡Á®¿È
+			// í•´ë‹¹ ê²Œì‹œë¬¼ì˜ ê°ì²´(TrainuploadVO)ê°€ì ¸ì˜´
 			
 			TrainuploadVO vo = TrainuploadDAO.getUpload(tn_idx);
 			
 			request.setAttribute("vo3", vo);
-			viewPath = "/jsp/admin/schoolRecord/TrainuploadEdit.jsp";
+			viewPath = "jsp/admin/schoolRecord/TrainuploadEdit.jsp";
 		}else if(enc_type !=null && enc_type.startsWith("multipart")){
-			//db¿¡ ¾÷µ¥ÀÌÆ® ÇÏ°í ¿äÃ»¹æ½ÄÀÌ post¹æ½Ä ±Ûµî·ÏÇÒ¶§ ÆÄÀÏÀ» ¹«Á¶°Ç ¼±ÅÃÇÏ°í º¸³Â±â ¶§¹®¿¡
-			// multipartÀ¸·Î ½ÃÀÛ
+			//dbì— ì—…ë°ì´íŠ¸ í•˜ê³  ìš”ì²­ë°©ì‹ì´ postë°©ì‹ ê¸€ë“±ë¡í• ë•Œ íŒŒì¼ì„ ë¬´ì¡°ê±´ ì„ íƒí•˜ê³  ë³´ëƒˆê¸° ë•Œë¬¸ì—
+			// multipartìœ¼ë¡œ ì‹œì‘
 			
 			ServletContext application = request.getServletContext();
 			String realPath = application.getRealPath("/ictedu_upload");
 			
 			try {
-				//Ã·ºÎÆÄÀÏ Ã³¸®
+				//ì²¨ë¶€íŒŒì¼ ì²˜ë¦¬
 				MultipartRequest mr = new MultipartRequest(request, realPath, 1024*1024*100, "utf-8",new DefaultFileRenamePolicy());
 				
-				// Ã·ºÎÆÄÀÏÀÌ ÀÖ¾ú´Ù¸é ÀÌ¹Ì ÀúÀåµÈ »óÅÂ
+				// ì²¨ë¶€íŒŒì¼ì´ ìˆì—ˆë‹¤ë©´ ì´ë¯¸ ì €ì¥ëœ ìƒíƒœ
 				
 				String tn_idx = mr.getParameter("tn_idx");
 				String title = mr.getParameter("title");
 				String content = mr.getParameter("content");
 				
-				// Ã·ºÎÆÄÀÏÀÌ ÀÖ¾ú´Ù¸é db¿¡¼­ ±âÁ¸ ÆÄÀÌ¸êÀ» Áö¿ì°í »õ·Î ¾÷·ÎµåµÈ ÆÄÀÏ¸íÀ¸·Î ¼öÁ¤
-				// ±×·¸±â ¶§¹®¿¡ ÆÄÀÏ¸íÀ» ¾Ë¾Æ³»¾ß ÇÑ´Ù
+				// ì²¨ë¶€íŒŒì¼ì´ ìˆì—ˆë‹¤ë©´ dbì—ì„œ ê¸°ì¡´ íŒŒì´ë©¸ì„ ì§€ìš°ê³  ìƒˆë¡œ ì—…ë¡œë“œëœ íŒŒì¼ëª…ìœ¼ë¡œ ìˆ˜ì •
+				// ê·¸ë ‡ê¸° ë•Œë¬¸ì— íŒŒì¼ëª…ì„ ì•Œì•„ë‚´ì•¼ í•œë‹¤
 				
 				File f = mr.getFile("file");
 				

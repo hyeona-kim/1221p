@@ -35,4 +35,13 @@ public class CourseTypeDAO {
 		return ar;
 	}
 	
+	public static CourseTypeVO SearchList(String ct_name) {
+		CourseTypeVO ar = null;
+		SqlSession ss = FactoryService.getFactory().openSession();
+		ar = ss.selectOne("courseType.search",ct_name);
+		ss.close();
+		
+		return ar;
+	}
+	
 }

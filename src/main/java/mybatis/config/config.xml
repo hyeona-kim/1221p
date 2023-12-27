@@ -26,5 +26,6 @@
     <mapper resource="mybatis/mapper/suggestion.xml"/>
     <mapper resource="mybatis/mapper/traineecurrent.xml"/>
     <mapper resource="mybatis/mapper/upload.xml"/>
+    <mapper resource="mybatis/mapper/trainconfirm.xml"/>
   </mappers>
 </configuration>

@@ -16,7 +16,7 @@
 	<!-- 원글 저장 -->
 	<insert id="add" parameterType="Map">
 		insert into trainupload_t(subject, content, file_name,ori_name, tn_name,status)
-		values(#{subject},#{content},#{f_name},#{oname},#{tn_name},0)
+		values(#{subject},#{content},#{fname},#{oname},#{tn_name},0)
 	</insert>
 	
 	<!-- 원글 보기 -->
@@ -38,6 +38,7 @@
 		</trim>
 		where tn_idx = #{tn_idx}
 	</update>
+	
 	<!-- 원글 삭제 status값을 1로 변경 -->
 	<update id="del" parameterType="String">
 		update trainupload_t

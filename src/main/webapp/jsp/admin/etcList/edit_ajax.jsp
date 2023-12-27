@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
-<form action="Controller?type=addStaff" method="post">
+<form action="Controller?type=editStaff" method="post" encType="multipart/form-data">
 	<table>
 		<colgroup>
 			<col width="15%">
@@ -9,25 +9,25 @@
 			<col width="15%">
 			<col width="35%">
 		</colgroup>
-		<caption>교직원 등록 테이블</caption>
+		<caption>교직원 수정 테이블</caption>
 		<tbody>
 			<tr>
 				<th>이름</th>
-				<td class="left"><input class="input" type="text" placeholder="이름" name="sf_name"/></td>
+				<td class="left"><input class="input" type="text" id="sf_name" name="sf_name"/></td>
 				<th>직급</th>
-				<td class="left"><input class="input" type="text" placeholder="직급" name="sf_job"/></td>
+				<td class="left"><input class="input" type="text" name="sf_job"/></td>
 			</tr>
 			<tr>
 				<th>아이디</th>
-				<td class="left"><input class="input" type="text" placeholder="아이디" name="sf_id"/></td>
+				<td class="left"><input class="input" type="text" name="sf_id"/></td>
 				<th>암호</th>
-				<td class="left"><input class="input" type="text" placeholder="암호" name="sf_pwd"/></td>
+				<td class="left"><input class="input" type="text" name="sf_pwd"/></td>
 			</tr>
 			<tr>
 				<th>입사일</th>
-				<td class="left"><input class="input" type="date" placeholder="2023-01-01" name="sf_hire_date"/></td>
+				<td class="left"><input class="input" type="date" name="sf_hire_date"/></td>
 				<th>퇴사일</th>
-				<td class="left"><input class="input" type="date" disabled="disabled" name="sf_fire_date"/></td>
+				<td class="left"><input class="input" type="date" name="sf_fire_date"/></td>
 			</tr>
 			<tr>
 				<th>연락처</th>
@@ -61,7 +61,7 @@
 				<td colspan="4">
 					<!-- <button type="button" onclick="addStaff()" class="staff_edit_btn staff_btn">저장</button>
 					<button type="button" onclose="" class="staff_del_btn staff_btn">취소</button> -->
-					<a href="javascript:addStaff()" class="staff_edit_btn staff_btn">등록</a>
+					<a href="javascript:addStaff()" class="staff_edit_btn staff_btn">수정</a>
 					<a href="" class="staff_del_btn staff_btn">취소</a>
 				</td>
 			</tr>
