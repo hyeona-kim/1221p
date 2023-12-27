@@ -108,7 +108,7 @@ thead tr{
 					<tr>
 						<th><label>과정명</label></th>
 						<td>
-							<input type="text" name="c_name">${vo.c_name }</input>
+							<input type="text" name="c_name" value="${select_vo.c_name }" />
 						</td>
 						<th><label>과정구분</label></th>
 						<td>
@@ -133,9 +133,9 @@ thead tr{
 					</tr>
 					<tr>
 						<th><label>개강일</label></th>
-						<td><input type="text" name="start_date"></td>
+						<td><input type="text" name="start_date" value="${select_vo.start_date }"></td>
 						<th><label>종료일</label></th>
-						<td><input type="text" name="end_date"></td>
+						<td><input type="text" name="end_date" value="${select_vo.end_date }"></td>
 					</tr>
 					<tr>
 						<th><label>교육시간</label></th>
@@ -145,13 +145,13 @@ thead tr{
 					</tr>
 					<tr>
 						<th><label>교육비</label></th>
-						<td><input type="text" name="course_fee"><div id="box">(* 콤마(,)없이 숫자로만 입력해주세요)</div></td>
+						<td><input type="text" name="course_fee" value="${select_vo.course_fee }"><div id="box">(* 콤마(,)없이 숫자로만 입력해주세요)</div></td>
 						<th><label>총교육일수</label></th>
 						<td><input type="text"><div id="box">(숫자만입력가능)</div></td>
 					</tr>
 					<tr>
 						<th><label>모집인원</label></th>
-						<td><input type="text" name="c_peo_num"></td>
+						<td><input type="text" name="c_peo_num" value="${select_vo.c_peo_num }"></td>
 						<th><label>요일</label></th>
 						<td>
 						<input type="checkbox" name="monday" value="월">월
@@ -168,7 +168,8 @@ thead tr{
 						<td><input type="text"></td>
 						<th><label>회차</label></th>
 						<td>
-						<input type="text" name="c_round_num">
+						<input type="text" name="c_round_num" value="${select_vo.c_round_num }">
+						<input type="hidden" name="c_idx" value="${select_vo.c_idx }"/>
 						</td>
 					</tr>
 				</tbody>
@@ -181,7 +182,7 @@ thead tr{
 					</tr>
 					<tr>
 						<td colspan="2" align="right" id="course_add_btn">
-							<input type="button" value="수정" onclick="addCourse()">
+							<input type="button" value="수정" onclick="addCourse(this.form)">
 						</td>
 						<td colspan="2" align="left">
 							<input type="button" value="목록" onclick="javascript:location.href=">
@@ -196,9 +197,10 @@ thead tr{
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-function addCourse() {
+function addCourse(frm) {
     // 양식(form)을 서버로 제출
-    document.forms[0].submit();
+    frm.action = "Controller?type=editCourse";
+    frm.submit();
 }
 </script>
 </body>

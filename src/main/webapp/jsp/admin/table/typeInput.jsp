@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +12,9 @@
 	#hd{
 		background-color: #2e2e2e;
 		color: #fff;
-		width: 600px;
-		height: 30px;
+		width: 100%;
 		margin: 0px auto;
 		margin-bottom: 10px;
-		font-size: 20px;
 	}
 	#t1{
 		border-collapse: collapse;
@@ -60,10 +59,11 @@
 </style>
 </head>
 <body>
-	<header id="hd">과정타입 등록/수정</header>
+	<header id="hd"><h2>과정타입 등록/수정</h2></header>
 	<div id="wrap">
 		<article>
-			<form action="Controller?type=addCourseType" method="post">
+			<form action="Controller" method="post" name="fm">
+			<input type="hidden" name="type"  value="addCourseType"/>
 			<table id="t1">
 				<colgroup>
 					<col width="80px"/>
@@ -72,71 +72,86 @@
 					<col width="*/2"/>
 				</colgroup>
 				<tbody>
+				<c:if test="${c_ar ne null}">
+					<c:forEach var="tvo" items="${c_ar }">
 					<tr>
+
 						<td class="num">1</td>
 						<td>
-							<input type="text" id="type1"  value="${ar[0].ct_name }"/>
+							<input type="text" id="type1"  value=""/>
 						</td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text1"  value="${ar[0].ct_color }"/>
-							<input type="color" id="color1"  value="${ar[0].ct_color }"/>
+							<input type="text" name ="text1"  value=""/>
+							<input type="color" id="color1"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">2</td>
-						<td><input type="text" id="type2"  value="${ar[1].ct_name }"/></td>
+						<td><input type="text" id="type2"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text2"  value="${ar[1].ct_color }"/>
-							<input type="color" id="color2"  value="${ar[1].ct_color }"/>
+							<input type="text" name ="text2"  value="$"/>
+							<input type="color" id="color2"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">3</td>
-						<td><input type="text" id="type3"  value="${ar[2].ct_name }"/></td>
+						<td><input type="text" id="type3"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text3"  value="${ar[2].ct_color }"/>
-							<input type="color" id="color3"  value="${ar[2].ct_color }"/>
+							<input type="text" name ="text3"  value=""/>
+							<input type="color" id="color3"  value=""/>
+
 						</td>
 					</tr>
+					</c:forEach>
+				<c:forEach var="i" begin="${f:length(c_ar)+1}" end="7">
 					<tr>
 						<td class="num">4</td>
-						<td><input type="text" id="type4"  value="${ar[3].ct_name }"/></td>
+						<td><input type="text" id="type4"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text4"  value="${ar[3].ct_color }"/>
-							<input type="color" id="color4"  value="${ar[3].ct_color }"/>
+							<input type="text" name ="text4"  value=""/>
+							<input type="color" id="color4"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">5</td>
-						<td><input type="text" id="type5"  value="${ar[4].ct_name }"/></td>
+						<td><input type="text" id="type5"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text5"  value="${ar[4].ct_color }"/>
-							<input type="color" id="color5"  value="${ar[4].ct_color }"/>
+							<input type="text" name ="text5"  value=""/>
+							<input type="color" id="color5"  value=""/>
 						</td>
+				
 					</tr>
+				</c:forEach>
+				</c:if>
+				<c:if test="${c_ar eq null }">
+				<c:forEach var="i" begin="1" end="7">
 					<tr>
+
 						<td class="num">6</td>
-						<td><input type="text" id="type6"  value="${ar[5].ct_name }"/></td>
+						<td><input type="text" id="type6"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text6"  value="${ar[5].ct_color }"/>
-							<input type="color" id="color6"  value="${ar[5].ct_color }"/>
+							<input type="text" name ="text6"  value=""/>
+							<input type="color" id="color6"  value=""/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">7</td>
-						<td><input type="text" id="type7"  value="${ar[6].ct_name }"/></td>
+						<td><input type="text" id="type7"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text7"  value="${ar[6].ct_color }"/>
-							<input type="color" id="color7"  value="${ar[6].ct_color }"/>
+							<input type="text" name ="text7"  value=""/>
+							<input type="color" id="color7"  value=""/>
 						</td>
+				
 					</tr>
+				</c:forEach>
+				</c:if>
 				</tbody>
 			</table>
 			</form>
@@ -144,20 +159,20 @@
 	</div>
 	<div id="btn">
 		<form>
-			<input type="button" value="저장" id="save" onclick="save()"/>
+			<input type="button" value="저장" id="save" />
 			<input type="button" value="취소" id="cancel" onclick="cancel()"/>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	
 	<script>
-		function save() {
-			document.forms[0].submit();
-		}
-		
-		function cancel() {
-			
-		}
+		$(function(){
+			$("#save").click(function(){
+
+				document.fm.submit();
+			});
+		});
+
 	</script>
 </body>
 </html>
