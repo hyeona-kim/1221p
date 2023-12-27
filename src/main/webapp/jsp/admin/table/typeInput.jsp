@@ -126,7 +126,7 @@
    <div id="btn">
       <form>
          <input type="button" value="저장" id="save" />
-         <input type="button" value="취소" id="cancel" onclick="cancel()"/>
+         <input type="button" value="취소" id="cancel"/>
       </form>
    </div>
    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -138,6 +138,11 @@
             document.fm.submit();
          });
       });
+      $(function() {
+		$("#cancel").click(function() {
+			location.href="Controller?type=course&listSelect=1";
+		});
+	});
 
    </script>
 </body>

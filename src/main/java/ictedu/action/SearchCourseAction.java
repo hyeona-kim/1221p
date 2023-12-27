@@ -76,6 +76,7 @@ public class SearchCourseAction implements Action{
 		map.put("begin", String.valueOf(page.getBegin()));
 		map.put("end", String.valueOf(page.getEnd()));
 		
+
 		CourseVO[] ar = CourseDAO.SearchCourse(map);
 	
 		request.setAttribute("ar", ar);

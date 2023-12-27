@@ -13,6 +13,7 @@ public class AddStaffAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		// [기타관리 -> 교직원등록 -> 저장] 버튼을 눌렀을 때 수행하는 곳
 		// add_ajax에서 전달되는 파라미터 값들을 먼저 받아서 저장한다.
+		// 인증을 하는 경우 
 		String name = request.getParameter("sf_name");
 		String job = request.getParameter("sf_job");
 		String id = request.getParameter("sf_id");
