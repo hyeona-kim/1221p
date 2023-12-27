@@ -17,16 +17,15 @@ public class SearchCourseAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		// °Ë»öÀ» ÇØ¼­ °¡Á®¿Í¼­ page¿Í, ar À» °¡Á®¿Í¾ß ÇÑ´Ù.
-		//¸¸¾à¿¡ °Ë»öÃ¢¿¡ °ø¹éÀÌ ÀÔ·ÂµÆÀ»¶§¿¡´Â ar¿¡ nullÀ» ÀúÀåÇÏ°í ¿òÁ÷ ¿©¾ßÇÑ´Ù. ±×·³ courseAction¿¡¼­ arÀ» »õ·Ó°Ô ¹Þ¾Æ¼­ ÀüÃ¼¸¦ °¡Á®¿À´Â ar·Î ÁöÁ¤ÇØ¼­ ¹Þ±â ¶§¹®ÀÌ´Ù.
-		// page´Â page select¿¡ ÀÔ·ÁµÇ´Â value°ªÀ» °¡Á®¿À°í 
-		// selectYear¿¡¼­ÀÇ ¿¬µµ´Â °³°­ÀÏÀÇ ¿¬µµ¸¦ ¶æÇÑ´Ù .
+		// ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ pageï¿½ï¿½, ar ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ ï¿½Ñ´ï¿½.
+		//ï¿½ï¿½ï¿½à¿¡ ï¿½Ë»ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ arï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½×·ï¿½ courseActionï¿½ï¿½ï¿½ï¿½ arï¿½ï¿½ ï¿½ï¿½ï¿½Ó°ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ arï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
+		// pageï¿½ï¿½ page selectï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ç´ï¿½ valueï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+		// selectYearï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½ .
 		
-		System.out.println("°Ë»ö");
-		String numPerPage = request.getParameter("num");
-		String year = request.getParameter("year");
-		String select = request.getParameter("select");
-		String value = request.getParameter("value");
+		String numPerPage = request.getParameter("num"); // 5
+		String year = request.getParameter("year"); // 2024
+		String select = request.getParameter("select"); // 2
+		String value = request.getParameter("value"); // 1
 		
 		Paging page = null;
 
@@ -35,36 +34,12 @@ public class SearchCourseAction implements Action{
 		else 
 			page = new Paging(); 
 		
-		page.setNowPage(2);
-		page.setTotalRecord(1);
+		page.setNowPage(1);
+		System.out.println("begin= "+page.getBegin());
+		System.out.println("end= "+page.getEnd());
+		System.out.println("startPage= "+page.getStartPage());
+		System.out.println("endPage= "+page.getEndPage());
 		
-		
-		if(value == null || value.length()<1) {
-			value = null;
-		}
-		
-		if(select == null || select.length()<1) {
-			select = null;
-		}
-		
-		if(year == null || year.length()==0) {
-			year = null;
-		}
-		if(select != null)
-			System.out.println("¼±ÅÃÇÑ°Ë»öÅ¸ÀÔ"+select);
-		else {
-			System.out.println("select null");
-		}
-		if(year != null)
-			System.out.println(year);
-		else {
-			System.out.println("year null");
-		}
-		if(value != null)
-			System.out.println("º¯È¯µÇ±âÀü value°ª"+value);
-		else {
-			System.out.println("value null");
-		}
 		LmsBean bean = new LmsBean();
 		if(value != null && select.equals("1")) {
 			StaffVO vo = bean.searchStaff2(value);
@@ -77,8 +52,6 @@ public class SearchCourseAction implements Action{
 			value = vo.getR_idx();
 		}
 		
-		System.out.println("º¯È¯µÈ value°ª"+value);
-		System.out.println(String.valueOf(page.getBegin())+String.valueOf(page.getEnd()));
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("year", year);
 		map.put("select", select);
