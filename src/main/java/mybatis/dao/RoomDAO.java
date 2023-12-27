@@ -19,6 +19,5 @@ public class RoomDAO {
 			list.toArray(ar);
 		}
 		return ar;
-		
 	}
 }

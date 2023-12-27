@@ -1,0 +1,32 @@
+package ictedu.action;
+
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import mybatis.dao.SchoolDAO;
+
+public class AddReplyAction implements Action{
+
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		String subject = request.getParameter("sg_subject");
+		String notice = request.getParameter("sg_notice");
+		String content = request.getParameter("sg_content");
+		String file = request.getParameter("sg_file");
+		String writer = request.getParameter("writer");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("sg_subject", subject);
+		map.put("notice", notice);
+		map.put("sg_content", content);
+		map.put("sg_file", file);
+		map.put("sg_writer", writer);
+		
+		SchoolDAO.addReply(map);
+		
+		return "Controller?type=suggestionList";
+	}
+
+}

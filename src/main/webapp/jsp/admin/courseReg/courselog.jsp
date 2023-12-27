@@ -169,7 +169,7 @@
 										<button type="button">교과목 등록/수정</button>
 										<button type="button">학습안내서 등록/수정</button>
 										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
-										<button type="button" onclick="edit(${cvo.c_idx})">수정</button>
+										<button type="button" onclick="editC('${cvo.c_idx}')">수정</button>
 										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
 									</td>
 								</tr>
@@ -220,8 +220,8 @@
 		</article>
 		
 		<form name="frm" action="Controller" method="post">
-			<input type="hidden" name="type" /> 
-			<input type="hidden" name="b_idx" value="${cvo.c_idx }" />
+			<input type="hidden" name="type"  value=""/> 
+			<input type="hidden" name="c_idx" value="" />
 		</form>
 		
 		
@@ -233,7 +233,7 @@
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
 			<div>
-				<jsp:include page="../table/typeInput.jsp"></jsp:include>
+				
 			</div>
 		</div>
 		
@@ -282,6 +282,14 @@
 				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
 			});	
 		
+			<%
+			Object obj = request.getAttribute("select_vo");
+			if(obj != null){
+				%>
+			$("#dialog4").dialog("open");
+				<%
+			}
+		%>
 		});
 		
 		function set() {
@@ -297,10 +305,13 @@
 		function set3() {
             $("#dialog3").dialog("open");
         }
-		function edit() {
-			$("#dialog4").dialog("open");
-			document.frm.type.value = "editCourse"; 
+		function editC(c_idx) {
+			document.frm.type.value ="viewCourse"; 
+			document.frm.c_idx.value =c_idx; 
+			document.frm.submit();
         }
+		
+		
 		
 		$( "#dialog" ).dialog({
             autoOpen: false,
