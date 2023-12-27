@@ -20,13 +20,13 @@ public class EditCourseAction implements Action {
 		String viewPath = null;
 
         try {
-            // c_idx 파라미터 받아오기
+            // c_idx �뙆�씪誘명꽣 諛쏆븘�삤湲�
             String c_idx = request.getParameter("c_idx");
 
-            // c_idx를 기반으로 CourseVO 객체 가져오기
+            // c_idx瑜� 湲곕컲�쑝濡� CourseVO 媛앹껜 媛��졇�삤湲�
             CourseVO vo = CourseDAO.getCourse(c_idx);
 
-            // 폼으로부터 다른 파라미터들 가져오기
+            // �뤌�쑝濡쒕��꽣 �떎瑜� �뙆�씪誘명꽣�뱾 媛��졇�삤湲�
             String c_name = request.getParameter("c_name");
             String start_date = request.getParameter("start_date");
             String end_date = request.getParameter("end_date");
@@ -35,13 +35,12 @@ public class EditCourseAction implements Action {
             String c_round_num = request.getParameter("c_round_num");
             
 
-            // CourseDAO의 edit 메소드 호출
             CourseDAO.edit(c_name, start_date, end_date, course_fee, c_peo_num, c_round_num);
 
-            // 수정된 게시물을 보여주기 위한 경로 설정
+      
             viewPath = "Controller?type=view&c_idx=" + c_idx;
         } catch (Exception e) {
-            // 예외 처리
+            // �삁�쇅 泥섎━
             e.printStackTrace();
         }
 
