@@ -73,6 +73,11 @@ table tfoot ol.page {
 		text-indent: -9999px;
 		height: 0;
 	}
+	#b1{
+		 float: right;
+		 padding-top: 10px;
+		 margin-bottom: 10px;
+	}
 </style>
 
 </head>
@@ -84,56 +89,17 @@ table tfoot ol.page {
 			<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
 				<div id="staffWrap">
-					<div id="staffList_top">훈련생 현황</div>
-					<table id="searchTime">
-						<caption>과정검색</caption>
-							<thead>
-								<tr>
-									<th>검색</th>
-									<td>
-										<select>
-											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
-											<option>표시개수</option>
-											<option>5</option>
-											<option>10</option>
-											<option>15</option>
-										</select>
-										<select>
-											<option>년도선택</option>
-											<c:forEach begin="2000" end="2024" var="year">
-				     							  <option value="${year}">${year}</option>
-				    						</c:forEach>
-										</select>
-									</td>
-									<td>
-										<select>
-												<option>번호</option>
-												<option>과정명</option>
-												<option>담당교수</option>
-												<option>개강일</option>
-												<option>종료일</option>
-												<option>요일</option>
-												<option>회차</option>
-												<option>모집인원</option>
-										</select>
-										<input type="text"/>
-										<button type="button">검 색</button>
-									</td>
-								</tr>
-							</thead>
-						</table>
+					<div id="staffList_top">훈련생확인서류등록</div>
+					<div id="b1">
+						<input type="button" value="확인서류등록" onclick="javascript:location.href='Controller?type=uploadwrite'"/>
+					</div>
 				<table id="makeTime">
-				<caption>훈련현황 리스트</caption>
+				<caption>훈련생확인서류등록 리스트</caption>
 					<thead>
 						<tr>
-							<th>번호</th>
-							<th>과정명</th>
-							<th>담당교수</th>
-							<th>개강일</th>
-							<th>종료일</th>
-							<th>요일</th>
-							<th>회차</th>
-							<th>모집인원</th>
+							<th>순번</th>
+							<th>서류명</th>
+							<th>첨부파일</th>
 							<th>관리</th>
 						</tr>
 					</thead>
@@ -170,21 +136,16 @@ table tfoot ol.page {
 					</tfoot>
 					<tbody>
 		
-						<c:forEach var="vo2" items="${requestScope.ar }" varStatus="vs">
+						<c:forEach var="vo3" items="${requestScope.ar }" varStatus="vs">
 				<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 					<tr>
-						<td>${vs.index+1}</td>
-						<td>${vo2.c_name}</td>
-						<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
-						<td>${vo2.t_idx}</td>
-						<td>${vo2.start_date }</td>
-						<td>${vo2.end_date }</td>
-						<td>${vo2.ti_idx}</td>
-						<td>${vo2.c_round_num }</td>
-						<td>${vo2.c_peo_num}</td>
+						<td>${num+(vs.index)+1 }</td>
+						<td><!-- 테스트서류명 --></td>
+						<td><!-- 첨부파일 --></td>
 						<td>
-						<input type="button" value="과정별 훈련생 현황">
-						<input type="button" value="면접평가 결과표">
+						<input type="button" value="수정">
+						<input type="button" value="삭제">
+						<input type="button" value="확인서류보기">
 						</td>
 					</tr>
 				</c:forEach>
@@ -199,7 +160,7 @@ table tfoot ol.page {
 		$(function() {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
-			$("#thirdmenu").addClass("selected");
+			$("#secondmenu").addClass("selected");
 		});
 	</script>
 </body>
