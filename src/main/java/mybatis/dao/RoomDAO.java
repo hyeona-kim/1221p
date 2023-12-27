@@ -29,7 +29,7 @@ public class RoomDAO {
 		ss.close();
 		
 		return ar;
-
+	}
 	public static void addRoom(RoomVO vo) {
 		SqlSession ss = FactoryService.getFactory().openSession();
 		
