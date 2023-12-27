@@ -1,10 +1,6 @@
-<%@page import="mybatis.vo.CourseVO"%>
-<%@page import="java.util.List"%>
-<%@page import="mybatis.service.FactoryService"%>
-<%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,40 +93,41 @@
 					<div id="staffWrap">
 						<div id="courseList_top">교육과정리스트</div>
 						<div id="ttop">
-							<button type="button" onclick="set()">과정등록</button>	
-							<button type="button" onclick="set2()">과정타입수정</button>	
-							<button type="button" onclick="set3()">강의실관리</button>	
+							<button type="button" onclick="set()">과정수정</button>
+							<button type="button" onclick="set2()">과정타입수정</button>
+							<button type="button" onclick="set3()">강의실관리</button>
 						</div>
+						
 						<form>
-						<table id="searchCourse">
-						<caption>과정검색</caption>
-							<thead>
-								<tr>
-									<th>검색</th>
-									<td>
-										<select id="numPerPage">
-											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
-											<option>표시개수</option>
-											<option>5</option>
-											<option>10</option>
-											<option>15</option>
-										</select>
-										<select id="selectYear">
-
-										</select>
-									</td>
-									<td>
-										<select id="searchType">
-											<option value="1">훈련강사</option>
-											<option value="2">과정타입</option>
-											<option value="3">강의실</option>
-										</select>
-										<input type="text" id="searchValue"/>
-										<button type="button" id="search_bt">검 색</button>
-									</td>
-								</tr>
-							</thead>
-						</table>
+							<table id="searchCourse">
+							<caption>과정검색</caption>
+								<thead>
+									<tr>
+										<th>검색</th>
+										<td>
+											<select id="numPerPage">
+												<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
+												<option>표시개수</option>
+												<option>5</option>
+												<option>10</option>
+												<option>15</option>
+											</select>
+											<select id="selectYear">
+	
+											</select>
+										</td>
+										<td>
+											<select id="searchType">
+												<option value="1">훈련강사</option>
+												<option value="2">과정타입</option>
+												<option value="3">강의실</option>
+											</select>
+											<input type="text" id="searchValue"/>
+											<button type="button" id="search_bt">검 색</button>
+										</td>
+									</tr>
+								</thead>
+							</table>
 						</form>
 						<table id="makeCourse">
 							<thead>
@@ -150,10 +147,11 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="cvo" items="${ar }" >
-							<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
+							<c:if test="${ar ne null }">
+							<c:forEach var="cvo" items="${ar }" varStatus="vs">
+							<c:set var="num" value="${page.totalRecord-((page.nowPage-1)*page.numPerPage)}"/>
 								<tr>
-									<td>${num+(vs.index)-2 }</td>
+									<td>${num+(vs.index)-3}</td>
 									<td>${cvo.c_name }</td>
 									<td>W1805300001</td>
 									<td>${cvo.ct_idx} </td>
@@ -173,34 +171,40 @@
 									</td>
 								</tr>
 							</c:forEach>
+							</c:if>
+							<c:if test="${ar eq null }">
+								<tr>
+									<td colspan="12">검색 결과가 없습니다</td>
+								</tr>
+							</c:if>
 							</tbody>
 							<tfoot>
 						<tr>
 							<td colspan="12">
 								<ol class="page">
 			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-		<li class="disable">&lt;</li>
-	</c:if>	
+				<li class="disable">&lt;</li>
+			</c:if>	
 	
-	<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-	<li><a href="Controller?type=list&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
-	</c:if>
+			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
+				<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
+			</c:if>
 
-	<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-		<c:if test="${vs.index eq page.nowPage }">
-			<li class="now">${vs.index }</li>
-		</c:if>
-		<c:if test="${vs.index ne page.nowPage }">
-			<li><a href="Controller?type=list&cPage=${vs.index}">${vs.index}</a></li>
-		</c:if>
-	</c:forEach>
+			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
+				<c:if test="${vs.index eq page.nowPage }">
+					<li class="now">${vs.index }</li>
+				</c:if>
+				<c:if test="${vs.index ne page.nowPage }">
+					<li><a href="Controller?type=course&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
+				</c:if>
+			</c:forEach>
 	
-	<c:if test="${page.endPage < page.totalPage }">
-		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
-	</c:if>
-	<c:if test="${page.endPage >= page.totalPage }">
-		<li class="disable">&gt;</li>	
-	</c:if>
+			<c:if test="${page.endPage < page.totalPage }">
+				<li><a href="Controller?type=course&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
+			</c:if>
+			<c:if test="${page.endPage >= page.totalPage }">
+				<li class="disable">&gt;</li>	
+			</c:if>
                               </ol>
                           </td>
 						</tr>
@@ -219,7 +223,6 @@
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
 			<div>
-				<jsp:include page="../table/typeInput.jsp"></jsp:include>
 			</div>
 		</div>
 		
@@ -238,6 +241,9 @@
 	 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
 		$(function() {
+			let select ="";
+			let select_year = "";
+			let numPerPage = "";
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
@@ -261,24 +267,24 @@
 			});
 			$("#search_bt").click(function(){
 				let value = $("#searchValue").val();
-				//console.log(select+","+value);s
 				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
 			});	
 		
 		});
-		function set() {
+		
+		function set(){
             $("#dialog").dialog("open",{
             	width:500,
             	height:600
             });
         }
-		function set2() {
+		function set2(){
             $("#dialog2").dialog("open");
         }
-		function set3() {
+		function set3(){
             $("#dialog3").dialog("open");
         }
-		function set4() {
+		function set4(){
             $("#dialog4").dialog("open");
         }
 		$( "#dialog" ).dialog({
@@ -326,7 +332,6 @@
 	
 		function del(frm){
 			frm.action = "Controller?type=delCourse";
-			
 			frm.submit();
 		}
 		

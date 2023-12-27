@@ -18,6 +18,7 @@ public class CourseAction  implements Action{
 		Object obj3 = request.getAttribute("c_ar");
 		Paging page = null;
 		String listSelect = request.getParameter("listSelect");
+
 		if(obj == null)
 			page =new Paging();
 		else
@@ -40,7 +41,7 @@ public class CourseAction  implements Action{
 			ar = (CourseVO[])obj2;
 		
 		request.setAttribute("page", page);
-		request.setAttribute("ar", ar);
+		request.setAttribute("ar",ar);
 		
 		CourseTypeVO[] c_ar = null;
 		if(obj3 == null)
