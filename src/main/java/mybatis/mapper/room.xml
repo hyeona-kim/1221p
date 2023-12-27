@@ -20,7 +20,4 @@
            SET r_name = #{r_name}, r_sep = #{r_sep}, r_status = #{r_status}
            WHERE r_idx = #{r_idx}    
     </update>
-	<select id="all" resultType="mybatis.vo.RoomVO">
-		select * from room_t
-	</select>
 </mapper>
