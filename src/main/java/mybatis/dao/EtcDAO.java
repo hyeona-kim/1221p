@@ -35,4 +35,15 @@ public class EtcDAO {
 		ss.close();
 	}
 	
+	public static void delStaff(String idx) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.update("staff.del", idx);
+		if (cnt > 0) {
+			ss.commit();
+		}else {
+			ss.rollback();
+		}
+		ss.close();
+	}
+	
 }
