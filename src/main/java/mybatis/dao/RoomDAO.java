@@ -20,4 +20,21 @@ public class RoomDAO {
 		}
 		return ar;
 	}
+	
+	public static void addRoom(RoomVO vo) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		
+		int key = ss.selectOne("room.key", vo.getR_idx());
+		
+		if(key == 0)
+			key = ss.insert("room.add", vo);
+		else
+			key = ss.update("room.update", vo);
+		if(key > 0) {
+			ss.commit();
+		}else {
+			ss.rollback();
+		}
+		ss.close();
+	}
 }
