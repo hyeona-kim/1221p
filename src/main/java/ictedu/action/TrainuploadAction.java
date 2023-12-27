@@ -5,14 +5,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import ictedu.util.Paging;
 import mybatis.dao.TraineecurrentDAO;
+import mybatis.dao.TrainuploadDAO;
 import mybatis.vo.CourseVO;
+import mybatis.vo.TrainuploadVO;
 
 public class TrainuploadAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		Paging page = new Paging();
 		
-		page.setTotalPage(TraineecurrentDAO.getCount());
+		page.setTotalRecord(TraineecurrentDAO.getCount());
 		
 		String cPage = request.getParameter("cPage");
 		
@@ -24,7 +26,8 @@ public class TrainuploadAction implements Action{
 			
 		}
 		
-		CourseVO[] ar = TraineecurrentDAO.getlist(page.getBegin(), page.getEnd());
+		TrainuploadVO[] ar = TrainuploadDAO.getlist(page.getBegin(), page.getEnd());
+		
 		
 		request.setAttribute("page", page);
 		request.setAttribute("ar", ar);

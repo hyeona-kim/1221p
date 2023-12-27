@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import mybatis.dao.TrainuploadDAO;
+
 public class UploadwriteAction implements Action {
 
 	@Override
@@ -22,6 +24,7 @@ public class UploadwriteAction implements Action {
 		if(enc_type == null)
 			viewPath = "jsp/admin/schoolRecord/uploadwrite.jsp";
 		else if(enc_type.startsWith("multipart")) {
+			viewPath = "Controller?type=trainupload";
 			try {
 				ServletContext application = request.getServletContext();
 				
@@ -32,7 +35,8 @@ public class UploadwriteAction implements Action {
 				
 				String title = mr.getParameter("title");
 				String content = mr.getParameter("content");
-				
+				System.out.println(content);
+				String tn_name = mr.getParameter("tn_name");
 				
 				File f = mr.getFile("file");
 				String fname = null;
@@ -42,12 +46,13 @@ public class UploadwriteAction implements Action {
 					fname = f.getName();
 					oname = mr.getOriginalFileName("file");
 					
-					
 				}
 				
 				
+				int cnt = TrainuploadDAO.add(title,content,fname,oname,tn_name);
+				System.out.println(cnt);
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 			
 			
