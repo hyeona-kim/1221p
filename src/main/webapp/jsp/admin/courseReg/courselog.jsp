@@ -1,6 +1,10 @@
+<%@page import="mybatis.vo.CourseVO"%>
+<%@page import="java.util.List"%>
+<%@page import="mybatis.service.FactoryService"%>
+<%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,11 +97,10 @@
 					<div id="staffWrap">
 						<div id="courseList_top">교육과정리스트</div>
 						<div id="ttop">
-							<button type="button" onclick="set()">과정수정</button>
-							<button type="button" onclick="set2()">과정타입수정</button>
-							<button type="button" onclick="set3()">강의실관리</button>
+							<button type="button" onclick="set()">과정등록</button>	
+							<button type="button" onclick="set2()">과정타입수정</button>	
+							<button type="button" onclick="set3()">강의실관리</button>	
 						</div>
-						
 						<form>
 							<table id="searchCourse">
 							<caption>과정검색</caption>
@@ -165,8 +168,8 @@
 									<td>
 										<button type="button">교과목 등록/수정</button>
 										<button type="button">학습안내서 등록/수정</button>
-										<button type="button" onclick="set4()">수정</button>
 										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
+										<button type="button" onclick="editC('${cvo.c_idx}')">수정</button>
 										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
 									</td>
 								</tr>
@@ -215,6 +218,13 @@
 				</div>
 			</div>
 		</article>
+		
+		<form name="frm" action="Controller" method="post">
+			<input type="hidden" name="type"  value=""/> 
+			<input type="hidden" name="c_idx" value="" />
+		</form>
+		
+		
 		<div id="dialog" hidden="" title="교육과정등록">
 			<div>
 				<jsp:include page="../../basics.jsp"></jsp:include>
@@ -235,6 +245,7 @@
 		
 		<div id="dialog4" hidden="" title="과정수정">
 			<div>
+				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
 			</div>
 		</div>
 		
@@ -271,23 +282,37 @@
 				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
 			});	
 		
+			<%
+			Object obj = request.getAttribute("select_vo");
+			if(obj != null){
+				%>
+			$("#dialog4").dialog("open");
+				<%
+			}
+		%>
 		});
 		
-		function set(){
+		function set() {
+		
             $("#dialog").dialog("open",{
             	width:500,
             	height:600
             });
         }
-		function set2(){
+		function set2() {
             $("#dialog2").dialog("open");
         }
-		function set3(){
+		function set3() {
             $("#dialog3").dialog("open");
         }
-		function set4(){
-            $("#dialog4").dialog("open");
+		function editC(c_idx) {
+			document.frm.type.value ="viewCourse"; 
+			document.frm.c_idx.value =c_idx; 
+			document.frm.submit();
         }
+		
+		
+		
 		$( "#dialog" ).dialog({
             autoOpen: false,
             width:1200,
@@ -333,6 +358,7 @@
 	
 		function del(frm){
 			frm.action = "Controller?type=delCourse";
+			
 			frm.submit();
 		}
 		

@@ -50,17 +50,16 @@ public class CourseDAO {
 		return cnt;
 	}
 	
-	public static CourseVO[] searchCourse(HashMap<String, String> map) {
+	public static CourseVO[] SearchCourse(HashMap<String, String> map) {
 		CourseVO[] ar = null;
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
-		List<CourseVO> list = ss.selectList("course.search", map);
-		System.out.println(list.size());
-
+		List<CourseVO> list = ss.selectList("course.search",map);
 		if (list!= null && !list.isEmpty()) {
 			ar = new CourseVO[list.size()];
 			list.toArray(ar);
 		}
+		
 		ss.close();
 		return ar;
 	}
@@ -75,7 +74,7 @@ public class CourseDAO {
 		return cnt;
 	}
 	
-	public static Integer getSearchCount(HashMap<String, String> map) {	
+	public static int getSearchCount(HashMap<String, String> map) {	
 		SqlSession ss = FactoryService.getFactory().openSession();
 		int cnt = ss.selectOne("course.search_count",map);
 		ss.close();
@@ -85,18 +84,20 @@ public class CourseDAO {
 	
 	 public static CourseVO getCourse(String c_idx) {
 	        SqlSession ss = FactoryService.getFactory().openSession();
-	        CourseVO vo = null;
+	        CourseVO cvo = null;
 
 	        try {
-	            vo = ss.selectOne("course.getCourse", c_idx);
+	            cvo = ss.selectOne("course.getCourse", c_idx);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
 	            ss.close();
 	        }
 
-	        return vo;
+	        return cvo;
 	    }
+	 
+	
 	
 	public static int edit(String c_name,String start_date,
 			String end_date, String course_fee, 

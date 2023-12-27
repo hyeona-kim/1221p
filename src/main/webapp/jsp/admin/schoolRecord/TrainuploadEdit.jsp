@@ -100,9 +100,9 @@ table tfoot ol.page {
 	
 	
 	
-
-	
 </style>
+
+<c:if test="${request.vo3 ne null }">
 
 </head>
 <body>
@@ -113,13 +113,13 @@ table tfoot ol.page {
 			<div class="right">
 				<div id="staffWrap">
 					<div id="staffList_top">확인서류등록</div>
-				<form action="Controller?type=uploadwrite" method="post" encType="multipart/form-data">
+				<form action="Controller?type=TrainuploadEditAction" method="post" encType="multipart/form-data">
 				<table id="makeTime" >
 				<caption>확인서류등록 리스트</caption>
 					<tbody>
 						<tr>
 							<th>확인서류명</th>
-							<td><input type="text" name="title" size="45" data-str="서류명"/></td>
+							<td><input type="text" name="title" value="${vo3.subject }" data-str="서류명"/></td>
 						</tr>
 						<tr>
 							<th>과정별 자동입력</th>
@@ -141,11 +141,15 @@ table tfoot ol.page {
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id="content" name="content" cols="100" rows="8"></textarea></td>
+							<td><textarea id="content" name="content" ${vo3.content } cols="100" rows="8"></textarea></td>
 						</tr>
 						<tr>
 							<th>첨부파일:</th>
-							<td><input type="file" name="file" data-str="파일"/></td>
+							<td><input type="file" name="file" data-str="파일"/>
+								<c:if test=${vo3.file_name ne null }">
+								(${vo3.file_name })파일이 첨부된 상태
+								</c:if>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -157,6 +161,7 @@ table tfoot ol.page {
 						
 					</tbody>
 			</table>
+			<input type="hidden" name="tn_idx" value=""/>
 			</form>
 			</div>
 		</div>
@@ -202,3 +207,8 @@ table tfoot ol.page {
 	</script>
 </body>
 </html>
+</c:if>
+
+<c:if test="${reqestScope.vo3 eq null ">
+<c:redirect url="Controller?type=trainupload"/>
+</c:if>

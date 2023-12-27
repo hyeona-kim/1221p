@@ -24,6 +24,9 @@ public class TrainuploadDAO {
 		SqlSession ss = FactoryService.getFactory().openSession();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("begin", String.valueOf(begin));
+		map.put("end", String.valueOf(end));
+		
 		
 		List<TrainuploadVO> list = ss.selectList("upload.list",map);
 		

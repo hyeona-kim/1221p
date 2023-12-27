@@ -139,11 +139,13 @@ table tfoot ol.page {
 						<c:forEach var="vo3" items="${requestScope.ar }" varStatus="vs">
 				<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 					<tr>
-						<td>${num+(vs.index)+1 }</td>
-						<td><!-- 테스트서류명 --></td>
-						<td><!-- 첨부파일 --></td>
+						<td>${num+(vs.index)-2 }</td>
+						<td><%-- <a href="Contoller?type=view&tn_idx=${vo3.tn_idx }&cPage=${page.nowPage }">
+							${vo3.subject } --%> ${vo3.subject }</a></td>
+						<td>${vo3.file_name }</td>
 						<td>
-						<input type="button" value="수정">
+						<input type="button" value="수정"
+							onclick="edit('${vo3.tn_idx}')"/>
 						<input type="button" value="삭제">
 						<input type="button" value="확인서류보기">
 						</td>
@@ -154,6 +156,15 @@ table tfoot ol.page {
 			</div>
 		</div>
 	</div>
+	<form action="Controller" method="post" name="frm">
+		<input type="hidden" name="type" value=""/>
+		<input type="hidden" name="tn_idx" value=""/>
+		
+		<input type="hidden" name="cPage" value="${param.cPage }"/>
+		<input type="hidden" name="tn_idx" value="${vo3.tn_idx }"/>
+		
+	</form>
+	
 </article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script>
@@ -162,6 +173,21 @@ table tfoot ol.page {
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
 		});
+		
+		
+		
+		
+		function edit(tn_idx){
+			console.log(tn_idx);
+			document.frm.type.value="trainuploadedit";
+			document.frm.tn_idx.value=tn_idx;
+			console.log(document.frm.type.value);
+			//document.frm.submit();
+	
+		}
+		
+	
+		
 	</script>
 </body>
 </c:if>

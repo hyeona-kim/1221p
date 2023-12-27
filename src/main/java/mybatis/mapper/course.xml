@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="course">  
 	<select id="search" parameterType="Map" resultType="mybatis.vo.CourseVO">
 		select * 
@@ -28,6 +29,10 @@
 			values(#{c_name}, #{start_date}, #{end_date}, #{course_fee}, #{c_peo_num}, #{c_round_num})
 	</insert>
 
+  <select id="getCourse" parameterType="String" resultType="mybatis.vo.CourseVO">
+    SELECT * FROM course_t WHERE c_idx = #{c_idx}
+  </select>
+  
 	<!--  과정삭제 status값을 1로 변경 -->
 	<update id="del" parameterType="String">
 			update course_t
@@ -36,7 +41,7 @@
 	</update>
 	
 	<update id="edit" parameterType="map">
-		update bbs_t
+		update course_t
 		<trim prefix="SET" suffixOverrides=","> 
         c_name = #{c_name},
         start_date = #{start_date},
@@ -46,18 +51,13 @@
         c_round_num = #{c_round_num}
  		 </trim>
 			where c_idx = #{c_idx}
-  </update>
-  
-  <select id="getCourse" parameterType="String" resultType="mybatis.vo.CourseVO">
-    SELECT * FROM course_t WHERE c_idx = #{c_idx}
-  </select>
-  
-	
+  	</update>
+
 	<select id="count" resultType="int" >
 		select count(*) from course_t 
 	</select>
 	
-	<select id="search_count" parameterType="Map" resultType="mybatis.vo.CourseVO">
+	<select id="search_count" parameterType="Map" resultType="int">
 		select count(*)
 		from 
 		(select @RN:=@RN+1 as rnum, a.* 

@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/ictedu/action/CourseAddAction.java=UTF-8
+encoding//src/main/java/ictedu/action/EditCourseAction.java=UTF-8
+encoding//src/main/java/ictedu/action/SearchCourseAction.java=UTF-8
 encoding//src/main/java/ictedu/action/StaffListAction.java=UTF-8
 encoding//src/main/java/mybatis/dao/EtcDAO.java=UTF-8

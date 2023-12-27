@@ -17,14 +17,14 @@ public class SearchCourseAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		// °Ë»öÀ» ÇØ¼­ °¡Á®¿Í¼­ page¿Í, ar À» °¡Á®¿Í¾ß ÇÑ´Ù.
-		//¸¸¾à¿¡ °Ë»öÃ¢¿¡ °ø¹éÀÌ ÀÔ·ÂµÆÀ»¶§¿¡´Â ar¿¡ nullÀ» ÀúÀåÇÏ°í ¿òÁ÷ ¿©¾ßÇÑ´Ù. ±×·³ courseAction¿¡¼­ arÀ» »õ·Ó°Ô ¹Þ¾Æ¼­ ÀüÃ¼¸¦ °¡Á®¿À´Â ar·Î ÁöÁ¤ÇØ¼­ ¹Þ±â ¶§¹®ÀÌ´Ù.
-		// page´Â page select¿¡ ÀÔ·ÁµÇ´Â value°ªÀ» °¡Á®¿À°í 
-		// selectYear¿¡¼­ÀÇ ¿¬µµ´Â °³°­ÀÏÀÇ ¿¬µµ¸¦ ¶æÇÑ´Ù.
+
+		// å¯ƒï¿½ï¿½ê¹‹ï¿½ì“£ ï¿½ë¹ï¿½ê½Œ åª›ï¿½ï¿½ì¡‡ï¿½ï¿½ï¿½ê½Œ pageï¿½ï¿½, ar ï¿½ì“£ åª›ï¿½ï¿½ì¡‡ï¿½ï¿½ï¿½ë¹ž ï¿½ë¸³ï¿½ë–Ž.
+		//ï§ëš¯ë¹Ÿï¿½ë¿‰ å¯ƒï¿½ï¿½ê¹‹ï§¡ìŽŒë¿‰ æ€¨ë“¬ê°šï¿½ì”  ï¿½ì—¯ï¿½ì °ï¿½ë¦±ï¿½ì“£ï¿½ë¸£ï¿½ë¿‰ï¿½ë’— arï¿½ë¿‰ nullï¿½ì“£ ï¿½ï¿½ï¿½ì˜£ï¿½ë¸¯æ€¨ï¿½ ï¿½ï¿½ï§žï¿½ ï¿½ë¿¬ï¿½ë¹žï¿½ë¸³ï¿½ë–Ž. æ´¹ëªƒì† courseActionï¿½ë¿‰ï¿½ê½Œ arï¿½ì“£ ï¿½ê¹‰æ¿¡ï¿½å¯ƒï¿½ è«›ì†ë¸˜ï¿½ê½Œ ï¿½ìŸ¾ï§£ëŒ€ï¿½ï¿½ åª›ï¿½ï¿½ì¡‡ï¿½ì‚¤ï¿½ë’— aræ¿¡ï¿½ ï§žï¿½ï¿½ì ™ï¿½ë¹ï¿½ê½Œ è«›ì„ë¦° ï¿½ë¸£è‡¾ëª„ì” ï¿½ë–Ž.
+		// pageï¿½ë’— page selectï¿½ë¿‰ ï¿½ì—¯ï¿½ì ®ï¿½ë¦ºï¿½ë’— valueåª›ë¯ªì“£ åª›ï¿½ï¿½ì¡‡ï¿½ì‚¤æ€¨ï¿½ 
+		// selectYearï¿½ë¿‰ï¿½ê½Œï¿½ì“½ ï¿½ë¿°ï¿½ë£„ï¿½ë’— åª›ì’“ì»¯ï¿½ì”ªï¿½ì“½ ï¿½ë¿°ï¿½ë£„ç‘œï¿½ ï¿½ì‘œï¿½ë¸³ï¿½ë–Ž.
 		request.removeAttribute("ar");
 		request.removeAttribute("page");
-		
-		System.out.println("°Ë»ö");
+
 		String numPerPage = request.getParameter("num");
 		String year = request.getParameter("year");
 		String select = request.getParameter("select");
@@ -46,7 +46,7 @@ public class SearchCourseAction implements Action{
 		if(year == null || year.length()==0) {
 			year = null;
 		}
-		
+
 		LmsBean bean = new LmsBean();
 		
 		if(value != null && select.equals("1")) {
@@ -59,37 +59,32 @@ public class SearchCourseAction implements Action{
 			RoomVO vo = bean.searchRoom2(value);
 			value = vo.getR_idx();
 		}
-		
-		System.out.println("º¯È¯µÈ value°ª"+value);
-	
 
 		if(numPerPage!=null && numPerPage.length()>0 )
 			page = new Paging(Integer.parseInt(numPerPage),5);
 		else 
-			page = new Paging(); 
-		
-		if(cPage == null)
-	        page.setNowPage(1);
-	    else {
-	       int nowPage = Integer.parseInt(cPage);
-	       page.setNowPage(nowPage);
-	    }
-		
+			page = new Paging();
+
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("year", year);
 		map.put("select", select);
 		map.put("value", value);
+		page.setTotalRecord(CourseDAO.getSearchCount(map));
+
+		 
+		if(cPage == null) {
+	        page.setNowPage(1);
+		}else {
+	       int nowPage = Integer.parseInt(cPage);
+	       page.setNowPage(nowPage);
+	    }
 		
-		page.setTotalRecord(1);
-		System.out.println(page.getBegin());
-		map.put("begin", "0");
-		map.put("end", "5");
-		
+		map.put("begin", String.valueOf(page.getBegin()));
+		map.put("end", String.valueOf(page.getEnd()));
 		
 		System.out.println(select);
-		CourseVO[] ar = CourseDAO.searchCourse(map);
+		CourseVO[] ar = CourseDAO.SearchCourse(map);
 	
-		System.out.println(ar);
 		request.setAttribute("ar", ar);
 		request.setAttribute("page", page);
 		

@@ -1,6 +1,5 @@
 package mybatis.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import mybatis.service.FactoryService;
@@ -9,7 +8,9 @@ import mybatis.vo.CourseTypeVO;
 public class CourseTypeDAO {
 	public static void addType(CourseTypeVO vo){
 		SqlSession ss = FactoryService.getFactory().openSession();
+		
 		int key = ss.selectOne("courseType.key", vo.getCt_idx());
+		
 		if(key == 0)
 			key = ss.insert("courseType.add", vo);
 		else
