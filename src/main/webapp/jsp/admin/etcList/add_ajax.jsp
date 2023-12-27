@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
 <form action="Controller?type=addStaff" method="post">
 	<table>
 		<colgroup>
@@ -24,9 +25,9 @@
 			</tr>
 			<tr>
 				<th>입사일</th>
-				<td class="left"><input class="input" type="text" placeholder="2023-01-01" name="sf_hire_date"/></td>
+				<td class="left"><input class="input" type="date" placeholder="2023-01-01" name="sf_hire_date"/></td>
 				<th>퇴사일</th>
-				<td class="left"><input class="input" type="text" disabled="disabled" name="sf_fire_date"/></td>
+				<td class="left"><input class="input" type="date" disabled="disabled" name="sf_fire_date"/></td>
 			</tr>
 			<tr>
 				<th>연락처</th>
@@ -36,7 +37,7 @@
 					<input class="phone" type="text" placeholder="5678" name="sf_phone"/>
 				</td>
 				<th>사용권한</th>
-				<td align="left">
+				<td class="left">
 					<select name="rt_idx">
 						<option value="0">기본(교직원)</option>
 						<option value="1">임직원</option>
@@ -46,10 +47,11 @@
 			</tr>
 			<tr>
 				<th>인증선택</th>
-				<td colspan="3" align="left">
-					<select>
-						<option>사용안함</option>
-						<option>사용</option>
+				<td colspan="3" class="left">
+					<select id="certification" onchange="changeCertifi()">
+						<option value="none">사용안함</option>
+						<option value="image">도장이미지</option>
+						<option value="sign">전자서명</option>
 					</select>
 				</td>
 			</tr>
@@ -57,8 +59,51 @@
 		<tfoot>
 			<tr>
 				<td colspan="4">
+					<!-- <button type="button" onclick="addStaff()" class="staff_edit_btn staff_btn">저장</button>
+					<button type="button" onclose="" class="staff_del_btn staff_btn">취소</button> -->
 					<a href="javascript:addStaff()" class="staff_edit_btn staff_btn">저장</a>
 					<a href="" class="staff_del_btn staff_btn">취소</a>
+				</td>
+			</tr>
+			<%-- 도장이미지 표현 부분 --%>
+			<tr>
+				<td>
+					<div id="certi_image" hidden="hidden">
+						<table class="certi_table">
+							<caption>도장이미지 입력 테이블</caption>
+							<tbody>
+								<tr>
+									<td>*서명에 사용할 도장을 등록해주세요!</td>
+								</tr>
+								<tr>
+									<td><input type="file"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<%-- 전자서명 표현 부분 --%>
+			<tr>
+				<td>
+					<div id="certi_sign" hidden="hidden">
+						<table class="certi_table">
+							<caption>전자서명 입력 테이블</caption>
+							<tbody>
+								<tr>
+									<td>*전자서명을 사용하실 경우 서명을 등록해주세요!</td>
+								</tr>
+								<tr>
+									<td><button type="button" id="clear_btn" onclick="padClear()">다시</button></td>
+								</tr>
+								<tr>
+									<td>
+										<canvas id="signature" width="600" height="200"></canvas>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</td>
 			</tr>
 		</tfoot>

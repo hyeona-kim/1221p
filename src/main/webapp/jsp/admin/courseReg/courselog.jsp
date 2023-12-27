@@ -168,8 +168,8 @@
 									<td>
 										<button type="button">교과목 등록/수정</button>
 										<button type="button">학습안내서 등록/수정</button>
-										<button type="button" onclick="set4()">수정</button>
 										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
+										<button type="button" onclick="editC('${cvo.c_idx}')">수정</button>
 										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
 									</td>
 								</tr>
@@ -218,6 +218,13 @@
 				</div>
 			</div>
 		</article>
+		
+		<form name="frm" action="Controller" method="post">
+			<input type="hidden" name="type"  value=""/> 
+			<input type="hidden" name="c_idx" value="" />
+		</form>
+		
+		
 		<div id="dialog" hidden="" title="교육과정등록">
 			<div>
 				<jsp:include page="../../basics.jsp"></jsp:include>
@@ -225,7 +232,9 @@
 		</div>
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
-			
+			<div>
+				<jsp:include page="../table/typeInput.jsp"></jsp:include>
+			</div>
 		</div>
 		
 		<div id="dialog3" hidden="" title="강의실관리">
@@ -235,7 +244,9 @@
 		</div>
 		
 		<div id="dialog4" hidden="" title="과정수정">
-			
+			<div>
+				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
+			</div>
 		</div>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -271,8 +282,18 @@
 				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
 			});	
 		
+			<%
+			Object obj = request.getAttribute("select_vo");
+			if(obj != null){
+				%>
+			$("#dialog4").dialog("open");
+				<%
+			}
+		%>
 		});
+		
 		function set() {
+		
             $("#dialog").dialog("open",{
             	width:500,
             	height:600
@@ -284,9 +305,14 @@
 		function set3() {
             $("#dialog3").dialog("open");
         }
-		function set4() {
-            $("#dialog4").dialog("open");
+		function editC(c_idx) {
+			document.frm.type.value ="viewCourse"; 
+			document.frm.c_idx.value =c_idx; 
+			document.frm.submit();
         }
+		
+		
+		
 		$( "#dialog" ).dialog({
             autoOpen: false,
             width:1200,

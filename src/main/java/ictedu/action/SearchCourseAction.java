@@ -17,27 +17,38 @@ public class SearchCourseAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		// °Ë»öÀ» ÇØ¼­ °¡Á®¿Í¼­ page¿Í, ar À» °¡Á®¿Í¾ß ÇÑ´Ù.
-		//¸¸¾à¿¡ °Ë»öÃ¢¿¡ °ø¹éÀÌ ÀÔ·ÂµÆÀ»¶§¿¡´Â ar¿¡ nullÀ» ÀúÀåÇÏ°í ¿òÁ÷ ¿©¾ßÇÑ´Ù. ±×·³ courseAction¿¡¼­ arÀ» »õ·Ó°Ô ¹Ş¾Æ¼­ ÀüÃ¼¸¦ °¡Á®¿À´Â ar·Î ÁöÁ¤ÇØ¼­ ¹Ş±â ¶§¹®ÀÌ´Ù.
-		// page´Â page select¿¡ ÀÔ·ÁµÇ´Â value°ªÀ» °¡Á®¿À°í 
-		// selectYear¿¡¼­ÀÇ ¿¬µµ´Â °³°­ÀÏÀÇ ¿¬µµ¸¦ ¶æÇÑ´Ù .
-	
+
+		// ê²€ìƒ‰ì„ í•´ì„œ ê°€ì ¸ì™€ì„œ pageì™€, ar ì„ ê°€ì ¸ì™€ì•¼ í•œë‹¤.
+		//ë§Œì•½ì— ê²€ìƒ‰ì°½ì— ê³µë°±ì´ ì…ë ¥ëì„ë•Œì—ëŠ” arì— nullì„ ì €ì¥í•˜ê³  ì›€ì§ ì—¬ì•¼í•œë‹¤. ê·¸ëŸ¼ courseActionì—ì„œ arì„ ìƒˆë¡­ê²Œ ë°›ì•„ì„œ ì „ì²´ë¥¼ ê°€ì ¸ì˜¤ëŠ” arë¡œ ì§€ì •í•´ì„œ ë°›ê¸° ë•Œë¬¸ì´ë‹¤.
+		// pageëŠ” page selectì— ì…ë ¤ë˜ëŠ” valueê°’ì„ ê°€ì ¸ì˜¤ê³  
+		// selectYearì—ì„œì˜ ì—°ë„ëŠ” ê°œê°•ì¼ì˜ ì—°ë„ë¥¼ ëœ»í•œë‹¤.
+		request.removeAttribute("ar");
+		request.removeAttribute("page");
+
 		String numPerPage = request.getParameter("num");
 		String year = request.getParameter("year");
 		String select = request.getParameter("select");
 		String value = request.getParameter("value");
+		String listSelect = request.getParameter("listSelect");
+		String cPage = request.getParameter("cPage");
+		 
 		Paging page = null;
 		System.out.println(numPerPage);
-		if(numPerPage != null)
-			page = new Paging(Integer.parseInt(numPerPage),5);
-		else 
-			page = new Paging(); 
-		request.setAttribute("page", page);
 		
-		System.out.println(select);
-		//System.out.println(value);
-		System.out.println(year);
+		if(value == null || value.length()<1) {
+			value = null;
+		}
+		
+		if(select == null || select.length()<1) {
+			select = null;
+		}
+		
+		if(year == null || year.length()==0) {
+			year = null;
+		}
+
 		LmsBean bean = new LmsBean();
+		
 		if(value != null && select.equals("1")) {
 			StaffVO vo = bean.searchStaff2(value);
 			value = vo.getSf_idx();
@@ -48,20 +59,36 @@ public class SearchCourseAction implements Action{
 			RoomVO vo = bean.searchRoom2(value);
 			value = vo.getR_idx();
 		}
-		
-		System.out.println(value);
+
+		if(numPerPage!=null && numPerPage.length()>0 )
+			page = new Paging(Integer.parseInt(numPerPage),5);
+		else 
+			page = new Paging();
+
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("year", year);
 		map.put("select", select);
 		map.put("value", value);
+		page.setTotalRecord(CourseDAO.getSearchCount(map));
+
+		 
+		if(cPage == null) {
+	        page.setNowPage(1);
+		}else {
+	       int nowPage = Integer.parseInt(cPage);
+	       page.setNowPage(nowPage);
+	    }
+		
 		map.put("begin", String.valueOf(page.getBegin()));
 		map.put("end", String.valueOf(page.getEnd()));
 		
-		CourseVO[] ar = CourseDAO.SearchCourse(map);
+		System.out.println(select);
+		CourseVO[] ar = CourseDAO.searchCourse(map);
 	
 		request.setAttribute("ar", ar);
+		request.setAttribute("page", page);
 		
-		return "Controller?type=course";
+		return "Controller?type=course&listSelect="+listSelect;
 	}
 	
 }
