@@ -4,17 +4,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ictedu.util.Paging;
-import mybatis.dao.ServeDAO;
-import mybatis.vo.CourseVO;
+import mybatis.dao.SchoolDAO;
+import mybatis.dao.TrainingDAO;
+import mybatis.vo.SuggestionVO;
 
-public class ServeAction implements Action {
+public class SuggestionListAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-
+		
 		Paging page = new Paging();
 		
-		page.setTotalRecord(ServeDAO.getCount());
+		page.setTotalRecord(SchoolDAO.getTotalRecord());
 		
 		String cPage = request.getParameter("cPage");
 		
@@ -25,13 +26,12 @@ public class ServeAction implements Action {
 			page.setNowPage(nowPage);
 		}
 		
-		CourseVO[] ar = ServeDAO.getlist(page.getBegin(),page.getEnd());
+		SuggestionVO[] ar = SchoolDAO.getSuggList(page.getBegin(), page.getEnd());
 		
 		request.setAttribute("page", page);
 		request.setAttribute("ar", ar);
 		
-		
-		return "/jsp/admin/courseReg/serve.jsp";
+		return "/jsp/admin/schoolRecord/suggestionList.jsp";
 	}
 
 }

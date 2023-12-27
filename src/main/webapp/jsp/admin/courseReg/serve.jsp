@@ -85,38 +85,37 @@ table tfoot ol.page {
 			<div class="right">
 				<div id="staffWrap">
 					<div id="staffList_top">과정별 교수계획서 및 학습 안내서</div>
-					<table id="searchTime">
+					<form>
+						<table id="searchTime">
 						<caption>과정검색</caption>
 							<thead>
 								<tr>
 									<th>검색</th>
 									<td>
-										<select>
+										<select id="numPerPage">
 											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
 											<option>표시개수</option>
 											<option>5</option>
 											<option>10</option>
 											<option>15</option>
 										</select>
-										<select>
-											<option>년도선택</option>
-											<c:forEach begin="2000" end="2024" var="year">
-				     							  <option value="${year}">${year}</option>
-				    						</c:forEach>
+										<select id="selectYear">
+
 										</select>
 									</td>
 									<td>
-										<select>
-											<option>훈련강사</option>
-											<option>과정타입</option>
-											<option>강의실</option>
+										<select id="searchType">
+											<option value="1">훈련강사</option>
+											<option value="2">과정타입</option>
+											<option value="3">강의실</option>
 										</select>
-										<input type="text"/>
-										<button type="button">검 색</button>
+										<input type="text" id="searchValue"/>
+										<button type="button" id="search_bt">검 색</button>
 									</td>
 								</tr>
 							</thead>
 						</table>
+					</form>	
 				<table id="makeTime">
 				<caption>과정별 교수계획서 및 학습 안내서 리스트</caption>
 					<thead>
@@ -138,34 +137,32 @@ table tfoot ol.page {
 							<td colspan="10">
 								<ol class="page">
 			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-		<li class="disable">&lt;</li>
-	</c:if>	
+				<li class="disable">&lt;</li>
+			</c:if>	
 	
-	<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-	<li><a href="Controller?type=list&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
-	</c:if>
+			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
+				<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
+			</c:if>
 
-	<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-		<c:if test="${vs.index eq page.nowPage }">
-			<li class="now">${vs.index }</li>
-		</c:if>
-		<c:if test="${vs.index ne page.nowPage }">
-			<li><a href="Controller?type=list&cPage=${vs.index}">${vs.index}</a></li>
-		</c:if>
-	</c:forEach>
+			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
+				<c:if test="${vs.index eq page.nowPage }">
+					<li class="now">${vs.index }</li>
+				</c:if>
+				<c:if test="${vs.index ne page.nowPage }">
+					<li><a href="Controller?type=course&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
+				</c:if>
+			</c:forEach>
 	
-	<c:if test="${page.endPage < page.totalPage }">
-		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
-	</c:if>
-	<c:if test="${page.endPage >= page.totalPage }">
-		<li class="disable">&gt;</li>	
-	</c:if>
-                              </ol>
+			<c:if test="${page.endPage < page.totalPage }">
+				<li><a href="Controller?type=course&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
+			</c:if>
+			<c:if test="${page.endPage >= page.totalPage }">
+				<li class="disable">&gt;</li>	
+			</c:if>
+                      		</ol>
                           </td>
 						</tr>
 					</tfoot>
-					<tbody>
-		
 						<c:forEach var="vo2" items="${requestScope.ar }" varStatus="vs">
 						<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 						<tr>
@@ -192,8 +189,47 @@ table tfoot ol.page {
 	<script>
 		$(function() {
 			//$().removeClass("selected");
+			let now = new Date();	// 현재 날짜 및 시간
+			let year = now.getFullYear();
+			let str = "<option>년도선택</option>";
+			let select =$("#searchType").val();
+			let select_year = $("#selectYear").val();
+			let numPerPage = $("#numPerPage").val();
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
+			
+			for(let i=year+1; i>year-5; i--){
+				str+= "<option value="+i+">"+i+"</option>";
+			}
+			
+			$("#selectYear").html(str);
+			
+			$("#searchType").on("change",function(){
+				select = this.value;
+			});
+			$("#selectYear").on("change",function(){
+				select_year = this.value;
+			});
+			$("#numPerPage").on("change",function(){
+				numPerPage = this.value;
+			});
+			$("#search_bt").click(function(){
+				let value = $("#searchValue").val();
+				if(value == null){
+					location.href= "Controller?type=course&listSelect=${param.listSelect}";
+				}else{
+				
+					if(select == "")
+						select ="1";
+					if(select_year == "")
+						select_year = year+1;
+					if(numPerPage == "")
+						numPerPage = "5";
+					let value = $("#searchValue").val();
+					//console.log(select+","+value);s
+					location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+				}
+			});	
 		});
 	</script>
 </body>

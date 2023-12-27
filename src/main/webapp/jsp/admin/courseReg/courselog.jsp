@@ -87,14 +87,6 @@
 
 </head>
 <body>
-<% 
-	Object obj = request.getAttribute("ar");
-	CourseVO[] cvo = null;
-	if (obj != null) {
-		cvo = (CourseVO[])obj;
-	};
-%>
-
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
 		<div id="center">
@@ -109,38 +101,37 @@
 							<button type="button" onclick="set2()">과정타입수정</button>	
 							<button type="button" onclick="set3()">강의실관리</button>	
 						</div>
-						<table id="searchCourse">
-						<caption>과정검색</caption>
-							<thead>
-								<tr>
-									<th>검색</th>
-									<td>
-										<select>
-											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
-											<option>표시개수</option>
-											<option>5</option>
-											<option>10</option>
-											<option>15</option>
-										</select>
-										<select>
-											<option>년도선택</option>
-											<c:forEach begin="2000" end="2024" var="year">
-				     							  <option value="${year}">${year}</option>
-				    						</c:forEach>
-										</select>
-									</td>
-									<td>
-										<select>
-											<option>훈련강사</option>
-											<option>과정타입</option>
-											<option>강의실</option>
-										</select>
-										<input type="text"/>
-										<button type="button">검 색</button>
-									</td>
-								</tr>
-							</thead>
-						</table>
+						<form>
+							<table id="searchCourse">
+							<caption>과정검색</caption>
+								<thead>
+									<tr>
+										<th>검색</th>
+										<td>
+											<select id="numPerPage">
+												<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
+												<option>표시개수</option>
+												<option>5</option>
+												<option>10</option>
+												<option>15</option>
+											</select>
+											<select id="selectYear">
+	
+											</select>
+										</td>
+										<td>
+											<select id="searchType">
+												<option value="1">훈련강사</option>
+												<option value="2">과정타입</option>
+												<option value="3">강의실</option>
+											</select>
+											<input type="text" id="searchValue"/>
+											<button type="button" id="search_bt">검 색</button>
+										</td>
+									</tr>
+								</thead>
+							</table>
+						</form>
 						<table id="makeCourse">
 							<thead>
 								<tr>
@@ -159,10 +150,11 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="cvo" items="${ar }" >
-							<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
+							<c:if test="${ar ne null }">
+							<c:forEach var="cvo" items="${ar }" varStatus="vs">
+							<c:set var="num" value="${page.totalRecord-((page.nowPage-1)*page.numPerPage)}"/>
 								<tr>
-									<td>${num+(vs.index)-2 }</td>
+									<td>${num+(vs.index)-3}</td>
 									<td>${cvo.c_name }</td>
 									<td>W1805300001</td>
 									<td>${cvo.ct_idx} </td>
@@ -176,44 +168,52 @@
 									<td>
 										<button type="button">교과목 등록/수정</button>
 										<button type="button">학습안내서 등록/수정</button>
-										<button type="button">수정</button>
-										<button type="button">삭제</button>
+										<button type="button" onclick="set4()">수정</button>
+										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
+										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
+							</c:if>
+							<c:if test="${ar eq null }">
+								<tr>
+									<td colspan="12">검색 결과가 없습니다</td>
+								</tr>
+							</c:if>
 							</tbody>
 							<tfoot>
 						<tr>
 							<td colspan="12">
 								<ol class="page">
 			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-		<li class="disable">&lt;</li>
-	</c:if>	
+				<li class="disable">&lt;</li>
+			</c:if>	
 	
-	<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-	<li><a href="Controller?type=list&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
-	</c:if>
+			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
+				<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
+			</c:if>
 
-	<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-		<c:if test="${vs.index eq page.nowPage }">
-			<li class="now">${vs.index }</li>
-		</c:if>
-		<c:if test="${vs.index ne page.nowPage }">
-			<li><a href="Controller?type=list&cPage=${vs.index}">${vs.index}</a></li>
-		</c:if>
-	</c:forEach>
+			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
+				<c:if test="${vs.index eq page.nowPage }">
+					<li class="now">${vs.index }</li>
+				</c:if>
+				<c:if test="${vs.index ne page.nowPage }">
+					<li><a href="Controller?type=course&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
+				</c:if>
+			</c:forEach>
 	
-	<c:if test="${page.endPage < page.totalPage }">
-		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
-	</c:if>
-	<c:if test="${page.endPage >= page.totalPage }">
-		<li class="disable">&gt;</li>	
-	</c:if>
+			<c:if test="${page.endPage < page.totalPage }">
+				<li><a href="Controller?type=course&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
+			</c:if>
+			<c:if test="${page.endPage >= page.totalPage }">
+				<li class="disable">&gt;</li>	
+			</c:if>
                               </ol>
                           </td>
 						</tr>
 					</tfoot>
 						</table>
+
 					</div>
 				</div>
 			</div>
@@ -225,9 +225,7 @@
 		</div>
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
-			<div>
-				<jsp:include page="../table/typeInput.jsp"></jsp:include>
-			</div>
+			
 		</div>
 		
 		<div id="dialog3" hidden="" title="강의실관리">
@@ -236,13 +234,42 @@
 			</div>
 		</div>
 		
+		<div id="dialog4" hidden="" title="과정수정">
+			
+		</div>
+		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
 		$(function() {
+			let select ="";
+			let select_year = "";
+			let numPerPage = "";
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#secondmenu").addClass("selected");
+			let now = new Date();	// 현재 날짜 및 시간
+			let year = now.getFullYear();
+			
+			let str = "<option>년도선택</option>";
+			for(let i=year+1; i>year-5; i--){
+				str+= "<option value="+i+">"+i+"</option>";
+			}
+			$("#selectYear").html(str);
+			
+			$("#searchType").on("change",function(){
+				select = this.value;
+			});
+			$("#selectYear").on("change",function(){
+				select_year = this.value;
+			});
+			$("#numPerPage").on("change",function(){
+				numPerPage = this.value;
+			});
+			$("#search_bt").click(function(){
+				let value = $("#searchValue").val();
+				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+			});	
 		
 		});
 		function set() {
@@ -256,6 +283,9 @@
         }
 		function set3() {
             $("#dialog3").dialog("open");
+        }
+		function set4() {
+            $("#dialog4").dialog("open");
         }
 		$( "#dialog" ).dialog({
             autoOpen: false,
@@ -288,6 +318,23 @@
                 }
             }
         });
+		$( "#dialog4" ).dialog({
+            autoOpen: false,
+            width: 1200,
+            modal: true,
+            buttons: {
+                "닫기": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+		
+	
+		function del(frm){
+			frm.action = "Controller?type=delCourse";
+			
+			frm.submit();
+		}
 		
 	</script>
 </body>

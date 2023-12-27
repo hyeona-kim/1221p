@@ -10,18 +10,22 @@ import mybatis.dao.EtcDAO;
 import mybatis.vo.CourseVO;
 
 public class CourseAddAction implements Action {
+	
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		// 파라미터들 받기
+		
+		System.out.println("들어옴");
+		
+		
 		String c_name = request.getParameter("c_name");
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
 		String course_fee = request.getParameter("course_fee");
 		String c_peo_num = request.getParameter("c_peo_num");
 		String c_round_num = request.getParameter("c_round_num");
+		String listSelect = request.getParameter("listSelect");
 		
-		//받은 객체들을 map으로 지정
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("c_name", c_name);
 		map.put("start_date", start_date);
@@ -32,7 +36,7 @@ public class CourseAddAction implements Action {
 		
 		CourseDAO.addCourse(map);
 		
-		return "Controller?type=course";
+		return "Controller?type=course&listSelect="+listSelect;
 	}
 
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,12 +48,22 @@
 	#btn>form>input:first-child{
 		background-color: #99ccff;
 	}
+	#btn>form>input:first-child:hover{
+		background-color: #88bbee;
+	}
+	#btn>form>input:last-child{
+		background-color: #c0c0c0;
+	}
+	#btn>form>input:last-child:hover{
+		background-color: #d1d1d1;
+	}
 </style>
 </head>
 <body>
 	<header id="hd">과정타입 등록/수정</header>
 	<div id="wrap">
 		<article>
+			<form action="Controller?type=addCourseType" method="post">
 			<table id="t1">
 				<colgroup>
 					<col width="80px"/>
@@ -62,82 +74,85 @@
 				<tbody>
 					<tr>
 						<td class="num">1</td>
-						<td><input type="text" id="type1"/></td>
+						<td>
+							<input type="text" id="type1"  value="${ar[0].ct_name }"/>
+						</td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text1" />
-							<input type="color" id="color1"/>
+							<input type="text" name ="text1"  value="${ar[0].ct_color }"/>
+							<input type="color" id="color1"  value="${ar[0].ct_color }"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">2</td>
-						<td><input type="text" id="type2"/></td>
+						<td><input type="text" id="type2"  value="${ar[1].ct_name }"/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text2" />
-							<input type="color" id="color2"/>
+							<input type="text" name ="text2"  value="${ar[1].ct_color }"/>
+							<input type="color" id="color2"  value="${ar[1].ct_color }"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">3</td>
-						<td><input type="text" id="type3"/></td>
+						<td><input type="text" id="type3"  value="${ar[2].ct_name }"/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text3" />
-							<input type="color" id="color3"/>
+							<input type="text" name ="text3"  value="${ar[2].ct_color }"/>
+							<input type="color" id="color3"  value="${ar[2].ct_color }"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">4</td>
-						<td><input type="text" id="type4"/></td>
+						<td><input type="text" id="type4"  value="${ar[3].ct_name }"/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text4" />
-							<input type="color" id="color4"/>
+							<input type="text" name ="text4"  value="${ar[3].ct_color }"/>
+							<input type="color" id="color4"  value="${ar[3].ct_color }"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">5</td>
-						<td><input type="text" id="type5"/></td>
+						<td><input type="text" id="type5"  value="${ar[4].ct_name }"/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text5" />
-							<input type="color" id="color5"/>
+							<input type="text" name ="text5"  value="${ar[4].ct_color }"/>
+							<input type="color" id="color5"  value="${ar[4].ct_color }"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">6</td>
-						<td><input type="text" id="type6"/></td>
+						<td><input type="text" id="type6"  value="${ar[5].ct_name }"/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text6" />
-							<input type="color" id="color6"/>
+							<input type="text" name ="text6"  value="${ar[5].ct_color }"/>
+							<input type="color" id="color6"  value="${ar[5].ct_color }"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="num">7</td>
-						<td><input type="text" id="type7"/></td>
+						<td><input type="text" id="type7"  value="${ar[6].ct_name }"/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text7" />
-							<input type="color" id="color7"/>
+							<input type="text" name ="text7"  value="${ar[6].ct_color }"/>
+							<input type="color" id="color7"  value="${ar[6].ct_color }"/>
 						</td>
 					</tr>
 				</tbody>
 			</table>
+			</form>
 		</article>
 	</div>
 	<div id="btn">
 		<form>
-			<input type="button" value="저장" onclick="save()"/>
-			<input type="button" value="취소" onclick="cancel()"/>
+			<input type="button" value="저장" id="save" onclick="save()"/>
+			<input type="button" value="취소" id="cancel" onclick="cancel()"/>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	
 	<script>
 		function save() {
-			
+			document.forms[0].submit();
 		}
 		
 		function cancel() {

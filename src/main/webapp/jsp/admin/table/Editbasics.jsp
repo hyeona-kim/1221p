@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,16 +92,15 @@ thead tr{
 <body>
 	<div id ="wrap">
 		<header>
-			<h2>교육과정등록</h2>
+			<h2>교육과정수정</h2>
 		</header>
 		<article>
-			<form action="Controller" method="post" name="frm02">
-			<input type="hidden" name="type"  value="addCourse"/>
+			<form action="Controller?type=editCourse" method="post">
 			<table id="table">
 			<thead>
 				<tr>
 					<td colspan="4">
-						과정등록
+						과정수정
 					</td>
 				</tr>
 			</thead>
@@ -108,7 +108,7 @@ thead tr{
 					<tr>
 						<th><label>과정명</label></th>
 						<td>
-							<input type="text" name="c_name" />
+							<input type="text" name="c_name">${vo.c_name }</input>
 						</td>
 						<th><label>과정구분</label></th>
 						<td>
@@ -181,10 +181,10 @@ thead tr{
 					</tr>
 					<tr>
 						<td colspan="2" align="right" id="course_add_btn">
-							<input type="button" value="등록" id="course_add_button">
+							<input type="button" value="수정" onclick="addCourse()">
 						</td>
 						<td colspan="2" align="left">
-							<input type="button" value="목록" onclick="">
+							<input type="button" value="목록" onclick="javascript:location.href=">
 						</td>
 					</tr>
 				</tfoot>	
@@ -196,12 +196,10 @@ thead tr{
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-	$(function(){
-		$("#course_add_button").click(function(){
-			
-			document.frm02.submit();
-		});
-	});
+function addCourse() {
+    // 양식(form)을 서버로 제출
+    document.forms[0].submit();
+}
 </script>
 </body>
 </html>
