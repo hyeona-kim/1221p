@@ -43,7 +43,7 @@ public class EtcDAO {
 		
 		ss.close();
 		return ar;
-
+	}
 	public static void delStaff(String idx) {
 		SqlSession ss = FactoryService.getFactory().openSession();
 		int cnt = ss.update("staff.del", idx);
