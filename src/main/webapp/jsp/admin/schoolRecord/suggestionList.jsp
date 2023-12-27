@@ -296,6 +296,7 @@
 											<li><a href="Controller?type=suggestionList&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
 										</c:if>
 										<%-- ========== 이전버튼 만드는 부분 끝 ========== --%>
+										
 										<%-- ========== page 번호 만드는 부분 시작 ==========--%>
 										<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
 											<c:if test="${vs.index eq page.nowPage }">
@@ -306,6 +307,7 @@
 											</c:if>
 										</c:forEach>
 										<%-- ========== page 번호 만드는 부분 끝 ==========--%>
+										
 										<%-- ========== 다음버튼 만드는 부분 시작 ========== --%>
 										<%-- endPage가 마지막 끝나는 page보다 작을 경우
 											 다음page로 가는 버튼 활성화 후 생성 --%>

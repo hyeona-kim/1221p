@@ -105,6 +105,9 @@
 	#addForm tfoot td{
 		border: none;
 	}
+	#signature{
+		border: 1px solid black;
+	}
 	#director{
 		background-color: #e14b4b;
 		border-radius: 3px;
@@ -191,11 +194,13 @@
 				</div>
 			</div>
 		</div>
+		
 		<%-- ========== 교직원 등록 폼 시작 ========== --%>
 		<div id="addForm">
 			
 		</div>
 		<%-- ========== 교직원 등록 폼 끝 ========== --%>
+		
 	</article>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -222,10 +227,55 @@
 				});
 			});
 		});
+		
+		<%-- 교직원등록에서 인증선택의 option을 변경할 때 수행하는 곳 --%>
+		function changeCertifi() {
+			<%-- option에서 선택된 값을 value에 저장 --%>
+			let value = $("#certification").val();
 			
+			switch(value){
+				case "none":{
+					$("#certi_image").hide();
+					$("#certi_sign").hide();				
+				}
+				break;
+				case "image":{
+					$("#certi_image").show();
+					$("#certi_sign").hide();			
+				}
+				break;
+				case "sign":{
+					$("#certi_image").hide();
+					$("#certi_sign").show();
+					
+					var canvas = $("#signature")[0];
+					var signature = new SignaturePad(canvas, {
+									minWidth : 2,
+									maxWidth : 2,
+									penColor : "rgb(0, 0, 0)"
+					});
+					
+					<%-- 교직원등록에서 전자서명패드를 clear하는 기능 --%>
+					$("#clear_btn").bind("click", function() {
+						signature.clear();
+					});
+				}
+				break;
+			};
+		};
+			
+		<%-- 교직원등록에서 [저장]버튼을 눌렀을 때 수행하는 곳 --%>
 		function addStaff() {
 			// 유효성 검사 해야함
-			document.forms[0].submit();
+			let signature = document.getElementById("signature");
+			console.log(signature);
+			if(signature.isEmpty()){
+				alert("내용을 입력하세요");
+			}else {
+				alert("내용있음");
+			}
+			
+			// document.forms[0].submit();
 		};
 	</script>
 </body>
