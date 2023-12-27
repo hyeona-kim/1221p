@@ -73,11 +73,6 @@ table tfoot ol.page {
 		text-indent: -9999px;
 		height: 0;
 	}
-	#b1{
-		 float: right;
-		 padding-top: 10px;
-		 margin-bottom: 10px;
-	}
 </style>
 
 </head>
@@ -89,17 +84,44 @@ table tfoot ol.page {
 			<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
 				<div id="staffWrap">
-					<div id="staffList_top">훈련생확인서류등록</div>
-					<div id="b1">
-						<input type="button" value="확인서류등록" onclick="javascript:location.href='Controller?type=uploadwrite'"/>
-					</div>
+					<div id="staffList_top">훈련생확인서류</div>
+					<table id="searchTime">
+						<caption>훈련생확인서류검색</caption>
+							<thead>
+								<tr>
+									<th>검색</th>
+									<td>
+										<select>
+											<option>년도선택</option>
+											<c:forEach begin="2000" end="2024" var="year">
+				     							  <option value="${year}">${year}</option>
+				    						</c:forEach>
+										</select>
+									</td>
+									<td>
+										<select>
+												<option>과정타입</option>
+												<option>담당교수</option>
+												
+										</select>
+										<input type="text"/>
+										<button type="button">검 색</button>
+									</td>
+								</tr>
+							</thead>
+						</table>
 				<table id="makeTime">
-				<caption>훈련생확인서류등록 리스트</caption>
+				<caption>훈련생확인서류 리스트</caption>
 					<thead>
 						<tr>
-							<th>순번</th>
-							<th>서류명</th>
-							<th>첨부파일</th>
+							<th>번호</th>
+							<th>과정명</th>
+							<th>담당교수</th>
+							<th>개강일</th>
+							<th>종료일</th>
+							<th>요일</th>
+							<th>회차</th>
+							<th>모집인원</th>
 							<th>관리</th>
 						</tr>
 					</thead>
@@ -136,17 +158,20 @@ table tfoot ol.page {
 					</tfoot>
 					<tbody>
 		
-						<c:forEach var="vo3" items="${requestScope.ar }" varStatus="vs">
+						<c:forEach var="vo4" items="${requestScope.ar }" varStatus="vs">
 				<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 					<tr>
-						<td>${num+(vs.index)-2 }</td>
-						<td><%-- <a href="Contoller?type=view&tn_idx=${vo3.tn_idx }&cPage=${page.nowPage }">
-							${vo3.subject } --%> ${vo3.subject }</a></td>
-						<td>${vo3.file_name }</td>
+						<td>${vs.index+1}</td>
+						<td>${vo4.c_name}</td>
+						<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
+						<td>${vo4.t_idx}</td>
+						<td>${vo4.start_date }</td>
+						<td>${vo4.end_date }</td>
+						<td>${vo4.ti_idx}</td>
+						<td>${vo4.c_round_num }</td>
+						<td>${vo4.c_peo_num}</td>
 						<td>
-						<input type="button" value="수정"
-							onclick="edit('${vo3.tn_idx}')"/>
-						<input type="button" onclick="traindel('${vo3.tn_idx}')" value="삭제">
+						<input type="button" value="확인서류설정" data-toggle="modal" data-target="#confirm">
 						<input type="button" value="확인서류보기">
 						</td>
 					</tr>
@@ -156,52 +181,14 @@ table tfoot ol.page {
 			</div>
 		</div>
 	</div>
-	<form action="Controller" method="post" name="frm">
-		<input type="hidden" name="type" value=""/>
-		<input type="hidden" name="tn_idx" value=""/>
-		<input type="hidden" name="cPage" value="${param.cPage }"/>
-	</form>
-
-	
-	
 </article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-	
 	<script>
 		$(function() {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#thirdmenu").addClass("selected");
 		});
-		
-		
-		
-		
-		function edit(tn_idx){
-			console.log(tn_idx);
-			
-			document.frm.type.value="trainuploadedit";
-			document.frm.tn_idx.value=tn_idx;
-			console.log(document.frm.type.value);
-			document.frm.submit();
-	
-		}
-		
-		function traindel(tn_idx){
-			
-			console.log(tn_idx);
-			document.frm.type.value="trainuploaddel";
-			document.frm.tn_idx.value=tn_idx;
-			console.log(document.frm.type.value);
-			document.frm.submit();
-			
-		}
-		
-		
-	
-	
 	</script>
 </body>
 </c:if>

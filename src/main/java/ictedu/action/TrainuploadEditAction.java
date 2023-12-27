@@ -14,10 +14,11 @@ import mybatis.vo.TrainuploadVO;
 
 public class TrainuploadEditAction implements Action {
 
+	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println(2);
+	
 		String enc_type = request.getContentType();
 		
 		String viewPath = null;
@@ -33,7 +34,7 @@ public class TrainuploadEditAction implements Action {
 			TrainuploadVO vo = TrainuploadDAO.getUpload(tn_idx);
 			
 			request.setAttribute("vo3", vo);
-			viewPath = "Controller?type=TrainuploadEdit.jsp";
+			viewPath = "jsp/admin/schoolRecord/TrainuploadEdit.jsp";
 		}else if(enc_type !=null && enc_type.startsWith("multipart")){
 			//db에 업데이트 하고 요청방식이 post방식 글등록할때 파일을 무조건 선택하고 보냈기 때문에
 			// multipart으로 시작

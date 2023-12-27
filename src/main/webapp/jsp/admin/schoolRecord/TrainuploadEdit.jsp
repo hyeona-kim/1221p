@@ -102,9 +102,9 @@ table tfoot ol.page {
 	
 </style>
 
-<c:if test="${request.vo3 ne null }">
 
 </head>
+<c:if test="${requestScope.vo3 ne null }">
 <body>
 	<article id="wrap">
 		<jsp:include page="../../head.jsp"></jsp:include>
@@ -146,7 +146,7 @@ table tfoot ol.page {
 						<tr>
 							<th>첨부파일:</th>
 							<td><input type="file" name="file" data-str="파일"/>
-								<c:if test=${vo3.file_name ne null }">
+								<c:if test="${vo3.file_name ne null }">
 								(${vo3.file_name })파일이 첨부된 상태
 								</c:if>
 							</td>
@@ -206,9 +206,9 @@ table tfoot ol.page {
         	}
 	</script>
 </body>
-</html>
 </c:if>
 
-<c:if test="${reqestScope.vo3 eq null ">
+<c:if test="${requestScope.vo3 eq null }">
 <c:redirect url="Controller?type=trainupload"/>
 </c:if>
+</html>
