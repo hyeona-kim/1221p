@@ -57,7 +57,7 @@
 		select count(*) from course_t 
 	</select>
 	
-	<select id="search_count" parameterType="Map" resultType="mybatis.vo.CourseVO">
+	<select id="search_count" parameterType="Map" resultType="int">
 		select count(*)
 		from 
 		(select @RN:=@RN+1 as rnum, a.* 

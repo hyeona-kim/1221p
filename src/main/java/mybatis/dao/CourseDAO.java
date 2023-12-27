@@ -75,7 +75,7 @@ public class CourseDAO {
 		return cnt;
 	}
 	
-	public static Integer getSearchCount(HashMap<String, String> map) {	
+	public static int getSearchCount(HashMap<String, String> map) {	
 		SqlSession ss = FactoryService.getFactory().openSession();
 		int cnt = ss.selectOne("course.search_count",map);
 		ss.close();
