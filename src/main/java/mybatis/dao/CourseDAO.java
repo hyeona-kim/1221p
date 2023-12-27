@@ -50,16 +50,17 @@ public class CourseDAO {
 		return cnt;
 	}
 	
-	public static CourseVO[] SearchCourse(HashMap<String, String> map) {
+	public static CourseVO[] searchCourse(HashMap<String, String> map) {
 		CourseVO[] ar = null;
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
-		List<CourseVO> list = ss.selectList("course.search",map);
+		List<CourseVO> list = ss.selectList("course.search", map);
+		System.out.println(list.size());
+
 		if (list!= null && !list.isEmpty()) {
 			ar = new CourseVO[list.size()];
 			list.toArray(ar);
 		}
-		
 		ss.close();
 		return ar;
 	}

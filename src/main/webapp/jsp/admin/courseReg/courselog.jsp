@@ -1,10 +1,6 @@
-<%@page import="mybatis.vo.CourseVO"%>
-<%@page import="java.util.List"%>
-<%@page import="mybatis.service.FactoryService"%>
-<%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,10 +93,11 @@
 					<div id="staffWrap">
 						<div id="courseList_top">교육과정리스트</div>
 						<div id="ttop">
-							<button type="button" onclick="set()">과정등록</button>	
-							<button type="button" onclick="set2()">과정타입수정</button>	
-							<button type="button" onclick="set3()">강의실관리</button>	
+							<button type="button" onclick="set()">과정수정</button>
+							<button type="button" onclick="set2()">과정타입수정</button>
+							<button type="button" onclick="set3()">강의실관리</button>
 						</div>
+						
 						<form>
 							<table id="searchCourse">
 							<caption>과정검색</caption>
@@ -226,7 +223,6 @@
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
 			<div>
-				<jsp:include page="../table/typeInput.jsp"></jsp:include>
 			</div>
 		</div>
 		
@@ -238,7 +234,7 @@
 		
 		<div id="dialog4" hidden="" title="과정수정">
 			<div>
-				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
+				
 			</div>
 		</div>
 		
@@ -276,19 +272,20 @@
 			});	
 		
 		});
-		function set() {
+		
+		function set(){
             $("#dialog").dialog("open",{
             	width:500,
             	height:600
             });
         }
-		function set2() {
+		function set2(){
             $("#dialog2").dialog("open");
         }
-		function set3() {
+		function set3(){
             $("#dialog3").dialog("open");
         }
-		function set4() {
+		function set4(){
             $("#dialog4").dialog("open");
         }
 		$( "#dialog" ).dialog({
@@ -336,7 +333,6 @@
 	
 		function del(frm){
 			frm.action = "Controller?type=delCourse";
-			
 			frm.submit();
 		}
 		
