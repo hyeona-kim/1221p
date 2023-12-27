@@ -20,4 +20,13 @@ public class RoomDAO {
 		}
 		return ar;
 	}
+	
+	public static RoomVO searchList(String r_idx) {
+		RoomVO ar = null;
+		SqlSession ss = FactoryService.getFactory().openSession();
+		ar = ss.selectOne("room.search",r_idx);
+		ss.close();
+		
+		return ar;
+	}
 }

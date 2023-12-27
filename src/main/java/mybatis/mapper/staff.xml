@@ -25,4 +25,8 @@
 		insert into staff_t (sf_name, sf_job, sf_id, sf_pwd, sf_hire_date, sf_phone, rt_idx, status, sf_code, sf_mgr)
 		values (#{sf_name}, #{sf_job}, #{sf_id}, #{sf_pwd}, #{sf_hire_date}, #{sf_phone}, #{rt_idx}, 0, 't011000', #{rt_idx})
 	</insert>
+	
+	 <select id="search" resultType="mybatis.vo.StaffVO" parameterType="String">
+		select * from staff_t where r_name like concat('%',#{str},'%')
+	</select>
 </mapper>

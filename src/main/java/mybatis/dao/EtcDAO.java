@@ -35,4 +35,15 @@ public class EtcDAO {
 		ss.close();
 	}
 	
+	public static StaffVO searchList(String sf_name) {
+		StaffVO ar = null;
+		
+		SqlSession ss = FactoryService.getFactory().openSession();
+		
+		ar = ss.selectOne("staff.all",sf_name);
+		
+		ss.close();
+		return ar;
+	}
+	
 }
