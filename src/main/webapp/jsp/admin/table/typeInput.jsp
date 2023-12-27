@@ -75,28 +75,54 @@
 				<c:if test="${c_ar ne null}">
 					<c:forEach var="tvo" items="${c_ar }">
 					<tr>
-						<td class="num" >${tvo.ct_idx }</td>
-						
+
+						<td class="num">1</td>
 						<td>
-							<input type="text" name="name"  value="${tvo.ct_name }"/>
+							<input type="text" id="type1"  value=""/>
 						</td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text"  name ="text" value="${tvo.ct_color }"/>
-							<input type="color"  name ="color"  value="${tvo.ct_color }"/>
+							<input type="text" name ="text1"  value=""/>
+							<input type="color" id="color1"  value=""/>
+						</td>
+					</tr>
+					<tr>
+						<td class="num">2</td>
+						<td><input type="text" id="type2"  value=""/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text2"  value="$"/>
+							<input type="color" id="color2"  value=""/>
+						</td>
+					</tr>
+					<tr>
+						<td class="num">3</td>
+						<td><input type="text" id="type3"  value=""/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text3"  value=""/>
+							<input type="color" id="color3"  value=""/>
+
 						</td>
 					</tr>
 					</c:forEach>
 				<c:forEach var="i" begin="${f:length(c_ar)+1}" end="7">
 					<tr>
-						<td class="num">${i}</td>
-						<td>
-							<input type="text" name="name" />
-						</td>
+						<td class="num">4</td>
+						<td><input type="text" id="type4"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text"  name ="text"/>
-							<input type="color"  name ="color" />
+							<input type="text" name ="text4"  value=""/>
+							<input type="color" id="color4"  value=""/>
+						</td>
+					</tr>
+					<tr>
+						<td class="num">5</td>
+						<td><input type="text" id="type5"  value=""/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text5"  value=""/>
+							<input type="color" id="color5"  value=""/>
 						</td>
 				
 					</tr>
@@ -105,14 +131,22 @@
 				<c:if test="${c_ar eq null }">
 				<c:forEach var="i" begin="1" end="7">
 					<tr>
-						<td class="num" >${i}</td>
-						<td>
-							<input type="text"  name="name" />
-						</td>
+
+						<td class="num">6</td>
+						<td><input type="text" id="type6"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text"  name ="text"/>
-							<input type="color"  name ="color" />
+							<input type="text" name ="text6"  value=""/>
+							<input type="color" id="color6"  value=""/>
+						</td>
+					</tr>
+					<tr>
+						<td class="num">7</td>
+						<td><input type="text" id="type7"  value=""/></td>
+						<td class="color">색상</td>
+						<td>
+							<input type="text" name ="text7"  value=""/>
+							<input type="color" id="color7"  value=""/>
 						</td>
 				
 					</tr>

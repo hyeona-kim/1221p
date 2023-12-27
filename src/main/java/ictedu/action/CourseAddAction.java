@@ -15,9 +15,7 @@ public class CourseAddAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("들어옴");
-		
-		
+	
 		String c_name = request.getParameter("c_name");
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
