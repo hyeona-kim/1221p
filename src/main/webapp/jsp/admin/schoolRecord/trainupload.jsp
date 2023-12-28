@@ -170,8 +170,10 @@ table tfoot ol.page {
 	<script>
 		$(function() {
 			//$().removeClass("selected");
-			$(".selected").removeClass("selected")
+			$(".selected").removeClass("selected");
+			$(".l_select").removeClass("l_selected");
 			$("#thirdmenu").addClass("selected");
+			$("#l_third").addClass("l_select");
 		});
 
 		function edit(tn_idx){
@@ -184,7 +186,6 @@ table tfoot ol.page {
 	
 		}
 		function traindel(tn_idx){
-			
 			console.log(tn_idx);
 			document.frm.type.value="trainuploaddel";
 			document.frm.tn_idx.value=tn_idx;

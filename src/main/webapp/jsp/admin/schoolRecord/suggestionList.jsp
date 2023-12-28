@@ -277,8 +277,10 @@
 	<script>
 		$(function() {
 			//$().removeClass("selected");
-			$(".selected").removeClass("selected")
+			$(".selected").removeClass("selected");
+			$(".l_select").removeClass("l_selected");
 			$("#thirdmenu").addClass("selected");
+			$("#l_first").addClass("l_select");
 			
 			<%-- 처음 고충 및 건의사항을 클릭했을 때
 				 비동기식통신을 수행해 전체 목록을 가져온다 --%>

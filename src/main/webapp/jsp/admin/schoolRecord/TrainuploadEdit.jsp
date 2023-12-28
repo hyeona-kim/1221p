@@ -172,8 +172,10 @@ table tfoot ol.page {
 	<script>
 		$(function() {
 			//$().removeClass("selected");
-			$(".selected").removeClass("selected")
-			$("#secondmenu").addClass("selected");
+			$(".selected").removeClass("selected");
+			$(".l_select").removeClass("l_selected");
+			$("#thirdmenu").addClass("selected");
+			$("#l_third").addClass("l_select");
 		});
 		
 	 	ClassicEditor

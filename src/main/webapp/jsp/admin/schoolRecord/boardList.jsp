@@ -105,28 +105,32 @@
 	table#boList tbody td {
 		font-size: 13px;
 	}
-	#addForm table caption{ text-indent: -9999px; }
-	#addForm table {
-		width: 950px;
-		height: 450px;
-		border-collapse: collapse;
-		position: absolute;
-		
-	}
-	#addForm table th, #addForm table td{
-		border: 1px solid #e9e9e6;
-		padding: 5px;
-	}
-	#addForm {
+	#addForm{
 		text-align: center;
 		margin: 0px auto;
 		padding: 10px;
+		width: 98%;
 	}
+	#addForm table caption{ text-indent: -9999px; }
+	
+	#addForm table{
+		width: 100%;
+		border-collapse: collapse;
+	}
+	#addForm table th{
+		background: #eee;
+	}
+	
+	#addForm table th,#addForm table td{
+		border: 1px solid #e9e9e6;
+		padding: 5px;
+	}
+	
 	#addForm .left {
 		text-align: left;
 	}
 	#addForm th{
-		width: 20%;
+		width: 20px;
 	}
 	#addForm .input{
 		width: 350px;
@@ -135,6 +139,7 @@
 		border: none;
 	}
 	#boContent table caption{ text-indent: -9999px; }
+	
 	#boContent table {
 		width: 950px;
 		height: 450px;
@@ -217,11 +222,7 @@
 		height: 20px;
 		background-color: #dcdcdc;
 	}
-	
-	
-	
-</style>
-
+	</style>
 </head>
 <c:if test="${tvo eq null }">
 <body>
@@ -233,8 +234,7 @@
 				<!--  여기서 표시될 테이블들 가지고오기 -->
 				<div id="boWrap">
 					<div id="boList_top">게시판</div>
-					
-						
+	
 						<%-- ===== 검색하는 부분 ===== --%>
 						<table id="boList">
 						<caption>게시판 테이블</caption>
@@ -255,30 +255,30 @@
 							</tr>
 							<tr><td colspan="6" align="right"><button type="button" id="bo_add_btn">글쓰기</button></td></tr>
 						</table>
-					</div>
-				<%-- ===== 비동기식으로 표현할 게시글 시작 ===== --%>
-				<div id="board_list">
 						
+						<div id="board_list">
+						
+						</div>
+						<%-- ===== 게시글 작성 폼 시작 ===== --%>
+						<div id="addForm">
+						
+						</div>
+						<%-- ===== 게시글 작성 폼 끝 ===== --%>
+						<%-- ===== 게시글 내용 시작 ===== --%>
+						<div id="boContent">
+						
+						</div>
+						<%-- ===== 게시글 내용 끝 ===== --%>
+						
+						<%-- ===== 게시글답변 작성 폼 시작 ===== --%>
+						<div id="replyForm">
+						
+						</div>
+						<%-- ===== 게시글 답변 작성 폼 끝 ===== --%>
+						</div>
+						</div>
+						<%-- ===== 비동기식으로 표현할 게시글 시작 ===== --%>
 				</div>
-				<%-- ===== 게시글 작성 폼 시작 ===== --%>
-				<div id="addForm">
-				
-				</div>
-				<%-- ===== 게시글 작성 폼 끝 ===== --%>
-				
-				<%-- ===== 게시글 내용 시작 ===== --%>
-				<div id="boContent">
-				
-				</div>
-				<%-- ===== 게시글 내용 끝 ===== --%>
-				
-				<%-- ===== 게시글답변 작성 폼 시작 ===== --%>
-				<div id="replyForm">
-				
-				</div>
-				<%-- ===== 게시글 답변 작성 폼 끝 ===== --%>
-			</div>
-		</div>
 	</article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -293,8 +293,10 @@
 				}).done(function(result){
 					$("#addForm").html(result);
 				});
-			$(".selected").removeClass("selected")
+			$(".selected").removeClass("selected");
+			$(".l_select").removeClass("l_selected");
 			$("#thirdmenu").addClass("selected");
+			$("#l_five").addClass("l_select");
 			
 			$("#bo_add_btn").bind("click", function(){
 				$.ajax({
