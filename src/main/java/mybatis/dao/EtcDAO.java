@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import mybatis.service.FactoryService;
 import mybatis.vo.StaffVO;
+import mybatis.vo.SuggestionVO;
 
 public class EtcDAO {
 	
@@ -55,4 +56,16 @@ public class EtcDAO {
 		ss.close();
 	}
 	
+	public static String[] searchSfCode() {
+		String[] ar = null;
+		
+		SqlSession ss = FactoryService.getFactory().openSession();
+		List<String> list = ss.selectList("staff.search_sfCode");
+		if(list != null && !list.isEmpty()) {
+			ar = new String[list.size()];
+			list.toArray(ar);
+		}
+		ss.close();
+		return ar;
+	}
 }
