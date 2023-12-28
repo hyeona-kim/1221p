@@ -25,6 +25,8 @@ public class TrainuploadAction implements Action{
 			
 		}
 		
+	
+		
 		TrainuploadVO[] ar = TrainuploadDAO.getlist(page.getBegin(), page.getEnd());
 		
 		
@@ -33,6 +35,15 @@ public class TrainuploadAction implements Action{
 		
 		return "jsp/admin/schoolRecord/trainupload.jsp";
 		
+		
+	
+		
+		
+		
 	}
+	
+	
+	
+	
 
 }

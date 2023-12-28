@@ -25,6 +25,11 @@
 		where tn_idx = #{num}
 	</select>
 	
+	<select id="view" parameterType="String" resultType="mybatis.vo.TrainuploadVO">
+		select # from trainupload_t
+		where tn_idx = #{idx}
+	</select>
+	
 	<!-- 수정 -->
 	<update id="update" parameterType="Map">
 		update trainupload_t 

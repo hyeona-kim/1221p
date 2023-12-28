@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <style>
 table tfoot ol.page {
 	    list-style:none;
@@ -100,9 +101,14 @@ table tfoot ol.page {
 									</td>
 									<td>
 										<select>
-												<option>과정타입</option>
+												<option>번호</option>
+												<option>과정명</option>
 												<option>담당교수</option>
-												
+												<option>개강일</option>
+												<option>종료일</option>
+												<option>요일</option>
+												<option>회차</option>
+												<option>모집인원</option>
 										</select>
 										<input type="text"/>
 										<button type="button">검 색</button>
@@ -161,7 +167,7 @@ table tfoot ol.page {
 						<c:forEach var="vo4" items="${requestScope.ar }" varStatus="vs">
 				<c:set var="num" value="${page.totalRecord - ((page.nowPage-1) * page.numPerPage) }"/>
 					<tr>
-						<td>${vs.index+1}</td>
+						<td>${num+(vs.index-2)}</td>
 						<td>${vo4.c_name}</td>
 						<%-- 강사 코드에따른 강사를 가져오는 Bean을 만든다 --%>
 						<td>${vo4.t_idx}</td>
@@ -171,7 +177,7 @@ table tfoot ol.page {
 						<td>${vo4.c_round_num }</td>
 						<td>${vo4.c_peo_num}</td>
 						<td>
-						<input type="button" value="확인서류설정" data-toggle="modal" data-target="#confirm">
+						<input type="button" id="fset"  onclick="set('${vo4.tn_idx}')" value="확인서류설정">
 						<input type="button" value="확인서류보기">
 						</td>
 					</tr>
@@ -181,14 +187,44 @@ table tfoot ol.page {
 			</div>
 		</div>
 	</div>
+	<div id="m1" hidden="hidden"></div>
+	
 </article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
 		$(function() {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#thirdmenu").addClass("selected");
+
+		
+			
 		});
+		
+	function set(str){
+		$.ajax({
+            url: "Controller",
+            type: "post",
+            data:"type="+encodeURIComponent("confirm")+"&select="+str
+         }).done(function(result){
+            $("#m1").html(result);
+         });
+         
+		$( "#m1" ).dialog({
+				width:700,
+            	height:600
+			
+		});
+		
+
+	
+	}
+		
+		
+		
+		
+		
 	</script>
 </body>
 </c:if>
