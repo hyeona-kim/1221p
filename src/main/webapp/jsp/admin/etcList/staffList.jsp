@@ -188,8 +188,8 @@
 												<td></td>
 											</sf:if>
 											<td colspan="2">
-												<a href="javascript:editStaff(${vo.sf_idx})" class="staff_edit_btn staff_btn">수정</a>
-												<a href="javascript:delStaff(${vo.sf_idx})" class="staff_del_btn staff_btn">삭제</a>
+												<a href="javascript:editStaff('${vo.sf_idx}')" class="staff_edit_btn staff_btn">수정</a>
+												<a href="javascript:delStaff('${vo.sf_idx}')" class="staff_del_btn staff_btn">삭제</a>
 											</td>
 										</tr>
 									</sf:forEach>
@@ -222,8 +222,9 @@
 			 비동기통신을 이용해 dialog를 띄우는 기능 --%>
 			$("#staff_add_btn").bind("click", function() {
 				$.ajax({
-					url: "${pageContext.request.contextPath}/jsp/admin/etcList/add_ajax.jsp",
-					type: "post"
+					url: "Controller",
+					type: "post",
+					data: "type=staffAddForm"
 				}).done(function(result){
 					$("#addForm").html(result);
 				});
@@ -241,8 +242,9 @@
 		 비동기통신을 이용해 dialog를 띄우는 기능 --%>
 		function editStaff(idx) {
 			$.ajax({
-				url: "${pageContext.request.contextPath}/jsp/admin/etcList/edit_ajax.jsp",
-				type: "post"
+				url: "Controller",
+				type: "post",
+				data: "type=staffEditForm"
 			}).done(function(result){
 				$("#addForm").html(result);
 			});
