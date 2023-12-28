@@ -223,10 +223,11 @@
 				<!--  여기서 표시될 테이블들 가지고오기 -->
 				<div id="boWrap">
 					<div id="boList_top">게시판</div>
-					<table id="boList">
-						<caption>게시판 테이블</caption>
+					
+						
 						<%-- ===== 검색하는 부분 ===== --%>
-						<thead>
+						<table id="boList">
+						<caption>게시판 테이블</caption>
 							<tr>
 								<th>검색</th>
 								<td>
@@ -243,88 +244,10 @@
 								</td>
 							</tr>
 							<tr><td colspan="6" align="right"><button type="button" id="bo_add_btn">글쓰기</button></td></tr>
-						</thead>
-						<tbody>
-						<%-- ===== 출력할 건의사항 항목 ===== --%>
-							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>첨부파일</th>
-								<th>작성자</th>
-								<th>등록일</th>
-								<th>조회수</th>
-							</tr>
-						<c:if test="${vo ne null}"> <%-- vo는 로그인 정보 --%>
-						<%-- ===== 로그인 정보가 있다면 반복문을 통해
-									건의사항 목록 출력 ===== --%>
-							<c:forEach items="${ar }" varStatus="vs" var="bvo">
-								<tr>
-									<td>${vs.index+1}</td>
-									<td align="left">
-										<%-- 전체공지로 클릭되었다면(notice가 1일때)
-											 공지 마크가 추가되어야함 --%>
-										<c:if test="${bvo.bd_notice eq '1'}">
-											<span id="notice">공지</span>
-										</c:if>
-										<a href="javascript:viewContent('${bvo.bd_subject}','${bvo.bd_write_date}'
-																		,'${bvo.bd_hit}','${bvo.bd_content}')">
-											${bvo.bd_subject}
-										</a>
-									</td>										
-									<td>${bvo.bd_file}</td>
-									<td>***</td>
-									<td>${bvo.bd_write_date}</td>
-									<td>${bvo.bd_hit}</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-						</tbody>
-						<%-- 화면 하단 page 번호 출력하는 부분 --%>
-						<tfoot>
-							<tr>
-								<td colspan="6">
-									<ol class="page">
-										<%-- ========== 이전버튼 만드는 부분 시작 ========== --%>
-										<%-- startPage가 5보다 작을 경우
-											 이전page로 돌아가는 버튼 비활성화 후 생성 --%>
-										<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-											<li class="disable">&lt;</li>
-										</c:if>	
-										<%-- startPage가 5보다 같거나 클 경우
-											 이전page로 돌아가는 버튼 활성화 후 생성 --%>
-										<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-											<li><a href="Controller?type=boardList&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
-										</c:if>
-										<%-- ========== 이전버튼 만드는 부분 끝 ========== --%>
-										
-										<%-- ========== page 번호 만드는 부분 시작 ==========--%>
-										<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-											<c:if test="${vs.index eq page.nowPage }">
-												<li class="now">${vs.index }</li>
-											</c:if>
-											<c:if test="${vs.index ne page.nowPage }">
-												<li><a href="Controller?type=boardList&cPage=${vs.index}">${vs.index}</a></li>
-											</c:if>
-										</c:forEach>
-										<%-- ========== page 번호 만드는 부분 끝 ==========--%>
-										
-										<%-- ========== 다음버튼 만드는 부분 시작 ========== --%>
-										<%-- endPage가 마지막 끝나는 page보다 작을 경우
-											 다음page로 가는 버튼 활성화 후 생성 --%>
-										<c:if test="${page.endPage < page.totalPage }">
-											<li><a href="Controller?type=board&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
-										</c:if>
-										<%-- endPage가 마지막 끝나는 page보다 크거나 같을 경우
-											 다음page로 가는 버튼 비활성화 후 생성 --%>
-										<c:if test="${page.endPage >= page.totalPage }">
-											<li class="disable">&gt;</li>	
-										</c:if>
-										<%-- ========== 다음버튼 만드는 부분 끝 ========== --%>
-									</ol>
-								</td>
-							</tr>
-						</tfoot>
-					</table>
+						</table>
+					</div>
+				<div id="board_list">
+						
 				</div>
 				<%-- ===== 게시글 작성 폼 시작 ===== --%>
 				<div id="addForm">
@@ -352,6 +275,13 @@
 	
 		$(function() {
 			//$().removeClass("selected");
+			$.ajax({
+					url: "Controller",
+					type: "post",
+					data: "type=boardListAjax"
+				}).done(function(result){
+					$("#addForm").html(result);
+				});
 			$(".selected").removeClass("selected")
 			$("#thirdmenu").addClass("selected");
 			
@@ -425,11 +355,18 @@
 		function addReply(frm) {
 			frm.submit();
 		};
+		
+		function paging(str) {
+			console.log(str);
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data: "type=boardListAjax&cPage="+str
+			}).done(function(result){
+				$("#addForm").html(result);
+			});
+		}
 	</script>
 </body>
-</c:if>
-<c:if test="${tvo ne null}">
-	<sg:redirect url="Controller">
-	</sg:redirect>
 </c:if>
 </html>
