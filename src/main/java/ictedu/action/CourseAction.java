@@ -41,7 +41,7 @@ public class CourseAction  implements Action{
 		StaffVO[] s_ar = EtcDAO.getList();
 		request.setAttribute("s_ar", s_ar);
 		
-		
+		System.out.println(listSelect);
 		if(listSelect.equals("1"))
 			return "/jsp/admin/courseReg/courselog.jsp";
 		else if(listSelect.equals("2"))

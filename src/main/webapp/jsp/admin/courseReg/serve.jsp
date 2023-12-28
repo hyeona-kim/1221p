@@ -125,57 +125,77 @@
 </article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script>
-		$(function() {
+	let select ="";
+	let select_year = "";
+	let numPerPage = "";
+	let value ="";
+	
+	$(function() {
+	
+		$.ajax({
+			url: "Controller",
+			type: "post",
+			data:"type="+encodeURIComponent("courseMain")+"&listSelect="+encodeURIComponent("2")+"&cPage="+encodeURIComponent(${param.cPage})
+		}).done(function(result){
+			$("#courseLog_Table").html(result);
+		});
+		
+		
+		//$().removeClass("selected");
+		$(".selected").removeClass("selected");
+		$(".l_select").removeClass("l_selected");
+		$("#secondmenu").addClass("selected");
+		$("#l_second").addClass("l_select");
+		
+		let now = new Date();	// 현재 날짜 및 시간
+		let year = now.getFullYear();
+		let str = "<option>년도선택</option>";
+		
+		for(let i=year+1; i>year-5; i--){
+			str+= "<option value="+i+">"+i+"</option>";
+		}
+		$("#selectYear").html(str);
+		
+		$("#searchType").on("change",function(){
+			select = this.value;
+		});
+		$("#selectYear").on("change",function(){
+			select_year = this.value;
+			console.log("dd");
 			$.ajax({
 				url: "Controller",
 				type: "post",
-				data:"type="+encodeURIComponent("courseMain")+"&listSelect="+encodeURIComponent("2")+"&cPage="+encodeURIComponent(${param.cPage})
+				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
 			}).done(function(result){
 				$("#courseLog_Table").html(result);
 			});
-			//$().removeClass("selected");
-			let now = new Date();	// 현재 날짜 및 시간
-			let year = now.getFullYear();
-			let str = "<option>년도선택</option>";
-			let select =$("#searchType").val();
-			let select_year = $("#selectYear").val();
-			let numPerPage = $("#numPerPage").val();
-			$(".selected").removeClass("selected")
-			$("#secondmenu").addClass("selected");
-			
-			for(let i=year+1; i>year-5; i--){
-				str+= "<option value="+i+">"+i+"</option>";
-			}
-			
-			$("#selectYear").html(str);
-			
-			$("#searchType").on("change",function(){
-				select = this.value;
-			});
-			$("#selectYear").on("change",function(){
-				select_year = this.value;
-			});
-			$("#numPerPage").on("change",function(){
-				numPerPage = this.value;
-			});
-			$("#search_bt").click(function(){
-				let value = $("#searchValue").val();
-				
-				$.ajax({
-					url: "Controller",
-					type: "post",
-					data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
-						+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
-				}).done(function(result){
-					$("#courseLog_Table").html(result);
-				});
-			});	
 		});
+		$("#numPerPage").on("change",function(){
+			numPerPage = this.value;
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
+		});
+		$("#search_bt").click(function(){
+			let value = $("#searchValue").val();
+			
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
+		});	
+	});
 	</script>
 </body>
-</c:if>
-<c:if test="${tvo ne null}">
-	<c:redirect url="Controller">
-	</c:redirect>
 </c:if>
 </html>

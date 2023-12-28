@@ -82,6 +82,8 @@ public class CourseMainAction implements Action {
 			return "/jsp/admin/courseReg/courseLog_ajax.jsp";
 		else if(listSelect.equals("2"))
 			return "/jsp/admin/courseReg/serve_ajax.jsp";
+		else if(listSelect.equals("3"))
+			return "/jsp/admin/courseReg/makeTime_ajax.jsp";
 		else
 			return "/jsp/admin/courseReg/courseLog_ajax.jsp";	
 		
