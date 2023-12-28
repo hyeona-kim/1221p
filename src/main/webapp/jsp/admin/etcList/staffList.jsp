@@ -157,7 +157,14 @@
 										<tr>
 											<td>${vs.index+1}</td>
 											<td>${vo.sf_name}</td>
-											<td>${vo.sf_code}</td>
+											<%-- 사용권한이 1(교수)인 사람만
+												 교수코드(sf_code)를 출력 --%>
+											<sf:if test="${vo.sf_code ne 'tcnull'}">
+												<td>${vo.sf_code}</td>
+											</sf:if>
+											<sf:if test="${vo.sf_code eq 'tcnull'}">
+												<td></td>
+											</sf:if>
 											<td>${vo.sf_job}</td>
 											<td>${vo.sf_id}</td>
 											<td>${vo.sf_pwd}</td>
@@ -298,11 +305,7 @@
 		function addStaff() {
 			// 유효성 검사 해야함
 			
-			/* if(url.isEmpty()){
-				alert("내용을 입력하세요");
-			}else {
-				alert("내용있음");
-			} */
+			
 			
 			document.forms[0].submit();
 		};

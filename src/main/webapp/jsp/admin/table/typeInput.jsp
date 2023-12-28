@@ -137,16 +137,16 @@
               $(this).prev().val($(this).val());
            });
           
-         $("#save").click(function(){
 
+         $("#save").click(function(){
             document.fm.submit();
          });
-      
-		$("#cancel").click(function() {
-			location.href="Controller?type=course&listSelect=1";
-		});
-		
-	});
+
+		  $("#cancel").click(function() {
+			  location.href="Controller?type=course&listSelect=1";
+		  });
+	  });
+
 
    </script>
 </body>

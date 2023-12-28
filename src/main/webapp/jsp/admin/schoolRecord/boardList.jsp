@@ -43,7 +43,7 @@
 	    border:1px solid silver;
 	    color:silver;
 	}
-	div#sugList_top{
+	div#boList_top{
 		background-color: black;
 		padding: 5px;
 		padding-left: 10px;
@@ -51,38 +51,38 @@
 		font-weight: bold;
 	}
 	
-	#sugWrap{
+	#boWrap{
 		width: 95%;
 		padding: 10px;
 		margin: 0px auto;
 	}
-	table#sugList{
+	table#boList{
 		border-collapse: collapse;
 		width: 98%;
 		margin: 10px auto 0px auto;
 		padding: 0px;
 	}
-	table#sugList thead{
+	table#boList thead{
 		text-align: center;
 	}
-	table#sugList thead th, table#sugList thead td{
+	table#boList thead th, table#boList thead td{
 		border: 1px solid #e9e9e6;
 		padding: 5px;
 	}
-	table#sugList thead th {
+	table#boList thead th {
 		background-color: #f0f0ef;
 	}
-	table#sugList thead td {
+	table#boList thead td {
 		font-size: 13px;
 	}
-	table#sugList caption{
+	table#boList caption{
 		text-indent: -9999px;
 		height: 0px;
 	}
-	table#sugList thead tr:last-child td {
+	table#boList thead tr:last-child td {
 		border: none;
 	}
-	#sug_add_btn{
+	#bo_add_btn{
 		background-color: #4cdbcf;
 		border-radius: 3px;
 		border: none;
@@ -92,17 +92,17 @@
 		color: white; 
 		text-decoration: none;
 	}
-	table#sugList tbody{
+	table#boList tbody{
 		text-align: center;
 	}
-	table#sugList tbody th, table#sugList tbody td{
+	table#boList tbody th, table#boList tbody td{
 		border: 1px solid #e9e9e6;
 		padding: 5px;
 	}
-	table#sugList tbody th {
+	table#boList tbody th {
 		background-color: #f0f0ef;
 	}
-	table#sugList tbody td {
+	table#boList tbody td {
 		font-size: 13px;
 	}
 	#addForm table caption{ text-indent: -9999px; }
@@ -134,30 +134,30 @@
 	#addForm tfoot td{
 		border: none;
 	}
-	#sugContent table caption{ text-indent: -9999px; }
-	#sugContent table {
+	#boContent table caption{ text-indent: -9999px; }
+	#boContent table {
 		width: 950px;
 		height: 450px;
 		border-collapse: collapse;
 		position: absolute;
 		
 	}
-	#sugContent table th, #sugContent table td{
+	#boContent table th, #boContent table td{
 		border: 1px solid #e9e9e6;
 		padding: 5px;
 	}
-	#sugContent {
+	#boContent {
 		text-align: center;
 		margin: 0px auto;
 		padding: 10px;
 	}
-	#sugContent .left {
+	#boContent .left {
 		text-align: left;
 	}
-	#sugContent th{
+	#boContent th{
 		width: 20%;
 	}
-	#sugContent tfoot td{
+	#boContent tfoot td{
 		border: none;
 	}
 	#replyForm table caption{ text-indent: -9999px; }
@@ -194,7 +194,7 @@
 		font-size: 14px;
 		color: white; 
 	}
-	.sug_btn{
+	.bo_btn{
 		display: inline-block;
 		background-color: #cc1919;
 		border-radius: 3px;
@@ -205,11 +205,11 @@
 		color: white; 
 		text-decoration: none;
 	}
-	.sug_list_btn{ background-color: #f0f0ef; }
-	.sug_reply_btn{ background-color: #cc1919; }
-	.sug_print_btn{ background-color: #1876c7; }
-	.sug_edit_btn{ background-color: #1876c7; }
-	.sug_del_btn{ background-color: #cc1919; }
+	.bo_list_btn{ background-color: #f0f0ef; }
+	.bo_reply_btn{ background-color: #cc1919; }
+	.bo_print_btn{ background-color: #1876c7; }
+	.bo_edit_btn{ background-color: #1876c7; }
+	.bo_del_btn{ background-color: #cc1919; }
 </style>
 
 </head>
@@ -221,28 +221,28 @@
 			<jsp:include page="./leftList.jsp"></jsp:include>
 			<div class="right">
 				<!--  여기서 표시될 테이블들 가지고오기 -->
-				<div id="sugWrap">
-					<div id="sugList_top">고충 및 건의사항</div>
-					<table id="sugList">
-						<caption>고충 및 건의사항 검색 테이블</caption>
+				<div id="boWrap">
+					<div id="boList_top">게시판</div>
+					<table id="boList">
+						<caption>게시판 테이블</caption>
 						<%-- ===== 검색하는 부분 ===== --%>
 						<thead>
 							<tr>
 								<th>검색</th>
 								<td>
-									<select id="search_tag">
-										<option value="subject">제목</option>
+									<select>
+										<option>제목</option>
 										<option>작성자</option>
 									</select>
-									<input type="text" id="search_value" name="search_value"/>
-									<button type="button" id="search_btn" onclick="searchSugg()">검색</button>
+									<input type="text"/>
+									<button type="button" id="search_btn">검색</button>
 								</td>
 								<th colspan="2">전체공지</th>
 								<td colspan="2">
 									<input type="checkbox"/>숨김
 								</td>
 							</tr>
-							<tr><td colspan="6" align="right"><button type="button" id="sug_add_btn">글쓰기</button></td></tr>
+							<tr><td colspan="6" align="right"><button type="button" id="bo_add_btn">글쓰기</button></td></tr>
 						</thead>
 						<tbody>
 						<%-- ===== 출력할 건의사항 항목 ===== --%>
@@ -257,24 +257,24 @@
 						<c:if test="${vo ne null}"> <%-- vo는 로그인 정보 --%>
 						<%-- ===== 로그인 정보가 있다면 반복문을 통해
 									건의사항 목록 출력 ===== --%>
-							<c:forEach items="${requestScope.ar}" varStatus="vs" var="svo">
+							<c:forEach items="${ar }" varStatus="vs" var="bvo">
 								<tr>
 									<td>${vs.index+1}</td>
 									<td align="left">
 										<%-- 전체공지로 클릭되었다면(notice가 1일때)
 											 공지 마크가 추가되어야함 --%>
-										<c:if test="${svo.notice eq '1'}">
+										<c:if test="${bvo.bd_notice eq '1'}">
 											<span id="notice">공지</span>
 										</c:if>
-										<a href="javascript:viewContent('${svo.sg_subject}','${svo.sg_write_date}'
-																		,'${svo.sg_hit}','${svo.sg_content}')">
-											${svo.sg_subject}
+										<a href="javascript:viewContent('${bvo.bd_subject}','${bvo.bd_write_date}'
+																		,'${bvo.bd_hit}','${bvo.bd_content}')">
+											${bvo.bd_subject}
 										</a>
 									</td>										
-									<td>${svo.sg_file}</td>
+									<td>${bvo.bd_file}</td>
 									<td>***</td>
-									<td>${svo.sg_write_date}</td>
-									<td>${svo.sg_hit}</td>
+									<td>${bvo.bd_write_date}</td>
+									<td>${bvo.bd_hit}</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -293,7 +293,7 @@
 										<%-- startPage가 5보다 같거나 클 경우
 											 이전page로 돌아가는 버튼 활성화 후 생성 --%>
 										<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-											<li><a href="Controller?type=suggestionList&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
+											<li><a href="Controller?type=boardList&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
 										</c:if>
 										<%-- ========== 이전버튼 만드는 부분 끝 ========== --%>
 										
@@ -303,7 +303,7 @@
 												<li class="now">${vs.index }</li>
 											</c:if>
 											<c:if test="${vs.index ne page.nowPage }">
-												<li><a href="Controller?type=suggestionList&cPage=${vs.index}">${vs.index}</a></li>
+												<li><a href="Controller?type=board&cPage=${vs.index}">${vs.index}</a></li>
 											</c:if>
 										</c:forEach>
 										<%-- ========== page 번호 만드는 부분 끝 ==========--%>
@@ -312,7 +312,7 @@
 										<%-- endPage가 마지막 끝나는 page보다 작을 경우
 											 다음page로 가는 버튼 활성화 후 생성 --%>
 										<c:if test="${page.endPage < page.totalPage }">
-											<li><a href="Controller?type=suggestionList&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
+											<li><a href="Controller?type=board&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
 										</c:if>
 										<%-- endPage가 마지막 끝나는 page보다 크거나 같을 경우
 											 다음page로 가는 버튼 비활성화 후 생성 --%>
@@ -326,44 +326,45 @@
 						</tfoot>
 					</table>
 				</div>
-				<%-- ===== 고충 및 건의사항 작성 폼 시작 ===== --%>
+				<%-- ===== 게시글 작성 폼 시작 ===== --%>
 				<div id="addForm">
 				
 				</div>
-				<%-- ===== 고충 및 건의사항 작성 폼 끝 ===== --%>
+				<%-- ===== 게시글 작성 폼 끝 ===== --%>
 				
-				<%-- ===== 건의사항 내용 시작 ===== --%>
-				<div id="sugContent">
+				<%-- ===== 게시글 내용 시작 ===== --%>
+				<div id="boContent">
 				
 				</div>
-				<%-- ===== 건의사항 내용 끝 ===== --%>
+				<%-- ===== 게시글 내용 끝 ===== --%>
 				
-				<%-- ===== 건의사항 답변 작성 폼 시작 ===== --%>
+				<%-- ===== 게시글답변 작성 폼 시작 ===== --%>
 				<div id="replyForm">
 				
 				</div>
-				<%-- ===== 건의사항 답변 작성 폼 끝 ===== --%>
+				<%-- ===== 게시글 답변 작성 폼 끝 ===== --%>
 			</div>
 		</div>
 	</article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
+	
 		$(function() {
 			//$().removeClass("selected");
 			$(".selected").removeClass("selected")
 			$("#thirdmenu").addClass("selected");
 			
-			$("#sug_add_btn").bind("click", function(){
+			$("#bo_add_btn").bind("click", function(){
 				$.ajax({
-					url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/add_ajax.jsp",
+					url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/addBoard_ajax.jsp",
 					type: "post"
 				}).done(function(result){
 					$("#addForm").html(result);
 				});
 				
 				$("#addForm").dialog({
-					title : '고충 및 건의사항 작성',
+					title : '게시글 작성',
 					modal : true,
 					width : 1000,
 					height : 600
@@ -372,8 +373,8 @@
 			
 		});
 		
-		<%-- 건의사항 작성 폼에서 [등록] 버튼을 눌렀을때 수행 --%>
-		function addSuggestion() {
+		<%-- 게시글 작성 폼에서 [등록] 버튼을 눌렀을때 수행 --%>
+		function addBoard() {
 			// 유효성 검사 해야함
 			
 			document.forms[0].submit();
@@ -382,17 +383,17 @@
 		<%-- 글의 제목을 클릭했을 때 내용 보기 --%>
 		function viewContent(subject, date, hit, content) {
 			$.ajax({
-				url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/view_ajax.jsp",
+				url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/boardView_ajax.jsp",
 				type: "post",
 				data: "subject="+encodeURIComponent(subject)+
 					  "&date="+encodeURIComponent(date)+
 					  "&hit="+encodeURIComponent(hit)+
 					  "&content="+encodeURIComponent(content)
 			}).done(function(result){
-				$("#sugContent").html(result);
+				$("#boContent").html(result);
 			});
 			
-			$("#sugContent").dialog({
+			$("#boContent").dialog({
 				title : '고충 및 건의사항',
 				modal : true,
 				width : 1000,
@@ -403,7 +404,7 @@
 		<%-- 건의사항 보기화면에서 [답변]을 눌렀을때 수행 --%>
 		function reply(subject, content) {
 			$.ajax({
-				url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/reply_ajax.jsp",
+				url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/boardReply_ajax.jsp",
 				type: "post",
 				data: "subject="+subject+
 					  "&content="+content+
@@ -424,19 +425,11 @@
 		function addReply(frm) {
 			frm.submit();
 		};
-		
-		<%-- 건의사항 목록에서 [검색]을 눌렀을때 수행 --%>
-		function searchSugg() {
-			let tag = document.getElementById("search_tag").value;
-			let value = document.getElementById("search_value").value;
-			location.href = "Controller?type=searchSugg&tag="+encodeURIComponent(tag)+"&value="+encodeURIComponent(value);
-		};
-		
 	</script>
 </body>
 </c:if>
 <c:if test="${tvo ne null}">
-	<c:redirect url="Controller">
-	</c:redirect>
+	<sg:redirect url="Controller">
+	</sg:redirect>
 </c:if>
 </html>
