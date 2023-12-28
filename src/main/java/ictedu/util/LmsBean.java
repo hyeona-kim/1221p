@@ -11,7 +11,7 @@ import mybatis.vo.SuggestionVO;
 import mybatis.vo.TimeVO;
 
 public class LmsBean {
-	//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占시곤옙표 ti_idx占쏙옙占쏙옙 占쌨아쇽옙 占쌓것울옙 占쏙옙占쏙옙 TimeVO占쏙옙 占쏙옙환占쏙옙占쌍댐옙 占쏙옙체 占쏙옙占쏙옙占�
+	
 	
 	public TimeVO searchTime(String ti_idx) {
 		TimeVO tvo = null;
@@ -27,7 +27,7 @@ public class LmsBean {
 	
 	public StaffVO searchStaff(String t_idx) {
 		StaffVO tvo = null;
-		//占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 sql占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
+		
 		StaffVO[] ar = EtcDAO.getList();
 		for(StaffVO vo : ar) {
 			if(vo.getSf_idx().equals(t_idx)) {

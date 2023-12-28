@@ -9,6 +9,42 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 <style>
+	table tfoot ol.page {
+	    list-style:none;
+	}
+	
+	table tfoot ol.page li {
+	    float:left;
+	    margin-right:8px;
+	}
+	
+	table tfoot ol.page li a {
+	    display:block;
+	    padding:3px 7px;
+	    border:1px solid #00B3DC;
+	    color:#2f313e;
+	    font-weight:bold;
+	    text-decoration: none;
+	}
+	
+	table tfoot ol.page li a:hover {
+	    background:#00B3DC;
+	    color:white;
+	    font-weight:bold;
+	}
+	.disable {
+	    padding:3px 7px;
+	    border:1px solid silver;
+	    color:silver;
+	}
+	
+	.now {
+	   padding:3px 7px;
+	    border:1px solid #ff4aa5;
+	    background:#ff4aa5;
+	    color:white;
+	    font-weight:bold;
+	}
 	#staffWrap{
 		width: 95%;
 		margin: auto;
@@ -21,19 +57,19 @@
 		line-height: 40px;
 	}
 	
-	#searchTime, #makeTime{
+	#searchTime, #makeCourse{
 		margin-top:10px;
 		border-collapse: collapse;
 		width: 100%;
 	}
-	#searchTime td, #searchTime th, #makeTime td, #makeTime th{
+	#searchTime td, #searchTime th, #makeCourse td, #makeCourse th{
 		border: 1px solid #ddd;
 		height: 40px;
 		padding-left: 10px;
 	}
-	#searchTime th, #makeTime th{background-color: #ddd;}
+	#searchTime th, #makeCourse th{background-color: #ddd;}
 	
-	#searchTime caption, #makeTime caption{
+	#searchTime caption, #makeCourse caption{
 		text-indent: -9999px;
 		height: 0;
 	}
@@ -74,55 +110,14 @@
 											<option>강의실</option>
 										</select>
 										<input type="text"/>
-										<button type="button">검 색</button>
+										<button type="button" id="search_bt">검 색</button>
 									</td>
 								</tr>
 							</thead>
 						</table>
-						<table id="makeTime">
-							<colgroup>
-								<col width="">
-							</colgroup>
-							<caption>과정별시간표만들기</caption>
-							<thead>
-								<tr>
-									<th>과정명</th>
-									<th>담당교수</th>
-									<th>개강일</th>
-									<th>종료일</th>
-									<th>요일</th>
-									<th>회차</th>
-									<th>주차</th>
-									<th>모집</th>
-									<th>관리</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:if test="${ar ne null }">
-								<c:forEach items="${ar }" var="tvo" varStatus="vs"></c:forEach>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>
-										 <button type="button">강사/시설/교과목 액셀등록</button>
-										 <button type="button">HRD시간표 액셀등록</button>
-										 <button type="button">주별시간표보기</button>
-									</td>
-								</tr>
-								</c:if>
-								<c:if test="${ar eq null}">
-									<tr>
-										<td colspan="9">시간표 리스트가 존재하지 않습니다.</td>
-									</tr>
-								</c:if>
-							</tbody>
-						</table>
+						<div id="courseLog_Table">
+							
+						</div>
 					</article>
 				</div>
 			</div>	
@@ -130,19 +125,69 @@
 	</article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script>
-		$(function() {
-			//$().removeClass("selected");
-			$(".selected").removeClass("selected")
-			$("#secondmenu").addClass("selected");
-			// 현재 년도 구하기 -5  6회 반복문 //
-			let now = new Date();	// 현재 날짜 및 시간
-			let year = now.getFullYear();
-			let str = "<option>년도선택</option>";
-			for(let i=year+1; i>year-5; i--){
-				str+= "<option value="+i+">"+i+"</option>";
-			}
-			$("#selectYear").html(str);
+	$(function() {
+		$.ajax({
+			url: "Controller",
+			type: "post",
+			data:"type="+encodeURIComponent("courseMain")+"&listSelect="+encodeURIComponent("3")+"&cPage="+encodeURIComponent(${param.cPage})
+		}).done(function(result){
+			$("#courseLog_Table").html(result);
 		});
+		//$().removeClass("selected");
+		let now = new Date();	// 현재 날짜 및 시간
+		let year = now.getFullYear();
+		let str = "<option>년도선택</option>";
+		let select =$("#searchType").val();
+		let select_year = $("#selectYear").val();
+		let numPerPage = $("#numPerPage").val();
+		$(".selected").removeClass("selected")
+		$("#secondmenu").addClass("selected");
+		
+		for(let i=year+1; i>year-5; i--){
+			str+= "<option value="+i+">"+i+"</option>";
+		}
+		
+		$("#selectYear").html(str);
+		
+		$("#searchType").on("change",function(){
+			select = this.value;
+			
+		});
+		$("#selectYear").on("change",function(){
+			select_year = this.value;
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
+		});
+		$("#numPerPage").on("change",function(){
+			numPerPage = this.value;
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
+		});
+		$("#search_bt").click(function(){
+			let value = $("#searchValue").val();
+			
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
+		});	
+	});
 	</script>
 </body>
 </c:if>

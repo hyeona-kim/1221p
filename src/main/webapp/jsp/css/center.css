@@ -59,6 +59,9 @@
 		line-height: 40px;
 	}
 	
+	#list2 .l_select a{
+		background: #000;
+	}
 	
 	#list2 .content a{
 		display: inline-block;
@@ -67,3 +70,5 @@
 		text-decoration: none;
 		color: white;
 	}
+	
+	

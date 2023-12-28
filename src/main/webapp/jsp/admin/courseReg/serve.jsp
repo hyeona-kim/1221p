@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 <style>
-table tfoot ol.page {
+	table tfoot ol.page {
 	    list-style:none;
 	}
 	
@@ -116,70 +116,9 @@ table tfoot ol.page {
 							</thead>
 						</table>
 					</form>	
-				<table id="makeTime">
-				<caption>과정별 교수계획서 및 학습 안내서 리스트</caption>
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>과정명</th>
-							<th>과정코드</th>
-							<th>담당교수</th>
-							<th>개강일</th>
-							<th>종료일</th>
-							<th>요일</th>
-							<th>회차</th>
-							<th>모집인원</th>
-							<th>관리</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<td colspan="10">
-								<ol class="page">
-			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-				<li class="disable">&lt;</li>
-			</c:if>	
-	
-			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-				<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
-			</c:if>
-
-			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-				<c:if test="${vs.index eq page.nowPage }">
-					<li class="now">${vs.index }</li>
-				</c:if>
-				<c:if test="${vs.index ne page.nowPage }">
-					<li><a href="Controller?type=course&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
-				</c:if>
-			</c:forEach>
-	
-			<c:if test="${page.endPage < page.totalPage }">
-				<li><a href="Controller?type=course&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
-			</c:if>
-			<c:if test="${page.endPage >= page.totalPage }">
-				<li class="disable">&gt;</li>	
-			</c:if>
-                      		</ol>
-                          </td>
-						</tr>
-					</tfoot>
-						<c:forEach var="vo2" items="${requestScope.ar }" varStatus="vs">
-						<c:set var="num" value="${page.totalRecord - (page.numPerPage*(page.nowPage-1))}"/>
-						<tr>
-							<td>${num-vs.index}</td>
-							<td>${vo2.c_name}</td>
-							<td>W1805300001	</td>
-							<td>${requestScope.sf_names[vs.index]}</td>
-							<td>${vo2.start_date }</td>
-							<td>${vo2.end_date }</td>
-							<td>${vo2.ti_idx}</td>
-							<td>${vo2.c_round_num }</td>
-							<td>${vo2.c_peo_num}</td>
-							<td><button type="button">과정별 학습 안내서</button></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+				<div id="courseLog_Table">	
+					
+			</div>
 			</div>
 		</div>
 	</div>
@@ -187,6 +126,13 @@ table tfoot ol.page {
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script>
 		$(function() {
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data:"type="+encodeURIComponent("courseMain")+"&listSelect="+encodeURIComponent("2")+"&cPage="+encodeURIComponent(${param.cPage})
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
 			//$().removeClass("selected");
 			let now = new Date();	// 현재 날짜 및 시간
 			let year = now.getFullYear();
@@ -214,20 +160,15 @@ table tfoot ol.page {
 			});
 			$("#search_bt").click(function(){
 				let value = $("#searchValue").val();
-				if(value == null){
-					location.href= "Controller?type=course&listSelect=${param.listSelect}";
-				}else{
 				
-					if(select == "")
-						select ="1";
-					if(select_year == "")
-						select_year = year+1;
-					if(numPerPage == "")
-						numPerPage = "5";
-					let value = $("#searchValue").val();
-					//console.log(select+","+value);s
-					location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
-				}
+				$.ajax({
+					url: "Controller",
+					type: "post",
+					data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+						+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
+				}).done(function(result){
+					$("#courseLog_Table").html(result);
+				});
 			});	
 		});
 	</script>

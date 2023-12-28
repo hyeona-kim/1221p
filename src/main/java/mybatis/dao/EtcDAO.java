@@ -40,7 +40,7 @@ public class EtcDAO {
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
 		
-		ar = ss.selectOne("staff.all",sf_name);
+		ar = ss.selectOne("staff.search",sf_name);
 		
 		ss.close();
 		return ar;
