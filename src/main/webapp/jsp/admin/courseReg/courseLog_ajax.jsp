@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<table id="makeCourse">
+		<table id="makeCourse">
+			<caption>교육과정리스트</caption>
 							<thead>
 								<tr>
 									<th>번호</th>
@@ -59,7 +60,7 @@
 			</c:if>	
 	
 			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-				<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
+				<li><a href="javascript:paging('${page.startPage-page.pagePerBlock }')">&lt;</a></li>
 			</c:if>
 
 			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
@@ -72,7 +73,7 @@
 			</c:forEach>
 	
 			<c:if test="${page.endPage < page.totalPage }">
-				<li><a href="Controller?type=course&cPage=${page.startPage+page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
+				<li><a href="javascript:paging('${page.startPage + page.pagePerBlock }')">&gt;</a></li>
 			</c:if>
 			<c:if test="${page.endPage >= page.totalPage }">
 				<li class="disable">&gt;</li>	

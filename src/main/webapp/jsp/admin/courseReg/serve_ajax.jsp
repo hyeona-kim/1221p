@@ -27,7 +27,7 @@
 		
 				<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
 					<c:if test="${param.select != null}">
-						<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
+						<li><a href="javascript:paging('${page.startPage-page.pagePerBlock }')">&lt;</a></li>
 					</c:if>
 				</c:if>
 	
@@ -36,12 +36,12 @@
 						<li class="now">${vs.index }</li>
 					</c:if>
 					<c:if test="${vs.index ne page.nowPage }">
-						<li><a href="Controller?type=course&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
+						<li><a href="javascript:paging('${vs.index}')">${vs.index}</a></li>
 					</c:if>
 				</c:forEach>
 		
 				<c:if test="${page.endPage < page.totalPage }">
-					<li><a href="Controller?type=course&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
+					<li><a href="javascript:paging('${page.startPage + page.pagePerBlock }')">&gt;</a></li>
 				</c:if>
 				<c:if test="${page.endPage >= page.totalPage }">
 					<li class="disable">&gt;</li>	

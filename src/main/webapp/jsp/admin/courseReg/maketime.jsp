@@ -57,19 +57,19 @@
 		line-height: 40px;
 	}
 	
-	#searchTime, #makeCourse{
+	#searchCourse, #makeCourse{
 		margin-top:10px;
 		border-collapse: collapse;
 		width: 100%;
 	}
-	#searchTime td, #searchTime th, #makeCourse td, #makeCourse th{
+	#searchCourse td, #searchTime th, #makeCourse td, #makeCourse th{
 		border: 1px solid #ddd;
 		height: 40px;
 		padding-left: 10px;
 	}
-	#searchTime th, #makeCourse th{background-color: #ddd;}
+	#searchCourse th, #makeCourse th{background-color: #ddd;}
 	
-	#searchTime caption, #makeCourse caption{
+	#searchCourse caption, #makeCourse caption{
 		text-indent: -9999px;
 		height: 0;
 	}
@@ -87,13 +87,13 @@
 					<article>
 						<%-- ========== 교직원현황 테이블 시작 ========== --%>
 						<div id="staffList_top">과정별시간표만들기</div>
-						<table id="searchTime">
+						<table id="searchCourse">
 						<caption>과정검색</caption>
 							<thead>
 								<tr>
 									<th>검색</th>
 									<td>
-										<select>
+										<select id="numPerPage">
 											<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
 											<option>표시개수</option>
 											<option>5</option>
@@ -104,12 +104,12 @@
 										</select>
 									</td>
 									<td>
-										<select>
-											<option>훈련강사</option>
-											<option>과정타입</option>
-											<option>강의실</option>
+										<select id="searchType">
+											<option value="1">훈련강사</option>
+											<option value="2">과정타입</option>
+											<option value="3">강의실</option>
 										</select>
-										<input type="text"/>
+										<input type="text" id="searchValue"/>
 										<button type="button" id="search_bt">검 색</button>
 									</td>
 								</tr>
@@ -125,7 +125,14 @@
 	</article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script>
+
+	let select ="";
+	let select_year = "";
+	let numPerPage = "";
+	let value ="";
+	
 	$(function() {
+	
 		$.ajax({
 			url: "Controller",
 			type: "post",
@@ -133,25 +140,25 @@
 		}).done(function(result){
 			$("#courseLog_Table").html(result);
 		});
+		
+		
 		//$().removeClass("selected");
+		$(".selected").removeClass("selected");
+		$(".l_select").removeClass("l_selected");
+		$("#secondmenu").addClass("selected");
+		$("#l_third").addClass("l_select");
+		
 		let now = new Date();	// 현재 날짜 및 시간
 		let year = now.getFullYear();
 		let str = "<option>년도선택</option>";
-		let select =$("#searchType").val();
-		let select_year = $("#selectYear").val();
-		let numPerPage = $("#numPerPage").val();
-		$(".selected").removeClass("selected")
-		$("#secondmenu").addClass("selected");
 		
 		for(let i=year+1; i>year-5; i--){
 			str+= "<option value="+i+">"+i+"</option>";
 		}
-		
 		$("#selectYear").html(str);
 		
 		$("#searchType").on("change",function(){
 			select = this.value;
-			
 		});
 		$("#selectYear").on("change",function(){
 			select_year = this.value;
@@ -159,7 +166,7 @@
 				url: "Controller",
 				type: "post",
 				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
-					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
 			}).done(function(result){
 				$("#courseLog_Table").html(result);
 			});
@@ -170,7 +177,7 @@
 				url: "Controller",
 				type: "post",
 				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
-					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
 			}).done(function(result){
 				$("#courseLog_Table").html(result);
 			});
@@ -182,17 +189,26 @@
 				url: "Controller",
 				type: "post",
 				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
-					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})+"&search="+encodeURIComponent("search_ok")
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
 			}).done(function(result){
 				$("#courseLog_Table").html(result);
 			});
 		});	
+		
 	});
+	
+	function paging(str) {
+		$.ajax({
+			url: "Controller",
+			type: "post",
+			data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+				+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(str),
+		}).done(function(result){
+			$("#courseLog_Table").html(result);
+		});
+	}
 	</script>
 </body>
 </c:if>
-<c:if test="${tvo ne null}">
-	<c:redirect url="Controller">
-	</c:redirect>
-</c:if>
+
 </html>

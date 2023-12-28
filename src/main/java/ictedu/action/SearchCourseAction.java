@@ -110,12 +110,11 @@ public class SearchCourseAction implements Action{
 		
 		//비동기 통신할 jsp로 보내기
 		if(listSelect.equals("1"))
-//			return "/jsp/admin/courseReg/searchCourse.jsp";
 			return "/jsp/admin/courseReg/courseLog_ajax.jsp";
 		else if(listSelect.equals("2"))
 			return "/jsp/admin/courseReg/serve_ajax.jsp";
 		else if(listSelect.equals("3"))
-			return "Controller?type=course&listSelect=2"+listSelect;
+			return "/jsp/admin/courseReg/makeTime_ajax.jsp";
 		else
 			return "/jsp/admin/courseReg/courseLog_ajax.jsp";
 		
