@@ -7,9 +7,17 @@ import org.apache.ibatis.session.SqlSession;
 
 import mybatis.service.FactoryService;
 import mybatis.vo.BoardVO;
+import mybatis.vo.SuggestionVO;
 import mybatis.vo.TraineeVO;
 
 public class BoardDAO {
+	
+	public static int reGetTotalRecord(HashMap<String, String> map) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.selectOne("board.reCount", map);
+		ss.close();
+		return cnt;
+	}
 	
 	public static int getTotalRecord() {
 		SqlSession ss = FactoryService.getFactory().openSession();
@@ -60,4 +68,19 @@ public class BoardDAO {
 		}
 		ss.close();
 	}
+	
+	public static BoardVO[] searchBoard(HashMap<String, String> map) {
+		BoardVO[] ar = null;
+		
+		SqlSession ss = FactoryService.getFactory().openSession();
+		List<BoardVO> list = ss.selectList("board.search", map);
+		if (list != null && !list.isEmpty()) {
+			ar = new BoardVO[list.size()];
+			list.toArray(ar);
+		}
+		ss.close();
+		
+		return ar;
+	}
+	
 }

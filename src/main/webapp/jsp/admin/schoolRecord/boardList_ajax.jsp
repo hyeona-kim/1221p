@@ -63,6 +63,9 @@
                                  <c:if test="${vs.index ne page.nowPage }">
                                     <li><a href="javascript:paging('${vs.index}')">${vs.index}</a></li>
                                  </c:if>
+							<c:if test="${vs.index ne page.nowPage && bl ne null}">
+								<li><a href="javascript:searchBoard('${vs.index}')">${vs.index}</a></li>
+							</c:if>
                               </c:forEach>
                               <%-- ========== page 번호 만드는 부분 끝 ==========--%>
                               
