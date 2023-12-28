@@ -82,8 +82,8 @@
 						</td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text1"  value=""/>
-							<input type="color" id="color1"  value=""/>
+							<input type="text" class ="text"  value=""/>
+							<input type="color" class="color1"  value=""/>
 						</td>
 					</tr>
 					<tr>
@@ -91,8 +91,8 @@
 						<td><input type="text" id="type2"  value=""/></td>
 						<td class="color">색상</td>
 						<td>
-							<input type="text" name ="text2"  value="$"/>
-							<input type="color" id="color2"  value=""/>
+							<input type="text" class ="text"  value="$"/>
+							<input type="color" class="color1"  value=""/>
 						</td>
 					</tr>
 					<tr>
@@ -106,51 +106,6 @@
 						</td>
 					</tr>
 					</c:forEach>
-				<c:forEach var="i" begin="${f:length(c_ar)+1}" end="7">
-					<tr>
-						<td class="num">4</td>
-						<td><input type="text" id="type4"  value=""/></td>
-						<td class="color">색상</td>
-						<td>
-							<input type="text" name ="text4"  value=""/>
-							<input type="color" id="color4"  value=""/>
-						</td>
-					</tr>
-					<tr>
-						<td class="num">5</td>
-						<td><input type="text" id="type5"  value=""/></td>
-						<td class="color">색상</td>
-						<td>
-							<input type="text" name ="text5"  value=""/>
-							<input type="color" id="color5"  value=""/>
-						</td>
-				
-					</tr>
-				</c:forEach>
-				</c:if>
-				<c:if test="${c_ar eq null }">
-				<c:forEach var="i" begin="1" end="7">
-					<tr>
-
-						<td class="num">6</td>
-						<td><input type="text" id="type6"  value=""/></td>
-						<td class="color">색상</td>
-						<td>
-							<input type="text" name ="text6"  value=""/>
-							<input type="color" id="color6"  value=""/>
-						</td>
-					</tr>
-					<tr>
-						<td class="num">7</td>
-						<td><input type="text" id="type7"  value=""/></td>
-						<td class="color">색상</td>
-						<td>
-							<input type="text" name ="text7"  value=""/>
-							<input type="color" id="color7"  value=""/>
-						</td>
-				
-					</tr>
-				</c:forEach>
 				</c:if>
 				</tbody>
 			</table>
@@ -170,6 +125,11 @@
 			$("#save").click(function(){
 
 				document.fm.submit();
+			});
+			
+			$(".color1").on("change input", function() {
+				$(this).prev().val($(this).val());
+				// $(".text").val(color);
 			});
 		});
 

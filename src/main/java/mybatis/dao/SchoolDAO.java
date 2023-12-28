@@ -6,10 +6,18 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import mybatis.service.FactoryService;
+import mybatis.vo.StaffVO;
 import mybatis.vo.SuggestionVO;
 import mybatis.vo.TraineeVO;
 
 public class SchoolDAO {
+	
+	public static int reGetTotalRecord(HashMap<String, String> map) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int cnt = ss.selectOne("suggestion.reCount", map);
+		ss.close();
+		return cnt;
+	}
 	
 	public static int getTotalRecord() {
 		SqlSession ss = FactoryService.getFactory().openSession();
@@ -73,5 +81,19 @@ public class SchoolDAO {
 			ss.rollback();
 		}
 		ss.close();
+	}
+	
+	public static SuggestionVO[] searchSugg(HashMap<String, String> map) {
+		SuggestionVO[] ar = null;
+		
+		SqlSession ss = FactoryService.getFactory().openSession();
+		List<SuggestionVO> list = ss.selectList("suggestion.search", map);
+		if (list != null && !list.isEmpty()) {
+			ar = new SuggestionVO[list.size()];
+			list.toArray(ar);
+		}
+		ss.close();
+		
+		return ar;
 	}
 }
