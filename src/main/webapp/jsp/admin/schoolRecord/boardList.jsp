@@ -210,6 +210,16 @@
 	.bo_print_btn{ background-color: #1876c7; }
 	.bo_edit_btn{ background-color: #1876c7; }
 	.bo_del_btn{ background-color: #cc1919; }
+	
+	#trFirst{
+		border-collapse: collapse;
+		width: 100%;
+		height: 20px;
+		background-color: #dcdcdc;
+	}
+	
+	
+	
 </style>
 
 </head>
@@ -231,12 +241,12 @@
 							<tr>
 								<th>검색</th>
 								<td>
-									<select>
-										<option>제목</option>
+									<select  id="search_tag">
+										<option value="subject">제목</option>
 										<option>작성자</option>
 									</select>
-									<input type="text"/>
-									<button type="button" id="search_btn">검색</button>
+									<input type="text"  id="search_value" name="search_value" />
+									<button type="button" id="search_btn" onclick="searchBoard()">검색</button>
 								</td>
 								<th colspan="2">전체공지</th>
 								<td colspan="2">
@@ -246,6 +256,7 @@
 							<tr><td colspan="6" align="right"><button type="button" id="bo_add_btn">글쓰기</button></td></tr>
 						</table>
 					</div>
+				<%-- ===== 비동기식으로 표현할 게시글 시작 ===== --%>
 				<div id="board_list">
 						
 				</div>
@@ -366,6 +377,21 @@
 				$("#addForm").html(result);
 			});
 		}
+		
+		<%-- 건의사항 목록에서 [검색]을 눌렀을때 수행 --%>
+		function searchBoard(cPage) {
+			let tag = document.getElementById("search_tag").value;
+			let value = document.getElementById("search_value").value;
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data: "type=searchBoard&cPage="+encodeURIComponent(cPage)+
+					  "&tag="+encodeURIComponent(tag)+"&value="+encodeURIComponent(value)
+			}).done(function(result){
+				$("#addForm").html(result);
+			});
+			// location.href = "Controller?type=searchSugg&tag="+encodeURIComponent(tag)+"&value="+encodeURIComponent(value);
+		};
 	</script>
 </body>
 </c:if>
