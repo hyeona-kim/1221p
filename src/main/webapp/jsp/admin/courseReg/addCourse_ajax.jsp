@@ -1,89 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-
-	div#wrap{
-		width: 100%;
-		border-bottom:1px solid #EAEAEA;
-		
-	}
-	
-	body{
-		margin:0;
-		padding:0;
-	}
-	
-	h2{
-		border: 1px solid black;
-		color: #FFFFFF;
-		background-color: #212121;
-		margin:0;
-		border-radius:5px;
-		padding: 0;
-		height: 60px;
-		line-height: 60px;
-	}
-	
-	
-	table{
-		width:100%;
-		border: 1px solid #EAEAEA;
-		border-collapse: collapse;
-		margin-top: 50px;
-
-	}
-	
-	th,td{
-		border-bottom : 1px solid #EAEAEA;
-		padding:10px;
-	}
-
-table th{
-	background-color: #D6F0FF;
-}
-
-div#box{
-	display: inline-block;
-	color: red;
-	width: 300px;
-	height: 20px;
-	padding:0;
-	margin:0;
-	margin-left:6px;
-	font-weight: bold; 
-
-}
-
-tfoot>tr:first-child td{
-	
-	color:blue;
-	font-weight: bold;
-	border-bottom: none;
-	font-size: 15px;
-	padding-top:10ppx;
-}
-
-thead tr{
-	font-weight: bold;
-	border-bottom: 1px solid black;
-}
-</style>
-
-</head>
-<body>
-	<div id ="wrap">
-		<header>
-			<h2>교육과정등록</h2>
-		</header>
-		<article>
-			<form action="Controller" method="post" name="frm02">
-			<input type="hidden" name="type"  value="addCourse"/>
+	<h2 id="table_h2">교육과정등록</h2>
+	<form action="Controller" method="post" name="frm02">
+		<input type="hidden" name="type"  value="addCourse"/>
 			<table id="table">
 			<thead>
 				<tr>
@@ -173,27 +93,13 @@ thead tr{
 					</tr>
 					<tr>
 						<td colspan="2" align="right" id="course_add_btn">
-							<input type="button" value="등록" id="course_add_button">
+							<input type="submit" value="등록">
 						</td>
 						<td colspan="2" align="left">
-							<input type="button" value="목록" onclick="">
+							<input type="button" value="목록" id="cc_cancle">
 						</td>
 					</tr>
 				</tfoot>	
 			</table>
 		</form>
 		
-		</article>
-	</div>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
-	$(function(){
-		$("#course_add_button").click(function(){
-			
-			document.frm02.submit();
-		});
-	});
-</script>
-</body>
-</html>
