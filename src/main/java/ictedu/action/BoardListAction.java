@@ -7,15 +7,25 @@ import ictedu.util.Paging;
 import mybatis.dao.BoardDAO;
 import mybatis.dao.SchoolDAO;
 import mybatis.vo.BoardVO;
+import mybatis.vo.SuggestionVO;
 
 public class BoardListAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		Paging page = new Paging();
+		BoardVO[] ar = null;
+		Paging page = null;
 		
-		page.setTotalRecord(BoardDAO.getTotalRecord());
+		Object obj_ar = request.getAttribute("ar");
+		Object obj_p = request.getAttribute("page");
+		
+		if(obj_p == null) {
+			page = new Paging();
+			page.setTotalRecord(BoardDAO.getTotalRecord());
+		}else {
+			page = (Paging)obj_p;
+		}
 		
 		String cPage = request.getParameter("cPage");
 		
@@ -26,12 +36,27 @@ public class BoardListAction implements Action{
 			page.setNowPage(nowPage);
 		}
 		
-		BoardVO[] ar = BoardDAO.getBoardList(page.getBegin(), page.getEnd());
+		if(obj_ar == null) {
+			ar = BoardDAO.getBoardList(page.getBegin(), page.getEnd());
+		}else {
+			ar = (BoardVO[])obj_ar;
+			System.out.println("========================");
+			System.out.println("ar.length: "+ar.length);
+		}
 		
-		request.setAttribute("page", page);
+		System.out.println("========================");
+		System.out.println("length: "+ar.length);
+		System.out.println("totalrecord: "+page.getTotalRecord());
+		System.out.println("begin: "+page.getBegin());
+		System.out.println("end: "+page.getEnd());
+		
+		
+		
 		request.setAttribute("ar", ar);
+		request.setAttribute("page", page);
 		
 		return "/jsp/admin/schoolRecord/boardList.jsp";
 	}
 
 }
+

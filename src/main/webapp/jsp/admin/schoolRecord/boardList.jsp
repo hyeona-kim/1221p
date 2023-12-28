@@ -303,7 +303,7 @@
 												<li class="now">${vs.index }</li>
 											</c:if>
 											<c:if test="${vs.index ne page.nowPage }">
-												<li><a href="Controller?type=board&cPage=${vs.index}">${vs.index}</a></li>
+												<li><a href="Controller?type=boardList&cPage=${vs.index}">${vs.index}</a></li>
 											</c:if>
 										</c:forEach>
 										<%-- ========== page 번호 만드는 부분 끝 ==========--%>
