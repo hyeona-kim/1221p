@@ -56,30 +56,30 @@
 		padding: 10px;
 		margin: 0px auto;
 	}
-	table#sugList{
+	.sugList {
 		border-collapse: collapse;
 		width: 98%;
 		margin: 10px auto 0px auto;
 		padding: 0px;
 	}
-	table#sugList thead{
+	.sugList thead{
 		text-align: center;
 	}
-	table#sugList thead th, table#sugList thead td{
+	.sugList thead th, .sugList thead td{
 		border: 1px solid #e9e9e6;
 		padding: 5px;
 	}
-	table#sugList thead th {
+	.sugList thead th {
 		background-color: #f0f0ef;
 	}
-	table#sugList thead td {
+	.sugList thead td {
 		font-size: 13px;
 	}
-	table#sugList caption{
+	.sugList caption{
 		text-indent: -9999px;
 		height: 0px;
 	}
-	table#sugList thead tr:last-child td {
+	.sugList thead tr:last-child td {
 		border: none;
 	}
 	#sug_add_btn{
@@ -92,17 +92,17 @@
 		color: white; 
 		text-decoration: none;
 	}
-	table#sugList tbody{
+	.sugList tbody{
 		text-align: center;
 	}
-	table#sugList tbody th, table#sugList tbody td{
+	.sugList tbody th, .sugList tbody td{
 		border: 1px solid #e9e9e6;
 		padding: 5px;
 	}
-	table#sugList tbody th {
+	.sugList tbody th {
 		background-color: #f0f0ef;
 	}
-	table#sugList tbody td {
+	.sugList tbody td {
 		font-size: 13px;
 	}
 	#addForm table caption{ text-indent: -9999px; }
@@ -223,7 +223,7 @@
 				<!--  여기서 표시될 테이블들 가지고오기 -->
 				<div id="sugWrap">
 					<div id="sugList_top">고충 및 건의사항</div>
-					<table id="sugList">
+					<table class="sugList">
 						<caption>고충 및 건의사항 검색 테이블</caption>
 						<%-- ===== 검색하는 부분 ===== --%>
 						<thead>
@@ -244,88 +244,14 @@
 							</tr>
 							<tr><td colspan="6" align="right"><button type="button" id="sug_add_btn">글쓰기</button></td></tr>
 						</thead>
-						<tbody>
-						<%-- ===== 출력할 건의사항 항목 ===== --%>
-							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>첨부파일</th>
-								<th>작성자</th>
-								<th>등록일</th>
-								<th>조회수</th>
-							</tr>
-						<c:if test="${vo ne null}"> <%-- vo는 로그인 정보 --%>
-						<%-- ===== 로그인 정보가 있다면 반복문을 통해
-									건의사항 목록 출력 ===== --%>
-							<c:forEach items="${requestScope.ar}" varStatus="vs" var="svo">
-								<tr>
-									<td>${vs.index+1}</td>
-									<td align="left">
-										<%-- 전체공지로 클릭되었다면(notice가 1일때)
-											 공지 마크가 추가되어야함 --%>
-										<c:if test="${svo.notice eq '1'}">
-											<span id="notice">공지</span>
-										</c:if>
-										<a href="javascript:viewContent('${svo.sg_subject}','${svo.sg_write_date}'
-																		,'${svo.sg_hit}','${svo.sg_content}')">
-											${svo.sg_subject}
-										</a>
-									</td>										
-									<td>${svo.sg_file}</td>
-									<td>***</td>
-									<td>${svo.sg_write_date}</td>
-									<td>${svo.sg_hit}</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-						</tbody>
-						<%-- 화면 하단 page 번호 출력하는 부분 --%>
-						<tfoot>
-							<tr>
-								<td colspan="6">
-									<ol class="page">
-										<%-- ========== 이전버튼 만드는 부분 시작 ========== --%>
-										<%-- startPage가 5보다 작을 경우
-											 이전page로 돌아가는 버튼 비활성화 후 생성 --%>
-										<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-											<li class="disable">&lt;</li>
-										</c:if>	
-										<%-- startPage가 5보다 같거나 클 경우
-											 이전page로 돌아가는 버튼 활성화 후 생성 --%>
-										<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-											<li><a href="Controller?type=suggestionList&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
-										</c:if>
-										<%-- ========== 이전버튼 만드는 부분 끝 ========== --%>
-										
-										<%-- ========== page 번호 만드는 부분 시작 ==========--%>
-										<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-											<c:if test="${vs.index eq page.nowPage }">
-												<li class="now">${vs.index }</li>
-											</c:if>
-											<c:if test="${vs.index ne page.nowPage }">
-												<li><a href="Controller?type=suggestionList&cPage=${vs.index}">${vs.index}</a></li>
-											</c:if>
-										</c:forEach>
-										<%-- ========== page 번호 만드는 부분 끝 ==========--%>
-										
-										<%-- ========== 다음버튼 만드는 부분 시작 ========== --%>
-										<%-- endPage가 마지막 끝나는 page보다 작을 경우
-											 다음page로 가는 버튼 활성화 후 생성 --%>
-										<c:if test="${page.endPage < page.totalPage }">
-											<li><a href="Controller?type=suggestionList&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
-										</c:if>
-										<%-- endPage가 마지막 끝나는 page보다 크거나 같을 경우
-											 다음page로 가는 버튼 비활성화 후 생성 --%>
-										<c:if test="${page.endPage >= page.totalPage }">
-											<li class="disable">&gt;</li>	
-										</c:if>
-										<%-- ========== 다음버튼 만드는 부분 끝 ========== --%>
-									</ol>
-								</td>
-							</tr>
-						</tfoot>
 					</table>
+					<%-- ===== 비동기식 통신으로 출력할 테이블 시작 ===== --%>
+					<div id="ajaxContent">
+					
+					</div>
+					<%-- ===== 비동기식 통신으로 출력할 테이블 끝 ===== --%>
 				</div>
+				
 				<%-- ===== 고충 및 건의사항 작성 폼 시작 ===== --%>
 				<div id="addForm">
 				
@@ -354,6 +280,17 @@
 			$(".selected").removeClass("selected")
 			$("#thirdmenu").addClass("selected");
 			
+			<%-- 처음 고충 및 건의사항을 클릭했을 때
+				 비동기식통신을 수행해 전체 목록을 가져온다 --%>
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data: "type=suggMain"
+			}).done(function(result){
+				$("#ajaxContent").html(result);
+			});
+			
+			<%-- 목록에서 [글쓰기]버튼을 클릭했을 때 수행 --%>
 			$("#sug_add_btn").bind("click", function(){
 				$.ajax({
 					url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/add_ajax.jsp",
@@ -371,6 +308,19 @@
 			});
 			
 		});
+		
+		<%-- 목록 아래 [page번호]를 클릭할 때 수행
+			 cPage를 변수로 가지고 새롭게 비동기통신을 해서
+			 테이블을 표현한다 --%>
+		function paging(cPage) {
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data: "type=suggMain&cPage="+cPage
+			}).done(function(result){
+				$("#ajaxContent").html(result);
+			});
+		}
 		
 		<%-- 건의사항 작성 폼에서 [등록] 버튼을 눌렀을때 수행 --%>
 		function addSuggestion() {
@@ -426,10 +376,18 @@
 		};
 		
 		<%-- 건의사항 목록에서 [검색]을 눌렀을때 수행 --%>
-		function searchSugg() {
+		function searchSugg(cPage) {
 			let tag = document.getElementById("search_tag").value;
 			let value = document.getElementById("search_value").value;
-			location.href = "Controller?type=searchSugg&tag="+encodeURIComponent(tag)+"&value="+encodeURIComponent(value);
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data: "type=searchSugg&cPage="+encodeURIComponent(cPage)+
+					  "&tag="+encodeURIComponent(tag)+"&value="+encodeURIComponent(value)
+			}).done(function(result){
+				$("#ajaxContent").html(result);
+			});
+			// location.href = "Controller?type=searchSugg&tag="+encodeURIComponent(tag)+"&value="+encodeURIComponent(value);
 		};
 		
 	</script>
