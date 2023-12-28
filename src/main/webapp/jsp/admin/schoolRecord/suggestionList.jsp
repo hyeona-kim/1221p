@@ -230,12 +230,12 @@
 							<tr>
 								<th>검색</th>
 								<td>
-									<select>
-										<option>제목</option>
+									<select id="search_tag">
+										<option value="subject">제목</option>
 										<option>작성자</option>
 									</select>
-									<input type="text"/>
-									<button type="button" id="search_btn">검색</button>
+									<input type="text" id="search_value" name="search_value"/>
+									<button type="button" id="search_btn" onclick="searchSugg()">검색</button>
 								</td>
 								<th colspan="2">전체공지</th>
 								<td colspan="2">
@@ -424,11 +424,19 @@
 		function addReply(frm) {
 			frm.submit();
 		};
+		
+		<%-- 건의사항 목록에서 [검색]을 눌렀을때 수행 --%>
+		function searchSugg() {
+			let tag = document.getElementById("search_tag").value;
+			let value = document.getElementById("search_value").value;
+			location.href = "Controller?type=searchSugg&tag="+encodeURIComponent(tag)+"&value="+encodeURIComponent(value);
+		};
+		
 	</script>
 </body>
 </c:if>
 <c:if test="${tvo ne null}">
-	<sg:redirect url="Controller">
-	</sg:redirect>
+	<c:redirect url="Controller">
+	</c:redirect>
 </c:if>
 </html>

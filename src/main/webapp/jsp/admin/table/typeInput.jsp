@@ -96,7 +96,7 @@
                   <td class="color">색상</td>
                   <td>
                      <input type="text"  name ="text"/>
-                     <input type="color"  name ="color" />
+                     <input type="color"  name ="color" class="ccol"/>
                   </td>
             
                </tr>
@@ -112,7 +112,7 @@
                   <td class="color">색상</td>
                   <td>
                      <input type="text"  name ="text"/>
-                     <input type="color"  name ="color" />
+                     <input type="color"  name ="color"  class="ccol"/>
                   </td>
             
                </tr>
@@ -133,16 +133,19 @@
    
    <script>
       $(function(){
+        
+         $(".ccol").on("change input", function() {
+            $(this).prev().val("");
+            $(this).prev().val($(this).val());
+         });
+        
          $("#save").click(function(){
-
             document.fm.submit();
          });
-      });
-      $(function() {
-		$("#cancel").click(function() {
-			location.href="Controller?type=course&listSelect=1";
-		});
-	});
+		  $("#cancel").click(function() {
+			  location.href="Controller?type=course&listSelect=1";
+		  });
+	  });
 
    </script>
 </body>
