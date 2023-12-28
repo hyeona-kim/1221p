@@ -157,7 +157,14 @@
 										<tr>
 											<td>${vs.index+1}</td>
 											<td>${vo.sf_name}</td>
-											<td>${vo.sf_code}</td>
+											<%-- 사용권한이 1(교수)인 사람만
+												 교수코드(sf_code)를 출력 --%>
+											<sf:if test="${vo.sf_code ne 'tcnull'}">
+												<td>${vo.sf_code}</td>
+											</sf:if>
+											<sf:if test="${vo.sf_code eq 'tcnull'}">
+												<td></td>
+											</sf:if>
 											<td>${vo.sf_job}</td>
 											<td>${vo.sf_id}</td>
 											<td>${vo.sf_pwd}</td>
@@ -181,8 +188,8 @@
 												<td></td>
 											</sf:if>
 											<td colspan="2">
-												<a href="javascript:editStaff(${vo.sf_idx})" class="staff_edit_btn staff_btn">수정</a>
-												<a href="javascript:delStaff(${vo.sf_idx})" class="staff_del_btn staff_btn">삭제</a>
+												<a href="javascript:editStaff('${vo.sf_idx}')" class="staff_edit_btn staff_btn">수정</a>
+												<a href="javascript:delStaff('${vo.sf_idx}')" class="staff_del_btn staff_btn">삭제</a>
 											</td>
 										</tr>
 									</sf:forEach>
@@ -215,8 +222,9 @@
 			 비동기통신을 이용해 dialog를 띄우는 기능 --%>
 			$("#staff_add_btn").bind("click", function() {
 				$.ajax({
-					url: "${pageContext.request.contextPath}/jsp/admin/etcList/add_ajax.jsp",
-					type: "post"
+					url: "Controller",
+					type: "post",
+					data: "type=staffAddForm"
 				}).done(function(result){
 					$("#addForm").html(result);
 				});
@@ -234,8 +242,9 @@
 		 비동기통신을 이용해 dialog를 띄우는 기능 --%>
 		function editStaff(idx) {
 			$.ajax({
-				url: "${pageContext.request.contextPath}/jsp/admin/etcList/edit_ajax.jsp",
-				type: "post"
+				url: "Controller",
+				type: "post",
+				data: "type=staffEditForm"
 			}).done(function(result){
 				$("#addForm").html(result);
 			});
@@ -298,11 +307,7 @@
 		function addStaff() {
 			// 유효성 검사 해야함
 			
-			/* if(url.isEmpty()){
-				alert("내용을 입력하세요");
-			}else {
-				alert("내용있음");
-			} */
+			
 			
 			document.forms[0].submit();
 		};

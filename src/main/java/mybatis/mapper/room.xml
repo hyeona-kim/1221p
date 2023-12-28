@@ -20,4 +20,8 @@
            SET r_name = #{r_name}, r_sep = #{r_sep}, r_status = #{r_status}
            WHERE r_idx = #{r_idx}    
     </update>
+    
+    <select id="search" resultType="mybatis.vo.RoomVO" parameterType="String">
+		select * from room_t where r_name like concat('%',#{str},'%')
+	</select>
 </mapper>

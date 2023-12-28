@@ -4,17 +4,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ictedu.util.Paging;
+import mybatis.dao.BoardDAO;
 import mybatis.dao.SchoolDAO;
-import mybatis.dao.TrainingDAO;
+import mybatis.vo.BoardVO;
 import mybatis.vo.SuggestionVO;
 
-public class SuggestionListAction implements Action{
+public class BoardListAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		
-		return "/jsp/admin/schoolRecord/suggestionList.jsp";
+		return "/jsp/admin/schoolRecord/boardList.jsp";
 	}
 
 }
+

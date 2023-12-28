@@ -66,7 +66,7 @@ public class SearchCourseAction implements Action{
 		page.setTotalRecord(CourseDAO.getSearchCount(map));
 
 		 
-		if(cPage == null) {
+		if(cPage == null||cPage.equals("undefined")) {
 	        page.setNowPage(1);
 		}else {
 	       int nowPage = Integer.parseInt(cPage);
@@ -82,7 +82,56 @@ public class SearchCourseAction implements Action{
 		request.setAttribute("ar", ar);
 		request.setAttribute("page", page);
 		
-		return "Controller?type=course&listSelect="+listSelect;
+		String[] ct_name = null;
+		String[] r_name = null;
+		String[] sf_name = null;
+		
+		LmsBean lb = new LmsBean();
+		
+		if(ar != null) {
+			ct_name= new String[ar.length];
+			r_name= new String[ar.length];
+			sf_name= new String[ar.length];
+			int i = 0;
+			for(CourseVO vo :ar) {
+				if(vo.getCt_idx() == null) {
+					ct_name[i] ="";
+				}else {
+					String cName = lb.searchCourseType(vo.getCt_idx()).getCt_name();
+					ct_name[i] = cName;
+				}
+				
+				if(vo.getR_idx() == null) {
+					r_name[i] ="";
+				}else {
+					String rName = lb.searchRoom(vo.getR_idx()).getR_name();
+					r_name[i] = rName;					
+				}
+				
+				if(vo.getT_idx() ==null) {
+					sf_name[i] ="";
+				}else {
+					String sName = lb.searchStaff(vo.getT_idx()).getSf_name();
+					sf_name[i] = sName;					
+				}
+				i++;
+			}
+		}
+		
+		request.setAttribute("ct_names",ct_name);
+		request.setAttribute("r_names",r_name);
+		request.setAttribute("sf_names",sf_name);
+		
+		//비동기 통신할 jsp로 보내기
+		if(listSelect.equals("1"))
+			return "/jsp/admin/courseReg/courseLog_ajax.jsp";
+		else if(listSelect.equals("2"))
+			return "/jsp/admin/courseReg/serve_ajax.jsp";
+		else if(listSelect.equals("3"))
+			return "/jsp/admin/courseReg/makeTime_ajax.jsp";
+		else
+			return "/jsp/admin/courseReg/courseLog_ajax.jsp";
+		
 	}
 	
 }

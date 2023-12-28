@@ -1,104 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
+			<h2 id="hd">교육과정수정</h2>
 
-	div#wrap{
-		width: 100%;
-		border-bottom:1px solid #EAEAEA;
-		
-	}
-	
-	body{
-	margin:0;
-	padding:0;
-	
-	}
-	
-	h2{
-		border: 1px solid black;
-		color: #FFFFFF;
-		background-color: #212121;
-		margin:0;
-		border-radius:5px;
-		padding: 0;
-		height: 60px;
-		line-height: 60px;
-	}
-	
-	
-	table{
-		width:100%;
-		border: 1px solid #EAEAEA;
-		border-collapse: collapse;
-		margin-top: 50px;
-	
-		
-	}
-	
-	th,td{
-		border-bottom : 1px solid #EAEAEA;
-		padding:10px;
-		
-	}
-
-table th{
-	
-	background-color: #D6F0FF;
-
-}
-
-
-
-div#box{
-	display: inline-block;
-	color: red;
-	width: 300px;
-	height: 20px;
-	padding:0;
-	margin:0;
-	margin-left:6px;
-	font-weight: bold; 
-	
-	
-	
-}
-
-tfoot>tr:first-child td{
-	
-	color:blue;
-	font-weight: bold;
-	border-bottom: none;
-	font-size: 15px;
-	padding-top:10ppx;
-
-
-}
-
-thead tr{
-	font-weight: bold;
-	border-bottom: 1px solid black;
-
-}
-
-</style>
-
-</head>
-<body>
-	<div id ="wrap">
-		<header>
-			<h2>교육과정수정</h2>
-		</header>
-		<article>
 			<form action="Controller?type=editCourse" method="post">
 			<table id="table">
 			<thead>
-				<tr>
+				<tr bgcolor="lightgray">
 					<td colspan="4">
 						과정수정
 					</td>
@@ -108,7 +16,7 @@ thead tr{
 					<tr>
 						<th><label>과정명</label></th>
 						<td>
-							<input type="text" name="c_name" value="${select_vo.c_name }" />
+							<input type="text" name="c_name" value="${edit_cvo.c_name }" />
 						</td>
 						<th><label>과정구분</label></th>
 						<td>
@@ -133,9 +41,9 @@ thead tr{
 					</tr>
 					<tr>
 						<th><label>개강일</label></th>
-						<td><input type="text" name="start_date" value="${select_vo.start_date }"></td>
+						<td><input type="text" name="start_date" value="${edit_cvo.start_date }"></td>
 						<th><label>종료일</label></th>
-						<td><input type="text" name="end_date" value="${select_vo.end_date }"></td>
+						<td><input type="text" name="end_date" value="${edit_cvo.end_date }"></td>
 					</tr>
 					<tr>
 						<th><label>교육시간</label></th>
@@ -145,13 +53,13 @@ thead tr{
 					</tr>
 					<tr>
 						<th><label>교육비</label></th>
-						<td><input type="text" name="course_fee" value="${select_vo.course_fee }"><div id="box">(* 콤마(,)없이 숫자로만 입력해주세요)</div></td>
+						<td><input type="text" name="course_fee" value="${edit_cvo.course_fee }"><div id="box">(* 콤마(,)없이 숫자로만 입력해주세요)</div></td>
 						<th><label>총교육일수</label></th>
 						<td><input type="text"><div id="box">(숫자만입력가능)</div></td>
 					</tr>
 					<tr>
 						<th><label>모집인원</label></th>
-						<td><input type="text" name="c_peo_num" value="${select_vo.c_peo_num }"></td>
+						<td><input type="text" name="c_peo_num" value="${edit_cvo.c_peo_num }"></td>
 						<th><label>요일</label></th>
 						<td>
 						<input type="checkbox" name="monday" value="월">월
@@ -168,8 +76,8 @@ thead tr{
 						<td><input type="text"></td>
 						<th><label>회차</label></th>
 						<td>
-						<input type="text" name="c_round_num" value="${select_vo.c_round_num }">
-						<input type="hidden" name="c_idx" value="${select_vo.c_idx }"/>
+						<input type="text" name="c_round_num" value="${edit_cvo.c_round_num }">
+						<input type="hidden" name="c_idx" value="${edit_cvo.c_idx }"/>
 						</td>
 					</tr>
 				</tbody>
@@ -185,23 +93,9 @@ thead tr{
 							<input type="button" value="수정" onclick="addCourse(this.form)">
 						</td>
 						<td colspan="2" align="left">
-							<input type="button" value="목록" onclick="javascript:location.href=">
+							<input type="button" value="목록" id="cancel4">
 						</td>
 					</tr>
 				</tfoot>	
 			</table>
 		</form>
-		
-		</article>
-	</div>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
-function addCourse(frm) {
-    // 양식(form)을 서버로 제출
-    frm.action = "Controller?type=editCourse";
-    frm.submit();
-}
-</script>
-</body>
-</html>

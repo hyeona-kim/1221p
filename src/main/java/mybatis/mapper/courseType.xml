@@ -20,4 +20,8 @@
 	<select id="all" resultType="mybatis.vo.CourseTypeVO">
 		select * from course_type_t
 	</select>
+	
+	 <select id="search" resultType="mybatis.vo.CourseTypeVO" parameterType="String">
+		select * from course_type_t where ct_name like concat('%',#{str},'%')
+	</select>
 </mapper>
