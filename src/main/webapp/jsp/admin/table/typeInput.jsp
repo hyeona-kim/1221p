@@ -83,7 +83,7 @@
                   <td class="color">색상</td>
                   <td>
                      <input type="text"  name ="text" value="${tvo.ct_color }"/>
-                     <input type="color"  name ="color"  value="${tvo.ct_color }"/>
+                     <input type="color"  name ="color" class="ccol" value="${tvo.ct_color }"/>
                   </td>
                </tr>
                </c:forEach>
@@ -96,7 +96,7 @@
                   <td class="color">색상</td>
                   <td>
                      <input type="text"  name ="text"/>
-                     <input type="color"  name ="color" />
+                     <input type="color"  name ="color" class="ccol"/>
                   </td>
             
                </tr>
@@ -112,9 +112,8 @@
                   <td class="color">색상</td>
                   <td>
                      <input type="text"  name ="text"/>
-                     <input type="color"  name ="color" />
+                     <input type="color"  name ="color"  class="ccol"/>
                   </td>
-            
                </tr>
             </c:forEach>
             </c:if>
@@ -130,18 +129,23 @@
       </form>
    </div>
    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-   
    <script>
       $(function(){
+
+    	  $(".ccol").on("change input", function() {
+    		  $(this).prev().val("");
+              $(this).prev().val($(this).val());
+           });
+          
          $("#save").click(function(){
 
             document.fm.submit();
          });
-      });
-      $(function() {
+      
 		$("#cancel").click(function() {
 			location.href="Controller?type=course&listSelect=1";
 		});
+		
 	});
 
    </script>

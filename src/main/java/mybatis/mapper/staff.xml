@@ -29,7 +29,7 @@
 	</insert>
 
 	 <select id="search" resultType="mybatis.vo.StaffVO" parameterType="String">
-		select * from staff_t where r_name like concat('%',#{str},'%')
+		select * from staff_t where sf_name like concat('%',#{str},'%')
 	</select>
 
 	<!-- 교직원 삭제하는 기능 -->
