@@ -80,6 +80,7 @@
 		margin-top:10px;
 		text-align: right;
 	}
+
 </style>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
@@ -133,88 +134,9 @@
 								</thead>
 							</table>
 						</form>
-						<table id="makeCourse">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>과정명</th>
-									<th>과정코드</th>
-									<th>과정타입</th>
-									<th>담당교수</th>
-									<th>개강일</th>
-									<th>종료일</th>
-									<th>요일</th>
-									<th>회차</th>
-									<th>모집인원</th>
-									<th>강의실</th>
-									<th>관리</th>
-								</tr>
-							</thead>
-							<tbody>
-							<c:if test="${ar ne null }">
-							<c:forEach var="cvo" items="${ar }" varStatus="vs">
-							<c:set var="num" value="${page.totalRecord - (page.numPerPage*(page.nowPage-1))}"/>
-								<tr>
-									<td>${num-vs.index}</td>
-									<td>${cvo.c_name }</td>
-									<td>W1805300001</td>
-									<td>${requestScope.ct_names[vs.index]} </td>
-									<td>${requestScope.sf_names[vs.index]} </td>
-									<td>${cvo.start_date }</td>
-									<td>${cvo.end_date }</td>
-									<td>월화수목금</td>
-									<td>${cvo.c_round_num }</td>
-									<td>${cvo.c_peo_num }</td>
-									<td>${requestScope.r_names[vs.index]} </td>
-									<td>
-										<button type="button">교과목 등록/수정</button>
-										<button type="button">학습안내서 등록/수정</button>
-										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
-										<button type="button" onclick="editC('${cvo.c_idx}')">수정</button>
-										<button type="button" id="c_del_btn" onclick="del('${cvo.c_idx}')">삭제</button>
-									</td>
-								</tr>
-							</c:forEach>
-							</c:if>
-							<c:if test="${ar eq null }">
-								<tr>
-									<td colspan="12">검색 결과가 없습니다</td>
-								</tr>
-							</c:if>
-							</tbody>
-							<tfoot>
-						<tr>
-							<td colspan="12">
-								<ol class="page">
-			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-				<li class="disable">&lt;</li>
-			</c:if>	
-	
-			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-				<li><a href="Controller?type=searchCourse&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
-			</c:if>
-
-			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-				<c:if test="${vs.index eq page.nowPage }">
-					<li class="now">${vs.index }</li>
-				</c:if>
-				<c:if test="${vs.index ne page.nowPage }">
-					<li><a href="Controller?type=searchCourse&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
-				</c:if>
-			</c:forEach>
-	
-			<c:if test="${page.endPage < page.totalPage }">
-				<li><a href="Controller?type=searchCourse&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
-			</c:if>
-			<c:if test="${page.endPage >= page.totalPage }">
-				<li class="disable">&gt;</li>	
-			</c:if>
-                              </ol>
-                          </td>
-						</tr>
-					</tfoot>
-						</table>
-
+						<div id="courseLog_Table">
+						
+						</div>
 					</div>
 				</div>
 			</div>
@@ -253,17 +175,33 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
+	
+		let select ="";
+		let select_year = "";
+		let numPerPage = "";
+		let value ="";
+		
 		$(function() {
-			let select ="";
-			let select_year = "";
-			let numPerPage = "";
+		
+			$.ajax({
+				url: "Controller?type=courseMain&listSelect=1",
+				type: "post",
+				data:"type="+encodeURIComponent("courseMain")+"&listSelect="+encodeURIComponent("1")+"&cPage="+encodeURIComponent(${param.cPage})
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
+			
+			
 			//$().removeClass("selected");
-			$(".selected").removeClass("selected")
+			$(".selected").removeClass("selected");
+			$(".l_select").removeClass("l_selected");
 			$("#secondmenu").addClass("selected");
+			$("#l_first").addClass("l_select");
+			
 			let now = new Date();	// 현재 날짜 및 시간
 			let year = now.getFullYear();
-			
 			let str = "<option>년도선택</option>";
+			
 			for(let i=year+1; i>year-5; i--){
 				str+= "<option value="+i+">"+i+"</option>";
 			}
@@ -274,13 +212,38 @@
 			});
 			$("#selectYear").on("change",function(){
 				select_year = this.value;
+				console.log("dd");
+				$.ajax({
+					url: "Controller",
+					type: "post",
+					data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+						+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
+				}).done(function(result){
+					$("#courseLog_Table").html(result);
+				});
 			});
 			$("#numPerPage").on("change",function(){
 				numPerPage = this.value;
+				$.ajax({
+					url: "Controller",
+					type: "post",
+					data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+						+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
+				}).done(function(result){
+					$("#courseLog_Table").html(result);
+				});
 			});
 			$("#search_bt").click(function(){
 				let value = $("#searchValue").val();
-				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
+				
+				$.ajax({
+					url: "Controller",
+					type: "post",
+					data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+						+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(${param.cPage})
+				}).done(function(result){
+					$("#courseLog_Table").html(result);
+				});
 			});	
 			
 			<%Object obj = request.getAttribute("select_vo");
@@ -351,8 +314,7 @@
                 }
             }
         });
-		
-	
+
 		function del(c_idx){
 			frm.action = "Controller?type=delCourse";
 			document.frm.c_idx.value =c_idx; 
@@ -360,6 +322,17 @@
 			document.frm.submit();
 		}
 		
+		function paging(str) {
+			console.log(str);
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data:"type="+encodeURIComponent("searchCourse")+"&select="+encodeURIComponent(select)+"&value="+encodeURIComponent(value)+"&year="+encodeURIComponent(select_year)
+					+"&num="+encodeURIComponent(numPerPage)+"&listSelect="+encodeURIComponent(${param.listSelect})+"&cPage="+encodeURIComponent(str),
+			}).done(function(result){
+				$("#courseLog_Table").html(result);
+			});
+		}
 	</script>
 </body>
 </html>

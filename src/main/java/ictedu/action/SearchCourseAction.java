@@ -82,7 +82,42 @@ public class SearchCourseAction implements Action{
 		request.setAttribute("ar", ar);
 		request.setAttribute("page", page);
 		
-		return "Controller?type=course&listSelect="+listSelect;
+		String[] ct_name = null;
+		String[] r_name = null;
+		String[] sf_name = null;
+		
+		LmsBean lb = new LmsBean();
+		
+		if(ar != null) {
+			ct_name= new String[ar.length];
+			r_name= new String[ar.length];
+			sf_name= new String[ar.length];
+			int i = 0;
+			for(CourseVO vo :ar) {
+				String cName = lb.searchCourseType(vo.getCt_idx()).getCt_name();
+				String rName = lb.searchRoom(vo.getR_idx()).getR_name();
+				String sName = lb.searchStaff(vo.getT_idx()).getSf_name();
+				ct_name[i] = cName;
+				r_name[i] = rName;
+				sf_name[i] = sName;
+				i++;
+			}
+		}
+		
+		request.setAttribute("ct_names",ct_name);
+		request.setAttribute("r_names",r_name);
+		request.setAttribute("sf_names",sf_name);
+		
+		//비동기 통신할 jsp로 보내기
+		if(listSelect.equals("1"))
+			return "/jsp/admin/courseReg/courseLog_ajax.jsp";
+		else if(listSelect.equals("2"))
+			return "/jsp/admin/courseReg/serve_ajax.jsp";
+		else if(listSelect.equals("3"))
+			return "/jsp/admin/courseReg/makeTime_ajax.jsp";
+		else
+			return "/jsp/admin/courseReg/courseLog_ajax.jsp";
+		
 	}
 	
 }
