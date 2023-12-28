@@ -66,7 +66,7 @@ public class SearchCourseAction implements Action{
 		page.setTotalRecord(CourseDAO.getSearchCount(map));
 
 		 
-		if(cPage == null) {
+		if(cPage == null||cPage.equals("undefined")) {
 	        page.setNowPage(1);
 		}else {
 	       int nowPage = Integer.parseInt(cPage);
@@ -94,12 +94,26 @@ public class SearchCourseAction implements Action{
 			sf_name= new String[ar.length];
 			int i = 0;
 			for(CourseVO vo :ar) {
-				String cName = lb.searchCourseType(vo.getCt_idx()).getCt_name();
-				String rName = lb.searchRoom(vo.getR_idx()).getR_name();
-				String sName = lb.searchStaff(vo.getT_idx()).getSf_name();
-				ct_name[i] = cName;
-				r_name[i] = rName;
-				sf_name[i] = sName;
+				if(vo.getCt_idx() == null) {
+					ct_name[i] ="";
+				}else {
+					String cName = lb.searchCourseType(vo.getCt_idx()).getCt_name();
+					ct_name[i] = cName;
+				}
+				
+				if(vo.getR_idx() == null) {
+					r_name[i] ="";
+				}else {
+					String rName = lb.searchRoom(vo.getR_idx()).getR_name();
+					r_name[i] = rName;					
+				}
+				
+				if(vo.getT_idx() ==null) {
+					sf_name[i] ="";
+				}else {
+					String sName = lb.searchStaff(vo.getT_idx()).getSf_name();
+					sf_name[i] = sName;					
+				}
 				i++;
 			}
 		}

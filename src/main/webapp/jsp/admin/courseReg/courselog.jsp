@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 	table tfoot ol.page {
 	    list-style:none;
 	}
@@ -65,9 +66,10 @@
 		border-collapse: collapse;
 		width: 100%;
 	}
+	
 	#searchCourse td, #searchCourse th, #makeCourse td, #makeCourse th{
 		border: 1px solid #ddd;
-		height: 20px;
+		height: 40px;
 		padding-left: 10px;
 	}
 	#searchCourse th, #makeCourse th{background-color: #ddd;}
@@ -80,7 +82,117 @@
 		margin-top:10px;
 		text-align: right;
 	}
+	<%-- 과정 추가하는 테이블의 css--%>
 
+	
+	#table{
+		width:100%;
+		border: 1px solid #EAEAEA;
+		border-collapse: collapse;
+		margin-top: 50px;
+
+	}
+	
+	#table th,td{
+		border-bottom : 1px solid #EAEAEA;
+		padding:10px;
+	}
+
+	#table th{
+		background-color: #D6F0FF;
+	}
+	
+	div#box{
+		display: inline-block;
+		color: red;
+		width: 300px;
+		height: 20px;
+		padding:0;
+		margin:0;
+		margin-left:6px;
+		font-weight: bold; 
+	
+	}
+	
+	#table tfoot>tr:first-child td{
+		
+		color:blue;
+		font-weight: bold;
+		border-bottom: none;
+		font-size: 15px;
+		padding-top:10ppx;
+	}
+	
+	#table thead tr{
+		font-weight: bold;
+		border-bottom: 1px solid black;
+	}
+	
+	<%-- 타입수정하는 css --%>
+	 #hd{
+      background-color: #2e2e2e;
+      color: #fff;
+      width: 100%;
+      margin: 0px auto;
+      margin-bottom: 10px;
+   }
+   #t1{
+      border-collapse: collapse;
+      width: 600px;
+      margin: auto;
+   }
+   
+   #t1 td{
+      border: 1px solid black;
+      padding: 4px;
+      height: 50px;
+      text-align: center;
+   }
+   .num, .color{
+      background-color: #D6F0FF;
+   }
+   #btn{
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      margin: 20px auto;
+   }
+   #btn>form>input{
+      height: 40px;   
+      border: none;
+      width: 60px;
+      font-size: 16px;
+      color: #fff;
+      border-radius: 3px;
+   }
+   #btn>form>input:first-child{
+      background-color: #99ccff;
+   }
+   #btn>form>input:first-child:hover{
+      background-color: #88bbee;
+   }
+   #btn>form>input:last-child{
+      background-color: #c0c0c0;
+   }
+   #btn>form>input:last-child:hover{
+      background-color: #d1d1d1;
+   }
+   <%--강의실 수정하는 css --%>
+   #t1 {
+      border-collapse: collapse;
+      width: 100%;
+      border-spacing: 0;
+   }
+
+   #t1 tbody{
+       margin: 0;
+        padding: 0;
+        border: 1px solid black;
+       text-align: center;
+    }
+     #t1 tfoot{
+     	border: none;
+     }
 </style>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
@@ -148,43 +260,29 @@
 		</form>
 		
 		
-		<div id="dialog" hidden="" title="교육과정등록">
-			<div>
-				<jsp:include page="../../basics.jsp"></jsp:include>
-			</div>
+		<div id="dialog" hidden="" title="교육과정등록">	
 		</div>
 		
 		<div id="dialog2" hidden="" title="과정타입수정">
-			<div>
-				<jsp:include page="../table/typeInput.jsp"></jsp:include>
-			</div>
 		</div>
 		
 		<div id="dialog3" hidden="" title="강의실관리">
-			<div>
-				<jsp:include page="../table/classApply.jsp"></jsp:include>
-			</div>
 		</div>
 		
 		<div id="dialog4" hidden="" title="과정수정">
-			<div>
-				<jsp:include page="../table/Editbasics.jsp"></jsp:include>
-			</div>
 		</div>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
-	
 		let select ="";
 		let select_year = "";
 		let numPerPage = "";
 		let value ="";
-		
-		$(function() {
-		
+		let room_length =7;
+		$(function(){
 			$.ajax({
-				url: "Controller?type=courseMain&listSelect=1",
+				url: "Controller",
 				type: "post",
 				data:"type="+encodeURIComponent("courseMain")+"&listSelect="+encodeURIComponent("1")+"&cPage="+encodeURIComponent(${param.cPage})
 			}).done(function(result){
@@ -212,7 +310,6 @@
 			});
 			$("#selectYear").on("change",function(){
 				select_year = this.value;
-				console.log("dd");
 				$.ajax({
 					url: "Controller",
 					type: "post",
@@ -233,6 +330,7 @@
 					$("#courseLog_Table").html(result);
 				});
 			});
+			
 			$("#search_bt").click(function(){
 				let value = $("#searchValue").val();
 				
@@ -246,33 +344,84 @@
 				});
 			});	
 			
-			<%Object obj = request.getAttribute("select_vo");
-			if(obj != null){%>
-			$("#dialog4").dialog("open");
-			<%}%>
+			
+			
+			
 		});
 		
 		function set() {
-		
+			$.ajax({
+				url:"Controller",
+				type:"post",
+				data:"type="+encodeURIComponent("c_dialog")+"&select="+encodeURIComponent("addCourse")
+			}).done(function(result){
+				$("#dialog").html(result);
+				
+				$("#cc_cancle").click(function(){
+					 $("#dialog").dialog("close");
+				});
+			});
             $("#dialog").dialog("open",{
             	width:500,
             	height:600
             });
         }
 		function set2() {
+			$.ajax({
+				url:"Controller",
+				type:"post",
+				data:"type="+encodeURIComponent("c_dialog")+"&select="+encodeURIComponent("addCourseType")
+			}).done(function(result){
+				$("#dialog2").html(result);
+				$(".ccol").on("change input", function() {
+		             $(this).prev().val("");
+		             $(this).prev().val($(this).val());
+		   		});
+				
+				$("#cancel").click(function(){
+					 $("#dialog2").dialog( "close" );
+				});
+			});
+			
             $("#dialog2").dialog("open");
         }
 		function set3() {
             $("#dialog3").dialog("open");
+            
+            $.ajax({
+				url:"Controller",
+				type:"post",
+				data:"type="+encodeURIComponent("c_dialog")+"&select="+encodeURIComponent("addRoom")
+			}).done(function(result){
+				$("#dialog3").html(result);
+				
+				$("#cl").click(function(){
+					 room_length = 7;
+					 $("#dialog3").dialog( "close" );
+				});
+				
+				$(".ui-dialog-titlebar-close").click(function(){
+					 room_length = 7;
+					 $("#dialog3").dialog( "close" );
+				});
+
+			});
         }
-		function editC(c_idx) {
-			document.frm.type.value ="viewCourse"; 
-			document.frm.c_idx.value =c_idx; 
-			document.frm.submit();
+		function editC(c_idx){
+			 $.ajax({
+					url:"Controller",
+					type:"post",
+					data:"type="+encodeURIComponent("editCourse")+"&c_idx="+c_idx
+				}).done(function(result){
+					$("#dialog4").html(result);
+					
+					$("#cancel4").click(function(){
+						 $("#dialog4").dialog( "close" );
+				});
+			});
+			$("#dialog4").dialog("open");	
         }
-		
-		
-		
+
 		$( "#dialog" ).dialog({
             autoOpen: false,
             width:1200,
@@ -301,9 +450,11 @@
             buttons: {
                 "닫기": function() {
                     $( this ).dialog( "close" );
+					room_length = 7;
                 }
             }
         });
+		
 		$( "#dialog4" ).dialog({
             autoOpen: false,
             width: 1200,
@@ -323,7 +474,6 @@
 		}
 		
 		function paging(str) {
-			console.log(str);
 			$.ajax({
 				url: "Controller",
 				type: "post",
@@ -332,6 +482,20 @@
 			}).done(function(result){
 				$("#courseLog_Table").html(result);
 			});
+		}
+		function addRoom() {
+			room_length +=1;
+			let str = $("#addRoom_tbody").html();
+			let str2="<tr><td><strong>"+room_length+"</strong><br/><button type='button'>삭제</button> </td> <td><input type='text' name='className'> </td> <td> <select name='roomSep'>"+
+			"<option value='1' selected>실습</option> <option value='2'>이론</option><option value='3'>겸용</option></select>"+
+			"</td><td>  <select name='use'><option value='1' selected>사용</option><option value='0' >미사용</option></select></td> </tr>" ;
+			
+			$("#addRoom_tbody").html(str+str2);
+		}
+		
+		function addCourse(frm) {
+		    frm.action= "Controller?type=editCourse&edit=ok";
+		    frm.submit();
 		}
 	</script>
 </body>
