@@ -18,11 +18,6 @@ public class SearchCourseAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-		// 검색을 해서 가져와서 page와, ar 을 가져와야 한다.
-		//만약에 검색창에 공백이 입력됐을때에는 ar에 null을 저장하고 움직 여야한다. 그럼 courseAction에서 ar을 새롭게 받아서 전체를 가져오는 ar로 지정해서 받기 때문이다.
-		// page는 page select에 입려되는 value값을 가져오고 
-		// selectYear에서의 연도는 개강일의 연도를 뜻한다.
-		request.removeAttribute("ar");
 		request.removeAttribute("page");
 
 		String numPerPage = request.getParameter("num");
@@ -33,8 +28,7 @@ public class SearchCourseAction implements Action{
 		String cPage = request.getParameter("cPage");
 		 
 		Paging page = null;
-		System.out.println(numPerPage);
-		
+
 		if(value == null || value.length()<1) {
 			value = null;
 		}
@@ -82,7 +76,7 @@ public class SearchCourseAction implements Action{
 		map.put("begin", String.valueOf(page.getBegin()));
 		map.put("end", String.valueOf(page.getEnd()));
 		
-		System.out.println(select);
+
 		CourseVO[] ar = CourseDAO.SearchCourse(map);
 	
 		request.setAttribute("ar", ar);

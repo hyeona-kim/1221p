@@ -8,7 +8,7 @@
 		select * 
 		from 
 		(select @RN:=@RN+1 as rnum, a.* 
-		from (select * from course_t
+		from (select * from course_t  
 				<trim prefix="where" suffixOverrides="and">
 					<if test="select !=null and select == 1">t_idx =#{value} and</if>
 					<if test="select !=null and select == 2">ct_idx =#{value} and</if>
@@ -16,17 +16,17 @@
 					<if test="year !=null">start_date like concat('%',#{year},'%') and</if>
 				</trim>
 		)a ,(select @RN:=0) b) c 
-		where c.rnum between #{begin} and #{end}
+		where c.rnum between #{begin} and #{end} and  c_status = 0 
 	</select>
 
 	<select id="list" parameterType="Map" resultType="mybatis.vo.CourseVO">
-		select * from (select @RN:=@RN+1 as rnum, a.* from(select * from course_t order by c_idx )a , 
+		select * from (select @RN:=@RN+1 as rnum, a.* from(select * from course_t WHERE c_status = 0  order by c_idx )a , 
 			(select @RN:=0) b) c where c.rnum between #{begin} and #{end}
 	</select>
 
 	<insert id="add" parameterType="Map">
-			INSERT INTO course_t(c_name,start_date,end_date,course_fee,c_peo_num, c_round_num)
-			values(#{c_name}, #{start_date}, #{end_date}, #{course_fee}, #{c_peo_num}, #{c_round_num})
+			INSERT INTO course_t(c_name,start_date,end_date,course_fee,c_peo_num, c_round_num, c_status)
+			values(#{c_name}, #{start_date}, #{end_date}, #{course_fee}, #{c_peo_num}, #{c_round_num}, 0)
 	</insert>
 
   <select id="getCourse" parameterType="String" resultType="mybatis.vo.CourseVO">
@@ -41,20 +41,20 @@
 	</update>
 	
 	<update id="edit" parameterType="map">
-		update course_t
-		<trim prefix="SET" suffixOverrides=","> 
+    update course_t
+    <set>
         c_name = #{c_name},
         start_date = #{start_date},
         end_date = #{end_date},
         course_fee = #{course_fee},
         c_peo_num = #{c_peo_num},
         c_round_num = #{c_round_num}
- 		 </trim>
-			where c_idx = #{c_idx}
-  	</update>
-	
+	    </set>
+	    where c_idx = #{c_idx}
+	</update>
+
 	<select id="count" resultType="int" >
-		select count(*) from course_t 
+		select count(*) from course_t where c_status = 0
 	</select>
 	
 	<select id="search_count" parameterType="Map" resultType="int">
@@ -69,5 +69,6 @@
 					<if test="year !=null">start_date like concat('%',#{year},'%') and</if>
 				</trim>
 		)a ,(select @RN:=0) b) c 
+		where c_status = 0
 	</select>
 </mapper>

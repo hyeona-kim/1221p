@@ -1,3 +1,4 @@
+<%@page import="ictedu.util.LmsBean"%>
 <%@page import="mybatis.vo.CourseVO"%>
 <%@page import="java.util.List"%>
 <%@page import="mybatis.service.FactoryService"%>
@@ -66,7 +67,7 @@
 	}
 	#searchCourse td, #searchCourse th, #makeCourse td, #makeCourse th{
 		border: 1px solid #ddd;
-		height: 40px;
+		height: 20px;
 		padding-left: 10px;
 	}
 	#searchCourse th, #makeCourse th{background-color: #ddd;}
@@ -110,7 +111,7 @@
 										<td>
 											<select id="numPerPage">
 												<%-- 이값에따라 page.numPerPage값을 수정 해 주어야한다 --%>
-												<option>표시개수</option>
+												<option value="5">표시개수</option>
 												<option>5</option>
 												<option>10</option>
 												<option>15</option>
@@ -152,25 +153,25 @@
 							<tbody>
 							<c:if test="${ar ne null }">
 							<c:forEach var="cvo" items="${ar }" varStatus="vs">
-							<c:set var="num" value="${page.totalRecord-((page.nowPage-1)*page.numPerPage)}"/>
+							<c:set var="num" value="${page.totalRecord - (page.numPerPage*(page.nowPage-1))}"/>
 								<tr>
-									<td>${num+(vs.index)-3}</td>
+									<td>${num-vs.index}</td>
 									<td>${cvo.c_name }</td>
 									<td>W1805300001</td>
-									<td>${cvo.ct_idx} </td>
-									<td>${cvo.t_idx }</td>
+									<td>${requestScope.ct_names[vs.index]} </td>
+									<td>${requestScope.sf_names[vs.index]} </td>
 									<td>${cvo.start_date }</td>
 									<td>${cvo.end_date }</td>
 									<td>월화수목금</td>
 									<td>${cvo.c_round_num }</td>
 									<td>${cvo.c_peo_num }</td>
-									<td>${cvo.r_idx }</td>
+									<td>${requestScope.r_names[vs.index]} </td>
 									<td>
 										<button type="button">교과목 등록/수정</button>
 										<button type="button">학습안내서 등록/수정</button>
 										<input type="hidden" name="c_idx" value="${cvo.c_idx }"/>
 										<button type="button" onclick="editC('${cvo.c_idx}')">수정</button>
-										<button type="button" id="c_del_btn" onclick="del(this.form)">삭제</button>
+										<button type="button" id="c_del_btn" onclick="del('${cvo.c_idx}')">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -190,7 +191,7 @@
 			</c:if>	
 	
 			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-				<li><a href="Controller?type=course&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
+				<li><a href="Controller?type=searchCourse&cPage=${page.startPage-page.pagePerBlock }&listSelect=${param.listSelect}">&lt;</a></li>
 			</c:if>
 
 			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
@@ -198,12 +199,12 @@
 					<li class="now">${vs.index }</li>
 				</c:if>
 				<c:if test="${vs.index ne page.nowPage }">
-					<li><a href="Controller?type=course&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
+					<li><a href="Controller?type=searchCourse&cPage=${vs.index}&listSelect=${param.listSelect}">${vs.index}</a></li>
 				</c:if>
 			</c:forEach>
 	
 			<c:if test="${page.endPage < page.totalPage }">
-				<li><a href="Controller?type=course&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
+				<li><a href="Controller?type=searchCourse&cPage= ${page.startPage + page.pagePerblock }&listSelect=${param.listSelect}">&gt;</a></li>
 			</c:if>
 			<c:if test="${page.endPage >= page.totalPage }">
 				<li class="disable">&gt;</li>	
@@ -281,15 +282,11 @@
 				let value = $("#searchValue").val();
 				location.href= "Controller?type=searchCourse&select="+select+"&value="+value+"&year="+select_year+"&num="+numPerPage+"&listSelect=${param.listSelect}";
 			});	
-		
-			<%
-			Object obj = request.getAttribute("select_vo");
-			if(obj != null){
-				%>
+			
+			<%Object obj = request.getAttribute("select_vo");
+			if(obj != null){%>
 			$("#dialog4").dialog("open");
-				<%
-			}
-		%>
+			<%}%>
 		});
 		
 		function set() {
@@ -356,10 +353,11 @@
         });
 		
 	
-		function del(frm){
+		function del(c_idx){
 			frm.action = "Controller?type=delCourse";
+			document.frm.c_idx.value =c_idx; 
 			
-			frm.submit();
+			document.frm.submit();
 		}
 		
 	</script>
