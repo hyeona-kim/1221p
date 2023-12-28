@@ -2,7 +2,16 @@ package mybatis.vo;
 
 public class CourseVO {
 	
-	private String c_status, c_code, c_idx, c_name, start_date, end_date, course_fee, c_peo_num, c_round_num, t_idx, ti_idx, s_idx, r_idx, ct_idx;
+	private String c_status, c_code, c_idx, c_name, start_date, end_date, course_fee, c_peo_num, c_round_num, t_idx, ti_idx, s_idx, r_idx, ct_idx,
+	tn_idx;
+	
+	public String getTn_idx() {
+		return tn_idx;
+	}
+
+	public void setTn_idx(String tn_idx) {
+		this.tn_idx = tn_idx;
+	}
 
 	public String getC_status() {
 		return c_status;

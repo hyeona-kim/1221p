@@ -120,6 +120,16 @@ public class TrainuploadDAO {
 		
 	}
 	
+	public static TrainuploadVO view(String tn_idx) {
+		
+		SqlSession ss = FactoryService.getFactory().openSession();
+		TrainuploadVO vo = ss.selectOne("upload.view",tn_idx);
+		ss.close();
+		
+		return vo;
+		
+	}
+	
 	
 	
 }

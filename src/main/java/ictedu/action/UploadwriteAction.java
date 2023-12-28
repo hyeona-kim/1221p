@@ -35,7 +35,7 @@ public class UploadwriteAction implements Action {
 				
 				String title = mr.getParameter("title");
 				String content = mr.getParameter("content");
-				System.out.println(content);
+			
 				String tn_name = mr.getParameter("tn_name");
 				
 				File f = mr.getFile("file");
@@ -50,7 +50,7 @@ public class UploadwriteAction implements Action {
 				
 				
 				int cnt = TrainuploadDAO.add(title,content,fname,oname,tn_name);
-				System.out.println(cnt);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
