@@ -14,11 +14,11 @@ public class SearchSuggAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		// [검색]을 눌렀을 때 전달받는 파라미터를 받아서 먼저 저장한다.
-		// request.removeAttribute("ar");
-		// request.removeAttribute("page");
 		SuggestionVO[] ar = null;
 		Paging page = null;
+		boolean bl = true;
 		
+		String cPage = request.getParameter("cPage");
 		String tag = request.getParameter("tag");
 		String value = request.getParameter("value");
 		
@@ -31,18 +31,21 @@ public class SearchSuggAction implements Action{
 		if(cnt > 0) {
 			page = new Paging();
 			page.setTotalRecord(cnt);
-			page.setNowPage(1);
+			if(cPage.equals("undefined")) {
+				page.setNowPage(1);				
+			}else {
+				page.setNowPage(Integer.parseInt(cPage));								
+			}
 			map.put("begin", String.valueOf(page.getBegin()));
 			map.put("end", String.valueOf(page.getEnd()));
 			ar = SchoolDAO.searchSugg(map);
-		}else {
-			
 		}
 		
+		request.setAttribute("bl", bl);
 		request.setAttribute("ar", ar);
 		request.setAttribute("page", page);
 
-		return "Controller?type=suggestionList";
+		return "Controller?type=suggMain";
 	}
 
 }
