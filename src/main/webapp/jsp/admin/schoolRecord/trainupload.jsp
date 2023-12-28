@@ -125,7 +125,7 @@ table tfoot ol.page {
 	</c:forEach>
 	
 	<c:if test="${page.endPage < page.totalPage }">
-		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
+		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerBlock }">&gt;</a></li>
 	</c:if>
 	<c:if test="${page.endPage >= page.totalPage }">
 		<li class="disable">&gt;</li>	
@@ -165,7 +165,6 @@ table tfoot ol.page {
 	
 </article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	
 	<script>

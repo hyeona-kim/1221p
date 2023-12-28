@@ -97,11 +97,7 @@ table tfoot ol.page {
 	background-color: #EBF7FF;
 	
 	}
-	
-	
-	
 
-	
 </style>
 
 </head>

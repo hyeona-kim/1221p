@@ -82,7 +82,7 @@
 						<%-- endPage가 마지막 끝나는 page보다 작을 경우
 							 다음page로 가는 버튼 활성화 후 생성 --%>
 						<c:if test="${page.endPage < page.totalPage }">
-							<li><a href="Controller?type=suggestionList&cPage= ${page.startPage + page.pagePerblock }">&gt;</a></li>
+							<li><a href="Controller?type=suggestionList&cPage= ${page.startPage + page.pagePerBlock }">&gt;</a></li>
 						</c:if>
 						<%-- endPage가 마지막 끝나는 page보다 크거나 같을 경우
 							 다음page로 가는 버튼 비활성화 후 생성 --%>
