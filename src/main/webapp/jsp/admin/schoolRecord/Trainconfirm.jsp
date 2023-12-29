@@ -227,8 +227,5 @@ table tfoot ol.page {
 	</script>
 </body>
 </c:if>
-<c:if test="${tvo ne null}">
-	<c:redirect url="Controller">
-	</c:redirect>
-</c:if>
+
 </html>

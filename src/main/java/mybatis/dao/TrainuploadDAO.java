@@ -89,7 +89,7 @@ public class TrainuploadDAO {
 		}
 		
 		SqlSession ss = FactoryService.getFactory().openSession();
-		int cnt = ss.insert("upload.update",map);
+		int cnt = ss.insert("upload.date",map);
 		
 		if(cnt >0)
 			ss.commit();

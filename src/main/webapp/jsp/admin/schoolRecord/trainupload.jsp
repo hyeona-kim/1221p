@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/header.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <style>
 table tfoot ol.page {
 	    list-style:none;
@@ -78,6 +79,28 @@ table tfoot ol.page {
 		 padding-top: 10px;
 		 margin-bottom: 10px;
 	}
+
+	.ck.ck-editor {
+    	max-width: 100%;
+    	padding: 8px;
+    	
+	}
+	.ck-editor__editable {
+	    min-height: 300px;
+	}
+	
+	#t2{
+		margin-top:10px;
+		border-collapse: collapse;
+		width: 99%;
+		margin-bottom: 10px;
+	}
+	
+	#t2 th{
+	width: 100px;
+	background-color: #EBF7FF;
+	
+	}
 </style>
 
 </head>
@@ -146,7 +169,7 @@ table tfoot ol.page {
 						<input type="button" value="수정"
 							onclick="edit('${vo3.tn_idx}')"/>
 						<input type="button" onclick="traindel('${vo3.tn_idx}')" value="삭제">
-						<input type="button" onclick="" value="확인서류보기">
+						<input type="button" onclick="javascript:location.href='Controller?type=trainuploadview&tn_idx=${vo3.tn_idx}'" value="확인서류보기">
 						</td>
 					</tr>
 				</c:forEach>
@@ -160,13 +183,13 @@ table tfoot ol.page {
 		<input type="hidden" name="tn_idx" value=""/>
 		<input type="hidden" name="cPage" value="${param.cPage }"/>
 	</form>
-
+	<div id="edit" hidden="hidden"></div>
 	
 	
 </article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-	
+	<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 	<script>
 		$(function() {
 			//$().removeClass("selected");
@@ -176,15 +199,15 @@ table tfoot ol.page {
 			$("#l_third").addClass("l_select");
 		});
 
-		function edit(tn_idx){
+		/* function edit(tn_idx){
 			console.log(tn_idx);
 			
 			document.frm.type.value="trainuploadedit";
 			document.frm.tn_idx.value=tn_idx;
 			console.log(document.frm.type.value);
-			document.frm.submit();
-	
-		}
+			document.frm.submit();}
+	 */
+		
 		function traindel(tn_idx){
 			console.log(tn_idx);
 			document.frm.type.value="trainuploaddel";
@@ -193,7 +216,54 @@ table tfoot ol.page {
 			document.frm.submit();
 			
 		}
-
+		function edit(ed){
+			console.log(ed);
+			$.ajax({
+				url:"Controller",
+				type:"post",
+				data:"type="+encodeURIComponent("trainuploadedit")+"&select="+ed
+			}).done(function(reg){
+				$("#edit").html(reg);
+				
+				ClassicEditor
+		        .create( document.querySelector( '#content' ))
+		        .catch( error => {
+		            console.error( error );
+		        });
+				
+				
+			});
+			
+			$("#edit").dialog({
+				width:1000,
+				height:500
+			});
+			
+		}
+		
+	
+		function sendData(){
+    		let ar = document.fff.elements;
+    	
+    			let str = ar[0].dataset.str;
+    			if(document.fff.elements[0].value==""){
+    				alert(str+"를 입력하세요");
+    				document.fff.elements[i].focus();
+    				return;
+    			}
+    		
+    		
+    		for(var i=21; i<ar.length-2; i++){
+    			console.log(ar.length)
+    			let str = ar[i].dataset.str;
+    			if(document.fff.elements[i].value==""){
+    				alert(str+"를 입력하세요");
+    				document.fff.elements[i].focus();
+    				return;
+    			}
+    		}
+    		document.fff.submit();
+		}
 	</script>
 </body>
 </c:if>

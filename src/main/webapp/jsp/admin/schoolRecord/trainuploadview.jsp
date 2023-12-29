@@ -113,8 +113,6 @@ table tfoot ol.page {
 				<table id="makeTime" >
 				<caption>서류보기 리스트</caption>
 					<tbody>
-					<c:forEach var="vo6" items="${requestScope.ar }" varStatus="vs">
-				
 						<tr>
 							<th>확인서류명</th>
 							<td>${vo6.subject}</td>
@@ -156,13 +154,23 @@ table tfoot ol.page {
 								<input type="button" value="닫기" onclick="javascript:location.href='Controller?type=trainupload'">
 							</td>
 						</tr>
-						</c:forEach>
 					</tbody>
 			</table>
 			</form>
 			</div>
 		</div>
 	</div>
+	<form action="Controller" method="post" name="frm">
+		<input type="hidden" name="type" value=""/>
+		<input type="hidden" name="tn_idx" value=""/>
+		<input type="hidden" name="fname"/>
+		<input type="hidden" name="cPage" value="${param.cPage }"/>
+	</form>
+	<div id="edit" hidden="hidden"></div>
+	
+	
+	
+	
 </article>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -201,6 +209,17 @@ table tfoot ol.page {
         		document.forms[0].submit();
         		
         	}
+	 	
+	 	function down(fname){
+	 		document.frm.fname.value = fname;
+	 		document.frm.type.value = "traindownload";
+	 		document.frm.submit();
+	 		
+	 	}
+	 	
+	 	
+	 	
+	 	
 	</script>
 </body>
 </html>

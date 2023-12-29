@@ -11,6 +11,7 @@ public class TrainconfirmAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+
 		Paging page = new Paging();
 		
 		page.setTotalRecord(TraineecurrentDAO.getCount());
@@ -31,6 +32,7 @@ public class TrainconfirmAction implements Action {
 		request.setAttribute("ar", ar);
 		
 		return "jsp/admin/schoolRecord/Trainconfirm.jsp";
+		
 		
 		
 		
