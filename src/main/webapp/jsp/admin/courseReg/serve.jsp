@@ -11,6 +11,8 @@
 <style>
 	table tfoot ol.page {
 	    list-style:none;
+	    width: 300px;
+	    margin: auto;
 	}
 	
 	table tfoot ol.page li {
@@ -21,28 +23,23 @@
 	table tfoot ol.page li a {
 	    display:block;
 	    padding:3px 7px;
-	    border:1px solid #00B3DC;
-	    color:#2f313e;
+	    color:gray;
 	    font-weight:bold;
 	    text-decoration: none;
 	}
 	
 	table tfoot ol.page li a:hover {
-	    background:#00B3DC;
-	    color:white;
+		color:black;
 	    font-weight:bold;
 	}
 	.disable {
 	    padding:3px 7px;
-	    border:1px solid silver;
-	    color:silver;
+	    color:white;
 	}
 	
 	.now {
 	   padding:3px 7px;
-	    border:1px solid #ff4aa5;
-	    background:#ff4aa5;
-	    color:white;
+	    color:#46ade1;
 	    font-weight:bold;
 	}
 	#staffWrap{

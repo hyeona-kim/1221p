@@ -11,7 +11,7 @@ import mybatis.vo.TrainuploadVO;
 public class TrainuploadAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 	
-		Paging page = new Paging();
+		Paging page = new Paging(5,5);
 		
 		page.setTotalRecord(TraineecurrentDAO.getCount());
 		
@@ -22,13 +22,8 @@ public class TrainuploadAction implements Action{
 		else {
 			int nowPage = Integer.parseInt(cPage);
 			page.setNowPage(nowPage);
-			
 		}
-		
-	
-		
 		TrainuploadVO[] ar = TrainuploadDAO.getlist(page.getBegin(), page.getEnd());
-		
 		
 		request.setAttribute("page", page);
 		request.setAttribute("ar", ar);

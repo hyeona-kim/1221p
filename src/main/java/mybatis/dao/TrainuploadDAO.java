@@ -28,13 +28,11 @@ public class TrainuploadDAO {
 		map.put("end", String.valueOf(end));
 		
 		
-		List<TrainuploadVO> list = ss.selectList("upload.list",map);
+		List<TrainuploadVO> list = ss.selectList("upload.getlist",map);
 		
 		if(list !=null && !list.isEmpty()) {
 			ar = new TrainuploadVO[list.size()];
-			
 			list.toArray(ar);
-			
 		}
 		
 		ss.close();

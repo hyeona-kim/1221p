@@ -10,8 +10,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <style>
-table tfoot ol.page {
+	table tfoot ol.page {
 	    list-style:none;
+	    width: 300px;
+	    margin: auto;
 	}
 	
 	table tfoot ol.page li {
@@ -22,28 +24,23 @@ table tfoot ol.page {
 	table tfoot ol.page li a {
 	    display:block;
 	    padding:3px 7px;
-	    border:1px solid #00B3DC;
-	    color:#2f313e;
+	    color:gray;
 	    font-weight:bold;
 	    text-decoration: none;
 	}
 	
 	table tfoot ol.page li a:hover {
-	    background:#00B3DC;
-	    color:white;
+		color:black;
 	    font-weight:bold;
 	}
 	.disable {
 	    padding:3px 7px;
-	    border:1px solid silver;
-	    color:silver;
+	    color:white;
 	}
 	
 	.now {
 	   padding:3px 7px;
-	    border:1px solid #ff4aa5;
-	    background:#ff4aa5;
-	    color:white;
+	    color:#46ade1;
 	    font-weight:bold;
 	}
 	#staffWrap{
@@ -135,29 +132,29 @@ table tfoot ol.page {
 						<tr>
 							<td colspan="10">
 								<ol class="page">
-			<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
-		<li class="disable">&lt;</li>
-	</c:if>	
+	<c:if test="${requestScope.page.startPage < requestScope.page.pagePerBlock }">
+				<li class="disable">&lt;</li>
+			</c:if>	
 	
-	<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
-	<li><a href="Controller?type=list&cPage=${page.startPage-page.pagePerBlock }">&lt;</a></li>
-	</c:if>
+			<c:if test="${requestScope.page.startPage >= requestScope.page.pagePerBlock }">
+				<li><a href="javascript:paging('${page.startPage-page.pagePerBlock }')">&lt;</a></li>
+			</c:if>
 
-	<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
-		<c:if test="${vs.index eq page.nowPage }">
-			<li class="now">${vs.index }</li>
-		</c:if>
-		<c:if test="${vs.index ne page.nowPage }">
-			<li><a href="Controller?type=list&cPage=${vs.index}">${vs.index}</a></li>
-		</c:if>
-	</c:forEach>
+			<c:forEach begin="${page.startPage }" end="${page.endPage }" varStatus="vs">
+				<c:if test="${vs.index eq page.nowPage }">
+					<li class="now">${vs.index }</li>
+				</c:if>
+				<c:if test="${vs.index ne page.nowPage }">
+					<li><a onclick="paging('${vs.index}')">${vs.index}</a></li>
+				</c:if>
+			</c:forEach>
 	
-	<c:if test="${page.endPage < page.totalPage }">
-		<li><a href="Controller?type=list&cPage= ${page.startPage + page.pagePerBlock }">&gt;</a></li>
-	</c:if>
-	<c:if test="${page.endPage >= page.totalPage }">
-		<li class="disable">&gt;</li>	
-	</c:if>
+			<c:if test="${page.endPage < page.totalPage }">
+				<li><a href="javascript:paging('${page.startPage + page.pagePerBlock }')">&gt;</a></li>
+			</c:if>
+			<c:if test="${page.endPage >= page.totalPage }">
+				<li class="disable">&gt;</li>	
+			</c:if>
                               </ol>
                           </td>
 						</tr>
@@ -220,6 +217,10 @@ table tfoot ol.page {
 
 	}
 		
+	function paging(str) {
+		location.href="Controller?type=trainconfirm&cPage="+str
+	
+	}
 		
 		
 		
