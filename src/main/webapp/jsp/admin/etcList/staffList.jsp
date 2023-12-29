@@ -305,9 +305,22 @@
 			
 		<%-- 교직원등록에서 [저장]버튼을 눌렀을 때 수행하는 곳 --%>
 		function addStaff() {
-			// 유효성 검사 해야함
-			
-			
+			// 유효성 검사
+			let ar = document.forms[0].elements;
+			for(let i=0 ; i<ar.length ; i++){
+				if(ar[i].value == ""){
+					if(ar[i].dataset.str.equals("undefined")){
+						alert("연락처를 입력하세요");
+						ar[i].focus();
+						return; // 수행 중단
+					}else{
+						alert(ar[i].dataset.str+
+								"을 입력하세요");
+						ar[i].focus();
+						return; // 수행 중단
+					}
+				}
+			}
 			
 			document.forms[0].submit();
 		};
