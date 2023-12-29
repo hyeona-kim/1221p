@@ -13,19 +13,19 @@
 		<tbody>
 			<tr>
 				<th>이름</th>
-				<td class="left"><input class="input" type="text" placeholder="이름" name="sf_name"/></td>
+				<td class="left"><input class="input" type="text" placeholder="이름" data-str="이름" name="sf_name"/></td>
 				<th>직급</th>
-				<td class="left"><input class="input" type="text" placeholder="직급" name="sf_job"/></td>
+				<td class="left"><input class="input" type="text" placeholder="직급" data-str="직급" name="sf_job"/></td>
 			</tr>
 			<tr>
 				<th>아이디</th>
-				<td class="left"><input class="input" type="text" placeholder="아이디" name="sf_id"/></td>
+				<td class="left"><input class="input" type="text" placeholder="아이디" data-str="아이디" name="sf_id"/></td>
 				<th>암호</th>
-				<td class="left"><input class="input" type="text" placeholder="암호" name="sf_pwd"/></td>
+				<td class="left"><input class="input" type="text" placeholder="암호" data-str="암호" name="sf_pwd"/></td>
 			</tr>
 			<tr>
 				<th>입사일</th>
-				<td class="left"><input class="input" type="date" placeholder="2023-01-01" name="sf_hire_date"/></td>
+				<td class="left"><input class="input" type="date" placeholder="2023-01-01" data-str="입사일" name="sf_hire_date"/></td>
 				<th>퇴사일</th>
 				<td class="left"><input class="input" type="date" disabled="disabled" name="sf_fire_date"/></td>
 			</tr>
