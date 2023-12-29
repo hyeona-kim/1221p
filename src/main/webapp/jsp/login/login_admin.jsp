@@ -30,6 +30,7 @@
 		height: 35px;
 		border: 1px solid #ddd;
 		border-radius: 4px 4px;
+		font-size: 15px;
 	}
 	
 	#table2 #login_btn{

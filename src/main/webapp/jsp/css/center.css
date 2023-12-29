@@ -2,17 +2,20 @@
 	#center{
 		width: 100%;
 		height: 900px; 
-		border: 1px solid lightgray;
+		
 		display: flex;
 	}
 	.left{
 		width: 20%;
 		height: 40px;
-		border: 1px solid lightgray;
+		
 	}
+	#list2 .left{
+		background-color: #343434;
+	}
+	
 	.right{
 		width: 80%;
-		border: 1px solid lightgray;
 	}
 
 	#list2 .title{
@@ -20,7 +23,6 @@
 		padding: 0;
 		margin: 0;
 		display: inline-block;
-		
 		width: 100%;
 		height: 40px;
 		background: #5CD1E5;
@@ -45,9 +47,9 @@
 		margin: 0;
 		display: inline-block;
 		width: 100%;
-		height: 40px;
+		height: 45px;
 		background: #343434;
-		line-height: 40px;
+		line-height: 45px;
 	}
 	
 	#list2 .content:hover{
@@ -55,9 +57,9 @@
 		margin: 0;
 		display: inline-block;
 		width: 100%;
-		height: 40px;
+		height: 45px;
 		background: black;
-		line-height: 40px;
+		line-height: 45px;
 	}
 	
 	#list2 .l_select a{
@@ -70,6 +72,15 @@
 		height: 100%;
 		text-decoration: none;
 		color: white;
+	}
+	
+	#list2 .last{
+		padding: 0;
+		margin: 0;
+		display: inline-block;
+		width: 100%;
+		height:800px;
+		background: #343434;
 	}
 	
 	

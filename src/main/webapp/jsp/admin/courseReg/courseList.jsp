@@ -50,7 +50,6 @@
 </style>
 </head>
 <body>
-	
 	<header>교육과정 현황</header>
 	<div id="ttop">
 			<button>과정등록</button>	

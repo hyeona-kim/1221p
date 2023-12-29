@@ -2,7 +2,7 @@
 	#head{
 		position: relative;
 	}
-	
+
 	#head #span1, #head a,#head #span2{
 		position: absolute;
 	}
@@ -29,18 +29,18 @@
 		display: flex;
 		padding: 0;
 		margin: 0;
+		border: 1px splid red;
 	}
-	#list .menubar:first-child{border-left:  1px solid red;}
-	
+
 	#list .menubar{
 		text-decoration: none;
 		padding: 10px 10px;
 		list-style: none;
 		border-left: none;
 		width: 140px;
-		height: 35px;
+		height: 45px;
 		flex-wrap: nowrap;
-		line-height: 35px;
+		line-height: 45px;
 		padding: 0;
 		margin: 0;
 		
