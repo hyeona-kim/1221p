@@ -23,6 +23,9 @@ public class CourseAddAction implements Action {
 		String c_peo_num = request.getParameter("c_peo_num");
 		String c_round_num = request.getParameter("c_round_num");
 		String listSelect = request.getParameter("listSelect");
+		String ct_idx = request.getParameter("ct_select");
+		String sf_idx = request.getParameter("sf_select");
+		
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("c_name", c_name);
@@ -31,6 +34,8 @@ public class CourseAddAction implements Action {
 		map.put("course_fee", course_fee);
 		map.put("c_peo_num", c_peo_num);
 		map.put("c_round_num", c_round_num);
+		map.put("ct_idx", ct_idx);
+		map.put("t_idx", sf_idx);
 		
 		CourseDAO.addCourse(map);
 		

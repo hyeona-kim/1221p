@@ -286,6 +286,8 @@
 	
 		$(function() {
 			//$().removeClass("selected");
+			<%-- 처음 게시글 클릭했을 때
+				 비동기식통신을 수행해 전체 목록을 가져온다 --%>
 			$.ajax({
 					url: "Controller",
 					type: "post",
@@ -298,6 +300,7 @@
 			$("#thirdmenu").addClass("selected");
 			$("#l_five").addClass("l_select");
 			
+			<%-- 목록에서 [글쓰기]버튼을 클릭했을 때 수행 --%>
 			$("#bo_add_btn").bind("click", function(){
 				$.ajax({
 					url: "${pageContext.request.contextPath}/jsp/admin/schoolRecord/addBoard_ajax.jsp",
@@ -316,12 +319,27 @@
 			
 		});
 		
+		<%-- 목록 아래 [page번호]를 클릭할 때 수행
+		 str를 변수로 가지고 새롭게 비동기통신을 해서
+		 테이블을 표현한다 --%>
+		function paging(str) {
+			console.log(str);
+			$.ajax({
+				url: "Controller",
+				type: "post",
+				data: "type=boardListAjax&cPage="+str
+			}).done(function(result){
+				$("#addForm").html(result);
+			});
+		}
+		
 		<%-- 게시글 작성 폼에서 [등록] 버튼을 눌렀을때 수행 --%>
 		function addBoard() {
 			// 유효성 검사 해야함
 			
 			document.forms[0].submit();
 		};
+		
 		
 		<%-- 글의 제목을 클릭했을 때 내용 보기 --%>
 		function viewContent(subject, date, hit, content) {
@@ -343,7 +361,6 @@
 				height : 600
 			});
 		};
-		
 		<%-- 건의사항 보기화면에서 [답변]을 눌렀을때 수행 --%>
 		function reply(subject, content) {
 			$.ajax({
@@ -364,21 +381,11 @@
 			});
 		};
 		
+		
 		<%-- 답변 작성에서 [등록]을 눌렀을때 수행 --%>
 		function addReply(frm) {
 			frm.submit();
 		};
-		
-		function paging(str) {
-			console.log(str);
-			$.ajax({
-				url: "Controller",
-				type: "post",
-				data: "type=boardListAjax&cPage="+str
-			}).done(function(result){
-				$("#addForm").html(result);
-			});
-		}
 		
 		<%-- 건의사항 목록에서 [검색]을 눌렀을때 수행 --%>
 		function searchBoard(cPage) {
