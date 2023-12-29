@@ -11,38 +11,40 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/jsp/css/center.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <style>
-	table tfoot ol.page {
+table tfoot ol.page {
 	    list-style:none;
+	    width: 300px;
+	    margin: auto;
 	}
+	
 	table tfoot ol.page li {
 	    float:left;
 	    margin-right:8px;
 	}
+	
 	table tfoot ol.page li a {
 	    display:block;
 	    padding:3px 7px;
-	    border:1px solid #00B3DC;
-	    color:#2f313e;
+	    color:gray;
 	    font-weight:bold;
 	    text-decoration: none;
 	}
+	
 	table tfoot ol.page li a:hover {
-	    background:#00B3DC;
-	    color:white;
-	    font-weight:bold;
-	}
-	.now {
-	   padding:3px 7px;
-	    border:1px solid #ff4aa5;
-	    background:#ff4aa5;
-	    color:white;
+		color:black;
 	    font-weight:bold;
 	}
 	.disable {
 	    padding:3px 7px;
-	    border:1px solid silver;
-	    color:silver;
+	    color:white;
 	}
+	
+	.now {
+	   padding:3px 7px;
+	    color:#46ade1;
+	    font-weight:bold;
+	}
+
 	div#boList_top{
 		background-color: black;
 		padding: 5px;

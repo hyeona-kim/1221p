@@ -12,9 +12,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
-	table tfoot ol.page {
+table tfoot ol.page {
 	    list-style:none;
+	    width: 300px;
+	    margin: auto;
 	}
 	
 	table tfoot ol.page li {
@@ -25,30 +26,26 @@
 	table tfoot ol.page li a {
 	    display:block;
 	    padding:3px 7px;
-	    border:1px solid #00B3DC;
-	    color:#2f313e;
+	    color:gray;
 	    font-weight:bold;
 	    text-decoration: none;
 	}
 	
 	table tfoot ol.page li a:hover {
-	    background:#00B3DC;
-	    color:white;
+		color:black;
 	    font-weight:bold;
 	}
 	.disable {
 	    padding:3px 7px;
-	    border:1px solid silver;
-	    color:silver;
+	    color:white;
 	}
 	
 	.now {
 	   padding:3px 7px;
-	    border:1px solid #ff4aa5;
-	    background:#ff4aa5;
-	    color:white;
+	    color:#46ade1;
 	    font-weight:bold;
 	}
+
 	#staffWrap{
 		width: 95%;
 		margin: auto;
@@ -69,8 +66,11 @@
 	
 	#searchCourse td, #searchCourse th, #makeCourse td, #makeCourse th{
 		border: 1px solid #ddd;
-		height: 40px;
+		height: 20px;
 		padding-left: 10px;
+	}
+	#makeCourse th{
+		height: 40px;
 	}
 	#searchCourse th, #makeCourse th{background-color: #ddd;}
 	
@@ -120,7 +120,7 @@
 		font-weight: bold;
 		border-bottom: none;
 		font-size: 15px;
-		padding-top:10ppx;
+		padding-top:10px;
 	}
 	
 	#table thead tr{
@@ -145,7 +145,7 @@
    #t1 td{
       border: 1px solid black;
       padding: 4px;
-      height: 50px;
+      height: 20px;
       text-align: center;
    }
    .num, .color{
