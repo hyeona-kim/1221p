@@ -98,7 +98,10 @@
 								</tr>
 								<tr>
 									<td>
-										<canvas id="signature" width="600" height="200"></canvas>
+										<canvas id="canvas" width="600" height="200"></canvas>
+									</td>
+									<td>
+										<button id="save">save</button>
 									</td>
 								</tr>
 							</tbody>
