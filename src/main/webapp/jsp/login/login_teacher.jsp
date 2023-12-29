@@ -5,24 +5,64 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	#login_admin{
+		width: 600px;
+		margin: 70px auto ; 
+	}
+	#table2{
+	 	border:0; 
+	 	text-align: center; 
+	 	
+	}
+	#table2 tr:first-child img{
+		width: 220px;
+	}
+	#table2 tr:nth-child(2){
+		margin: 0;
+	}
+	#table2 h2 {
+		font-size: 18px;
+		text-align: left;
+	}
+	#table2 .login_id {
+		width: 90%;
+		height: 35px;
+		border: 1px solid #ddd;
+		border-radius: 4px 4px;
+	}
+	
+	#table2 #login_btn{
+		width: 90%;
+		height: 35px;
+	}
+	#table2 p{
+		font-size: 12px;
+		color: #343434;
+	}
+	#table2 #login_btn{
+		background-color:  #49b6d6;
+		border: 1px #49b6d6;
+		border-radius: 4px 4px;
+		color: white;
+	}
+	
+</style>
 </head>
-<body>
-	<div id="content" class="row" style="margin:0px;">
-		<div class="col-xs-12" style="margin:0px;">
-
-		
-		 <table border="0" align="center" style="margin-top:50px">
+<body bgcolor="eeeeee">
+	<div id="login_admin">
+		 <table id="table2">
 			 <tr>
 			  <td colspan="3" align="center"> 
 				<h1>
-					<a href="Controller"><img src="" alt="상단이미지"></a>
+					<a href="Controller"><img src="${pageContext.request.contextPath }/jsp/image/ict_logo.png" alt="상단이미지"></a>
 				</h1>
 			  </td>
 			 </tr>
 			 <tr>
 				<td valign="top">
 		  			<div style="padding-top:20px">
-		  				<img src="" style="max-width: 100%" alt="왼쪽이미지">
+		  				<img src="${pageContext.request.contextPath }/jsp/image/admin_left.png" style="max-width: 100%" alt="왼쪽이미지">
 					 </div>
 				</td>
 				<td width="20px"></td>
@@ -32,18 +72,19 @@
 						<input type="hidden" name="type" value="login_ok">
 						<div class="login-layout">
 							<h2>교강사 로그인</h2>
+							<hr/>
 								 <div class="login-form">
 									<div class="login-input">
 										<div>
-											<input type="text" id="strLoginID" name="ID" value="" placeholder="교·강사 아이디" class="form-control input-lg" style="margin-bottom:5px"/>
+											<input type="text" id="strLoginID" name="ID" value="" placeholder="교·강사 아이디" class="form-control input-lg login_id" style="margin-bottom:5px"/>
 										</div>
 										<div>
-											<input type="password"  id="strLoginPwd" name="PW" value="" placeholder="교·강사 비밀번호" autocomplete="atosoft_02 strLoginPwd" class="form-control input-lg"/>
+											<input type="password"  id="strLoginPwd" name="PW" value="" placeholder="교·강사 비밀번호" autocomplete="atosoft_02 strLoginPwd" class="form-control input-lg login_id"/>
 											<input type="hidden" name="strLoginPwd1" id="strLoginPwd1" value="">
 										</div>
 									</div>
 									<div class="login-btn" style="margin-top:10px">
-										<input type="submit" value="로그인" class="btn btn-info block full-width" style="cursor:pointer;"/>
+										<input type="submit" value="로그인" class="btn btn-info block full-width" style="cursor:pointer;" id="login_btn"/>
 									</div>
 								</div>
 								<div class="login-bottom"></div>
@@ -61,6 +102,5 @@
 			</tr>
 		</table>
   </div>
-</div>
 </body>
 </html>

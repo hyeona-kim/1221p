@@ -11,7 +11,7 @@ public class TrainconfirmAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-Paging page = new Paging();
+		Paging page = new Paging();
 		
 		page.setTotalRecord(TraineecurrentDAO.getCount());
 		
