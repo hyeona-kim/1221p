@@ -216,11 +216,8 @@ table tfoot ol.page {
 		$( "#m1" ).dialog({
 				width:700,
             	height:600
-			
 		});
-		
 
-	
 	}
 		
 		

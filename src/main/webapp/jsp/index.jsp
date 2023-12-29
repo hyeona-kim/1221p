@@ -12,42 +12,89 @@
 
 .direct {
 	display: inline-block;
-	width: 100px;
-	height: 200px;
-	margin: 50px;
-	border: 1px solid black;
+	width: 200px;
+	height: 250px;
+	margin: 20px;
+	text-align: center;
 }
 
-.direct h2 {
-	text-indent: -9999px;
-	height: 0;
-}
-
-.direct a {
+.direct a{
 	display: inline-block;
+	position: relative;
 	width: 100%;
 	height: 100%;
-	background: gray;
+	text-align: center;
+	border-radius: 10px 10px;
+}
+
+.direct:first-child a{
+	background:#3765a3;
+}
+
+.direct:last-child a{
+	background:#60ba2a;
+}
+
+.direct:nth-child(2) a{
+	background:#6abde5;
+}
+
+.direct:first-child a:hover{
+	background:#324e97;
+}
+
+.direct:last-child a:hover{
+	background:#4ea51a;
+}
+
+.direct:nth-child(2) a:hover{
+	background:#39a8df;
+}
+.direct a img{
+	position: absolute;
+	display: block;
+	width: 65%;
+	height: 50%;
+	left: 32px;
+	top: 20px;
+}
+
+.direct a span{
+	text-decoration: none;
+	position: absolute;
+	bottom: 65px;
+	font-size: 25px;
+	right: 32px;
+	color: white;
+	font-weight: bold;
+}
+.direct:last-child a span{
+	right: 25px;
+}
+#logo{
+	margin-top: 110px;
 }
 </style>
 </head>
-<body>
+<body bgcolor="eeeeee">
 	<div class="text-center loginscreen2">
-		<h1 style="margin-top: 50px">한국ICT 기술협회</h1>
+		<div id="logo"><img alt="관리자 이미지" src="${pageContext.request.contextPath }/jsp/image/ict_logo.png" /></div>
 		<div class="text-center" style="margin: 20px auto 0;">
 			<div class="direct facebook">
-				<a href="Controller?type=login&select=admin"> <img alt="관리자 이미지" src="" width="110px">
-					<h2>관리자 모드</h2>
+				<a href="Controller?type=login&select=admin"> <img alt="관리자 이미지" src="${pageContext.request.contextPath }/jsp/image/admin.png" />
+					
+					<span>관리자 모드</span>
 				</a>
 			</div>
 			<div class="direct twitter">
-				<a href="Controller?type=login&select=train"> <img alt="수강생이미지" src="" width="110px">
-					<h2>수강생 모드</h2>
+				<a href="Controller?type=login&select=train"> <img alt="수강생이미지" src="${pageContext.request.contextPath }/jsp/image/trainee.png" />
+					<span>수강생 모드</span>
 				</a>
 			</div>
 			<div class="direct green">
-				<a href="Controller?type=login&select=teacher"> <img alt="교.강사모드" src="" width="110px">
-					<h2>교·강사 모드</h2>
+				<a href="Controller?type=login&select=teacher">
+					<img alt="교.강사 이미지" src="${pageContext.request.contextPath }/jsp/image/teach.png"/>
+					<span>교•강사 모드</span>
 				</a>
 			</div>
 		</div>
