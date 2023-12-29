@@ -27,7 +27,6 @@ public class LmsBean {
 	
 	public StaffVO searchStaff(String t_idx) {
 		StaffVO tvo = null;
-		
 		StaffVO[] ar = EtcDAO.getList();
 		for(StaffVO vo : ar) {
 			if(vo.getSf_idx().equals(t_idx)) {

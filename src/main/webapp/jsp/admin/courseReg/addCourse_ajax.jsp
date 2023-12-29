@@ -20,10 +20,13 @@
 						</td>
 						<th><label>과정구분</label></th>
 						<td>
-						<select>
+						<select name="ct_select">
 							<option value="0">선택하세요</option>
-							<c:forEach items="${requestScope.c_ar}" var="c_ar">
-								<option value="1">${c_ar.ct_name }</option>
+							<c:forEach items="${requestScope.c_ar}" var="c_ar"  varStatus="loop">
+								<option value="${c_ar.ct_idx }">
+								 		${c_ar.ct_name }
+								 </option>
+								 <%-- <input type="hidden" value="${c_ar.ct_idx }" name="ct_idx" /> --%>
 							</c:forEach>
 						</select>
 						</td>
@@ -35,10 +38,12 @@
 						</td>
 						<th><label>담당교사</label></th>
 						<td>
-						<select>
+						<select name="sf_select">
 							<option value="t1">선택하세요</option>
-							<c:forEach items="${requestScope.s_ar}" var="s_ar">
-								<option value="1">${s_ar.sf_name }</option>
+							<c:forEach items="${requestScope.s_ar}" var="s_ar" varStatus="loop">
+								<option value="${s_ar.sf_idx }">
+									${s_ar.sf_name }
+								</option>
 							</c:forEach>
 						</select>
 						</td>
