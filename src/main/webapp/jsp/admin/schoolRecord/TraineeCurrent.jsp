@@ -180,7 +180,7 @@ table tfoot ol.page {
 						<td>${vo2.c_round_num }</td>
 						<td>${vo2.c_peo_num}</td>
 						<td>
-						<input type="button" value="과정별 훈련생 현황">
+						<input type="button" onclick="javascript:location.href='Controller?type=traineecurrentbt1'" value="과정별 훈련생 현황">
 						<input type="button" value="면접평가 결과표">
 						</td>
 					</tr>

@@ -8,4 +8,14 @@
 	select * from trainee_t
 </select>
 
+<select id="count" resultType="int">
+		select count(*) from trainee_t
+		where status = 0
+</select>
+
+<select id="list" resultType="mybatis.vo.TraineeVO">
+		select * from trainee_t
+</select>
+
+
 </mapper>
