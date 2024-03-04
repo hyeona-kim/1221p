@@ -8,12 +8,12 @@ mvc패턴 평가관가관리 시스템
 * 23.12.21일 ~ 23.12.29일
 
 ### 👫 멤버 구성
-- jeongjjy
-- Lee Ga Eun
-- sangkiYoon
-- sannabie
-- tanksoda
-- hyeona-kim
+ - jeongjjy -
+ - Lee Ga Eun -
+ - sangkiYoon -
+ - sannabie - 
+ - tanksoda -
+ - hyeona-kim -
 
 ### ⚙️ 개발 환경
 - `java 11`
