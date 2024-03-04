@@ -7,7 +7,7 @@ mvc패턴 평가관가관리 시스템
 ## 🖥️ 개발 기간
 * 23.12.21일 ~ 23.12.29일
 
-### 멤버 구성
+### 👫 멤버 구성
 - jeongjjy
 - Lee Ga Eun
 - sangkiYoon
@@ -15,7 +15,7 @@ mvc패턴 평가관가관리 시스템
 - tanksoda
 - hyeona-kim
 
-### 개발 환경
+### ⚙️ 개발 환경
 - `java 11`
 - `JDK 11.0.18`
 - **Database : Mysql 8.0 CE**
