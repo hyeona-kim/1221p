@@ -24,7 +24,7 @@ mvc패턴 평가관가관리 시스템
 - index 페이지 LoginAction 구동
 
   
- ###### Action 실행시 클릭한 버튼에 따라 동일한 파라미터 (select)에 각각 다른값을 전달하여 파라미터에 담긴 값 (admin, teacher,trainee)중 하나를 가지고 이동할 경로 (viewPath)수정
+- ###### Action 실행시 클릭한 버튼에 따라 동일한 파라미터 (select)에 각각 다른값을 전달하여 파라미터에 담긴 값 (admin, teacher,trainee)중 하나를 가지고 이동할 경로 (viewPath)수정
 
  
   ![image](https://github.com/hyeona-kim/1221p/assets/45028751/f36ab6c6-7194-46d5-85ac-cd64be5682b2)
