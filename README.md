@@ -13,7 +13,7 @@ mvc패턴 평가관가관리 시스템
 - sangkiYoon
 - sannabie
 - tanksoda
-- hyeona-kim
+- hyeona-kim <a href="https://github.com/hyeona-kim">
 
 ### ⚙️ 개발 환경
 - `java 11`
